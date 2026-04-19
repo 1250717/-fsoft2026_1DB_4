@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Remover camião"
+Sistema --> Gestor: Apresentar lista de camiões registados
+Gestor -> Sistema: Selecionar o camião a remover
+
+Sistema -> Sistema: Verificar se existem cargas pendentes no camião
+
+break existem cargas pendentes no camião
+    Sistema --> Gestor: Apresentar mensagem de erro
+end
+
+Sistema -> Sistema: Verificar se existe camionista atribuído ao camião
+Sistema --> Gestor: Apresentar mensagem "Tem a certeza?"
+
+break gestor não confirma
+    Sistema --> Gestor: Apresentar mensagem "Ação cancelada"
+end
+
+Gestor -> Sistema: Confirmar a ação
+
+alt existe camionista atribuído ao camião
+    Sistema -> Sistema: Desvincular o camionista do camião
+    Sistema -> Sistema: Atualizar estado do camionista para "Disponível"
+end
+
+Sistema -> Sistema: Eliminar permanentemente os dados do camião da memória
+Sistema -> Sistema: Atualizar a lista de camiões
+Sistema --> Gestor: Exibir mensagem de sucesso e apresentar lista de camiões
+
+@enduml
