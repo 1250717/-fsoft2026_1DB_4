@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Registar Carga"
+Gestor -> Sistema: Inserir peso da carga
+Gestor -> Sistema: Inserir destino da carga
+
+Sistema -> Sistema: Validar campos da carga
+
+break campos em falta ou inválidos
+    Sistema --> Gestor: Apresentar mensagem de erro
+end
+
+Sistema -> Sistema: Registar carga com estado "Disponível"
+Sistema --> Gestor: Exibir mensagem de sucesso e lista de cargas registadas
+
+@enduml

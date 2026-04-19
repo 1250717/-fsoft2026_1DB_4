@@ -1,0 +1,31 @@
+@startuml
+hide footbox
+
+actor Camionista
+participant "Sistema de Gestão Logística" as Sistema
+
+Camionista -> Sistema: Solicitar início da entrega
+
+alt existem cargas atribuídas ao camião
+    Sistema -> Sistema: Definir ponto de partida da rota = Empresa (0,0)
+    Sistema -> Sistema: Calcular distância total da rota pela ordem FIFO dos destinos
+    Sistema --> Camionista: Apresentar itinerário FIFO e distância total
+
+    alt camionista confirma a entrega
+        Camionista -> Sistema: Confirmar entrega
+        Sistema -> Sistema: Criar objeto Rota
+        Sistema -> Sistema: Atualizar estado de cada carga para "Entregue"
+        Sistema -> Sistema: Atualizar estado do camionista para "Disponível", desvinculá-lo do camião e registar a rota como concluída
+        Sistema -> Sistema: Atualizar estado do camião para "Disponível"
+        Sistema --> Camionista: Exibir confirmação da conclusão da entrega
+
+    else camionista cancela a operação
+        Camionista -> Sistema: Cancelar operação
+        Sistema --> Camionista: Manter estado atual e não criar rota
+    end
+
+else não existem cargas atribuídas ao camião
+    Sistema --> Camionista: Exibir mensagem de aviso e impedir início da entrega
+end
+
+@enduml

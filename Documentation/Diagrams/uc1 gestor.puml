@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Registar Camião"
+Gestor -> Sistema: Inserir matrícula do camião
+Gestor -> Sistema: Inserir capacidade máxima do camião
+
+Sistema -> Sistema: Validar que a matrícula não existe
+
+break matrícula já existente
+    Sistema --> Gestor: Apresentar mensagem de erro
+end
+
+Sistema -> Sistema: Registar camião com estado "Disponível"
+Sistema --> Gestor: Apresentar mensagem de sucesso e lista de camiões
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Aceder à opção de eliminar carga
+Sistema --> Gestor: Apresentar lista de cargas registadas
+Gestor -> Sistema: Selecionar a carga a eliminar
+
+Sistema -> Sistema: Verificar estado atual da carga
+
+alt carga em estado "Disponível"
+    Sistema --> Gestor: Solicitar confirmação da eliminação
+
+    alt gestor confirma a eliminação
+        Gestor -> Sistema: Confirmar eliminação
+        Sistema -> Sistema: Eliminar permanentemente os dados da carga da memória
+        Sistema --> Gestor: Exibir mensagem de sucesso e atualizar a lista de cargas
+    else gestor cancela a confirmação
+        Gestor -> Sistema: Cancelar eliminação
+        Sistema --> Gestor: Abortar operação e manter a carga no sistema
+    end
+
+else carga em estado "Em Trânsito"
+    Sistema --> Gestor: Emitir alerta de erro
+
+else carga em estado "Atribuída" (mas não iniciada)
+    Sistema --> Gestor: Solicitar confirmação da eliminação
+
+    alt gestor confirma a eliminação
+        Gestor -> Sistema: Confirmar eliminação
+        Sistema -> Sistema: Atualizar peso disponível no camião correspondente
+        Sistema -> Sistema: Eliminar permanentemente os dados da carga da memória
+        Sistema --> Gestor: Exibir mensagem de sucesso e atualizar a lista de cargas
+    else gestor cancela a confirmação
+        Gestor -> Sistema: Cancelar eliminação
+        Sistema --> Gestor: Abortar operação e manter a carga no sistema
+    end
+end
+
+@enduml
