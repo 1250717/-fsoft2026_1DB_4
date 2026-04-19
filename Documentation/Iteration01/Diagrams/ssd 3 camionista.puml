@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+
+actor Camionista
+participant "Sistema de Gestão Logística" as Sistema
+
+Camionista -> Sistema: Selecionar opção "Remover carga do camião"
+Sistema --> Camionista: Apresentar lista de cargas atribuídas ao camião
+Camionista -> Sistema: Selecionar carga a remover
+Sistema --> Camionista: Solicitar confirmação da remoção
+
+alt camionista confirma a remoção
+    Camionista -> Sistema: Confirmar remoção
+    Sistema -> Sistema: Remover carga do inventário do camião
+    Sistema -> Sistema: Atualizar peso livre do camião, somando o peso da carga removida
+    Sistema -> Sistema: Atualizar estado da carga para "Disponível"
+    Sistema --> Camionista: Exibir estado atualizado do camião
+else camionista cancela a operação
+    Camionista -> Sistema: Cancelar remoção
+    Sistema --> Camionista: Manter carga atribuída e não efetuar alterações
+end
+
+@enduml

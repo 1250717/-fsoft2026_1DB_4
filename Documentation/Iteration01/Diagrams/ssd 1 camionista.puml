@@ -1,0 +1,18 @@
+@startuml
+hide footbox
+
+actor Camionista
+participant "Sistema de Gestão Logística" as Sistema
+
+Camionista -> Sistema: Selecionar opção "Visualizar Estado do Camião"
+
+alt camionista tem camião atribuído
+    Sistema --> Camionista: Exibir capacidade total do camião
+    Sistema --> Camionista: Exibir peso restante disponível
+    Sistema --> Camionista: Apresentar lista de cargas atribuídas ao camião
+    Sistema --> Camionista: Apresentar cargas disponíveis para seleção
+else camionista não tem camião atribuído
+    Sistema --> Camionista: Exibir mensagem de aviso
+end
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+hide footbox
+
+actor Camionista
+participant "Sistema de Gestão Logística" as Sistema
+
+Camionista -> Sistema: Selecionar opção "Adicionar carga ao camião"
+
+alt existem cargas disponíveis
+    Sistema --> Camionista: Apresentar lista de cargas disponíveis
+    Camionista -> Sistema: Selecionar carga a adicionar
+    Sistema -> Sistema: Validar que o peso não excede a capacidade disponível
+
+    alt peso dentro do limite
+        Sistema -> Sistema: Subtrair peso da carga à capacidade disponível
+        Sistema -> Sistema: Mover carga para o inventário do camião
+        Sistema -> Sistema: Atualizar estado da carga para "Atribuída"
+        Sistema --> Camionista: Exibir estado atualizado do camião
+    else peso excede capacidade restante
+        Sistema --> Camionista: Bloquear seleção e apresentar aviso de erro
+    end
+
+else não existem cargas disponíveis
+    Sistema --> Camionista: Apresentar mensagem informativa
+end
+
+@enduml
