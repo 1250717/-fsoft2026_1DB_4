@@ -1,0 +1,18 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Registar Camionista"
+Gestor -> Sistema: Inserir nome do camionista
+Sistema -> Sistema: Validar que o nome não existe
+
+break nome já existente
+    Sistema --> Gestor: Apresentar mensagem de erro
+end
+
+Sistema -> Sistema: Registar camionista com estado "Disponível"
+Sistema --> Gestor: Apresentar mensagem de sucesso e lista de camionistas registados
+
+@enduml

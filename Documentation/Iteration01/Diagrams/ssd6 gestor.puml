@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Remover camionista"
+Sistema --> Gestor: Apresentar lista de camionistas registados
+Gestor -> Sistema: Selecionar o camionista a remover
+
+Sistema -> Sistema: Verificar se o camionista tem cargas "Atribuída" ou "Em Trânsito"
+
+break camionista com cargas ativas
+    Sistema --> Gestor: Apresentar alerta de erro
+end
+
+Sistema -> Sistema: Verificar se o camionista está vinculado a algum camião
+Sistema --> Gestor: Apresentar mensagem "Tem a certeza?"
+
+break gestor não confirma
+    Sistema --> Gestor: Apresentar mensagem "Ação cancelada"
+end
+
+Gestor -> Sistema: Confirmar a ação
+
+alt camionista está vinculado a um camião
+    Sistema -> Sistema: Desvincular o camionista do camião
+    Sistema -> Sistema: Atualizar estado do camião para "Disponível"
+end
+
+Sistema -> Sistema: Eliminar permanentemente os dados do camionista da memória
+Sistema -> Sistema: Atualizar a lista de camionistas
+Sistema --> Gestor: Exibir mensagem de sucesso e apresentar lista de camionistas
+
+@enduml

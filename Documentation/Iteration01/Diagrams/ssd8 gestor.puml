@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Visualizar Registos"
+
+alt existem registos em todas as listas
+    Sistema --> Gestor: Apresentar lista de camiões com matrícula, capacidade máxima, capacidade disponível e estado
+    Sistema --> Gestor: Apresentar lista de camionistas com nome e estado
+    Sistema --> Gestor: Apresentar lista de cargas com peso, destino e estado
+else alguma lista está vazia
+    Sistema --> Gestor: Apresentar mensagem informativa
+end
+
+@enduml

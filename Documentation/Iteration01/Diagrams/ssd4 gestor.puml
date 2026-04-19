@@ -1,0 +1,27 @@
+@startuml
+hide footbox
+
+actor Gestor
+participant "Sistema de Gestão Logística" as Sistema
+
+Gestor -> Sistema: Selecionar opção "Atribuir Camionista a Camião"
+Sistema --> Gestor: Apresentar lista de camiões disponíveis
+
+alt existem camiões disponíveis
+    Gestor -> Sistema: Selecionar um camião
+    Sistema --> Gestor: Apresentar lista de camionistas disponíveis
+
+    alt existem camionistas disponíveis
+        Gestor -> Sistema: Selecionar um camionista
+        Sistema -> Sistema: Criar associação entre o camionista e o camião
+        Sistema -> Sistema: Atualizar disponibilidade dos dois recursos
+        Sistema --> Gestor: Exibir mensagem de sucesso e listagem de associações
+    else não existem camionistas disponíveis
+        Sistema --> Gestor: Apresentar mensagem informativa
+    end
+
+else não existem camiões disponíveis
+    Sistema --> Gestor: Apresentar mensagem informativa
+end
+
+@enduml
