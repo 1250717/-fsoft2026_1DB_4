@@ -1,0 +1,19 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Página-1" id="Ha3msfTaRdMOFaF7UrgQ">
+    <mxGraphModel dx="1042" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MPajymeD-IaGVf_a5YXW-1" parent="1" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" value="&lt;b style=&quot;&quot;&gt;PC&lt;/b&gt;" vertex="1">
+          <mxGeometry height="150" width="300" x="270" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="MPajymeD-IaGVf_a5YXW-5" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" value="Aplicação de Gestão Logística" vertex="1">
+          <mxGeometry height="90" width="270" x="279" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="MPajymeD-IaGVf_a5YXW-4" parent="1" style="shape=note;size=14;whiteSpace=wrap;html=1;fontFamily=Helvetica;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="510" y="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
