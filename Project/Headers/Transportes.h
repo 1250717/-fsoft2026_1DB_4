@@ -1,8 +1,0 @@
-//
-// Created by Afonso Teixeira on 20/03/2026.
-//
-
-#ifndef FSOFT2026_1DB_4_TRANSPORTES_H
-#define FSOFT2026_1DB_4_TRANSPORTES_H
-
-#endif //FSOFT2026_1DB_4_TRANSPORTES_H
