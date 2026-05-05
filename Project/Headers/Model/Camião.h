@@ -1,5 +1,0 @@
-class Camiao{
-    private:
-    
-    public:
-};
