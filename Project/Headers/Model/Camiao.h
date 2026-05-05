@@ -1,5 +1,5 @@
 #include <string>
-#include <list>
+#include <vector>
 #include "Carga.h"
 
 
@@ -12,7 +12,7 @@ private:
     float capacidadeMaxima;
     float capacidadeDisponivel;
 
-    std::list<Carga*> cargas;
+    std::vector<Carga*> cargas;
 
     Camionista *camionista;
 
@@ -20,5 +20,13 @@ public:
     Camiao(std::string matricula, float capacidadeMaxima);
 
     void setCamionista(Camionista *camionista);
+
+    void setEstado(std::string estado);
+
+    bool temCargas();
+
+    Camionista *getCamionista();
+
+    bool temCargasPorEstado(std::string estado);
 
 };

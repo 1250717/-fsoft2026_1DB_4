@@ -10,4 +10,6 @@ private:
     Localidade *destino;
 
 public:
+    Carga(float peso, std::string estado, Localidade *destino);
+    std::string getEstado();
 };
