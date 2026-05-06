@@ -1,3 +1,6 @@
+#ifndef CAMIAO_H
+#define CAMIAO_H
+
 #include <string>
 #include <vector>
 #include "Carga.h"
@@ -29,4 +32,21 @@ public:
 
     bool temCargasPorEstado(std::string estado);
 
+    float getCapacidadeDisponivel();
+
+    void setCapacidadeDisponivel(float valor);
+
+    std::string getMatricula();
+
+    float getCapacidadeMaxima();
+
+    std::string getEstado();
+
+    std::vector<Carga*>& getCargas();
+
+    void adicionarCarga(Carga *carga); //criamos uma variavel carga do tipo ponteiro, passamos um endereco de memoria
+
+    void removerCarga(Carga *carga);
+
 };
+#endif

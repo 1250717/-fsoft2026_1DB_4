@@ -39,3 +39,40 @@ bool Camiao::temCargasPorEstado(std::string estado){
     }
     return false;
 }
+
+float Camiao::getCapacidadeDisponivel(){
+    return this->capacidadeDisponivel;
+}
+
+void Camiao::setCapacidadeDisponivel(float valor){
+    this->capacidadeDisponivel = valor;
+}
+
+std::string Camiao::getMatricula(){
+    return this->matricula;
+}
+
+float Camiao::getCapacidadeMaxima(){
+    return this->capacidadeMaxima;
+}
+
+std::string Camiao::getEstado(){
+    return this->estado;
+}
+
+std::vector<Carga*>& Camiao::getCargas(){
+    return this->cargas;
+}
+
+void Camiao::adicionarCarga(Carga *carga){
+    cargas.push_back(carga);
+}
+
+void Camiao::removerCarga(Carga *carga){
+    for(int i = 0; i<cargas.size(); i++){
+        if(cargas[i] == carga){
+            cargas.erase(cargas.begin() + i);
+            return;
+        }
+    }
+}
