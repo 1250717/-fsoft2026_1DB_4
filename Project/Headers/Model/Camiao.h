@@ -44,7 +44,7 @@ public:
 
     std::vector<Carga*>& getCargas();
 
-    void adicionarCarga(Carga *carga); //criamos uma variavel carga do tipo ponteiro, passamos um endereco de memoria
+    void adicionarCarga(Carga *carga);
 
     void removerCarga(Carga *carga);
 
