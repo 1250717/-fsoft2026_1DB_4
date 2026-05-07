@@ -11,4 +11,6 @@ private:
 
 public:
     Camionista(std::string nome);
+
+    std::string getNome();
 };

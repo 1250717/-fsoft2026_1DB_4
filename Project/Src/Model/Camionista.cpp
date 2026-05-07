@@ -5,3 +5,7 @@ Camionista::Camionista(std::string nome){
     this->estado = "Disponível"; // Predefinido no relatório 
     this->camiao = nullptr; // Predefinido no relatório 
 }
+
+std::string Camionista::getNome(){
+    return this->nome;
+}
