@@ -1,26 +1,19 @@
-#ifndef CAMIAOCONTAINER_H
-#define CAMIAOCONTAINER_H
+#ifndef CARGACONTAINER_H
+#define CARGACONTAINER_H
 
-#include <string>
 #include <vector>
-#include "Camiao.h"
+#include "Carga.h"
 
-class CamiaoContainer {
+class CargaContainer {
 private:
-    std::vector<Camiao> camioes;
+    std::vector<Carga> cargas;
 
 public:
-    Camiao* validarMatricula(std::string matricula);
-    
-    void guardar(Camiao camiao);
-    
-    std::vector<Camiao>& getTodos();
-    
-    std::vector<Camiao*> getDisponiveis();
-    
-    Camiao* procurar(std::string matricula);
-    
-    void remover(std::string matricula);
+    void guardar(Carga carga);
+    std::vector<Carga>& getTodos();
+    Carga* procurar(int indice);
+    void remover(int indice);
+    std::vector<Carga*> getDisponiveis();
 };
 
 #endif
