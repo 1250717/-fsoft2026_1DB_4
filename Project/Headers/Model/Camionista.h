@@ -1,9 +1,11 @@
+#ifndef CAMIONISTA_H
+#define CAMIONISTA_H
+
 #include <string>
-#include <list>
 
 class Camiao;
 
-class Camionista{
+class Camionista {
 private:
     std::string nome;
     std::string estado;
@@ -12,5 +14,12 @@ private:
 public:
     Camionista(std::string nome);
 
+    void setCamiao(Camiao* camiao);
+    void setEstado(std::string estado);
+
+    Camiao* getCamiao();
     std::string getNome();
+    std::string getEstado();
 };
+
+#endif
