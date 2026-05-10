@@ -11,6 +11,7 @@ private:
 
 public:
     Localidade(std::string nome, float coordenadaX, float coordenadaY);
+    std::string getNome();
     float calcularDistancia(Localidade& outra);
 };
 

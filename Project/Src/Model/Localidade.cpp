@@ -7,6 +7,10 @@ Localidade::Localidade(std::string nome, float coordenadaX, float coordenadaY) {
     this->coordenadaY = coordenadaY;
 }
 
+std::string Localidade::getNome() {
+    return nome;
+}
+
 float Localidade::calcularDistancia(Localidade& outra) {
     float difX = outra.coordenadaX - this->coordenadaX; //distancia X
     float difY = outra.coordenadaY - this->coordenadaY;// distancia Y
