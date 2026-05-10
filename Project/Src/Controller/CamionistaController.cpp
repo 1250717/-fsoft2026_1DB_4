@@ -1,6 +1,6 @@
 #include "Project\Headers\Controller\CamionistaController.h"
 
-CamionistaController::CamionistaController(CamionistaService* service) {
+CamionistaController::CamionistaController(CamionistaService *service) {
     this->service = service;
 }
 
