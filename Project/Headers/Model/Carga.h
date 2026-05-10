@@ -2,7 +2,6 @@
 #define CARGA_H
 
 #include <string>
-#include <list>
 #include "Localidade.h"
 
 class Carga {
@@ -12,7 +11,7 @@ private:
     Localidade *destino;
 
 public:
-    Carga(float peso, std::string estado, Localidade *destino);
+    Carga(float peso,Localidade *destino);
     std::string getEstado();
     float getPeso();
     Localidade* getDestino();
