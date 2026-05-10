@@ -1,12 +1,17 @@
-#include <string>
-#include <list>
+#ifndef LOCALIDADE_H
+#define LOCALIDADE_H
 
-class Localidade{
+#include <string>
+
+class Localidade {
 private:
     std::string nome;
     float coordenadaX;
     float coordenadaY;
 
-
 public:
+    Localidade(std::string nome, float coordenadaX, float coordenadaY);
+    float calcularDistancia(Localidade& outra);
 };
+
+#endif
