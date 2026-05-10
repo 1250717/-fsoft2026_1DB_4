@@ -1,15 +1,16 @@
-#pragma once
-#include <list>
-#include "Rota.h" 
+#ifndef ROTACONTAINER_H
+#define ROTACONTAINER_H
+
+#include <vector>
+#include "Rota.h"
 
 class RotaContainer {
 private:
-    
-    std::list<Rota> rotas; 
+    std::vector<Rota> rotas;
 
 public:
-    
-    void guardar(Rota rota); 
-    
-    std::list<Rota>& getTodos(); 
+    std::vector<Rota>& getTodos();
+    void guardar(Rota rota);
 };
+
+#endif
