@@ -9,6 +9,8 @@
 using namespace std;
 
 void MenuGestor::mostrar() {
+
+    // O VIEW NAO RECEBE CONTAINERS RECEBE ACESSO AO CONTROLLER QUE TRATA DO RESTO
     CamiaoContainer camiaoContainer;
     CamionistaContainer camionistaContainer;
     CargaContainer cargaContainer;

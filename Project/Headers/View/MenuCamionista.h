@@ -5,6 +5,7 @@
 class MenuCamionista{
 private:
     CamionistaController *controller;
+    std::string nomeCamionista;
 public:
     MenuCamionista(CamionistaController *controller);
     void mostrar();

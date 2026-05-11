@@ -5,10 +5,11 @@
 
 using namespace std;
 
+MenuPrincipal::MenuPrincipal(CamionistaController &camionistaController){
+    this->camionistaController = &camionistaController;
+}
+
 void MenuPrincipal::mostrar() {
-    CamionistaContainer container;
-    CamionistaService service(&container);
-    CamionistaController controller(&service);
 
     while(true) {
         cout << "Introduza opção: \n";
@@ -24,7 +25,7 @@ void MenuPrincipal::mostrar() {
             menuGestor.mostrar();
         }
         else if(opcao == 2) {
-            MenuCamionista menuCamionista(&controller);
+            MenuCamionista menuCamionista(camionistaController);
             menuCamionista.mostrar();
         }
         else if(opcao == 0) {

@@ -2,7 +2,10 @@
 #define CAMIONISTASERVICE_H
 
 #include <string>
-#include <CamionistaContainer.h>
+#include "Project\Headers\Model\CamionistaContainer.h"
+#include "Project\Headers\Model\CamiaoDTO.h"
+#include "Project\Headers\Model\Camionista.h"
+#include "Project\Headers\Model\Camiao.h"
 
 class CamionistaService{
 private:
@@ -12,6 +15,8 @@ public:
     CamionistaService(CamionistaContainer *container);
 
     bool verificarLogin(std::string nome);
+
+    CamiaoDTO visualizarEstadoCamiao(std::string nomeCamionista);
 
 };
 
