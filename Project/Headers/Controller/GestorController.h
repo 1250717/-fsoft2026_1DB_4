@@ -13,10 +13,7 @@ private:
     CargaContainer *cargaContainer;
     RotaContainer *rotaContainer;
 public:
-    GestorController(CamiaoContainer *camiaoContainer,
-                     CamionistaContainer *camionistaContainer,
-                     CargaContainer *cargaContainer,
-                     RotaContainer *rotaContainer);
+    GestorController(CamiaoContainer *camiaoContainer, CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer);
 
     void registarCamiao(string matricula, float capacidade);
     void registarCamionista(string nome);
