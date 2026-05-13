@@ -15,14 +15,14 @@ private:
 public:
     GestorController(CamiaoContainer *camiaoContainer, CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer);
 
-    void registarCamiao(string matricula, float capacidade);
-    void registarCamionista(string nome);
-    void registarCarga(float peso, string destino);
+    void registarCamiao(std::string matricula, float capacidade);
+    void registarCamionista(std::string nome);
+    void registarCarga(float peso, std::string destino);
     void listarTodos();
-    void atribuirCamionista(string matriculaCamiao, string nomeCamionista);
-    void removerCamionista(string nome);
+    void atribuirCamionista(std::string matriculaCamiao, std::string nomeCamionista);
+    void removerCamionista(std::string nome);
     void removerCarga(int indice);
-    void removerCamiao(string matricula);
+    void removerCamiao(std::string matricula);
     void listarRotasConcluidas();
 };
 
