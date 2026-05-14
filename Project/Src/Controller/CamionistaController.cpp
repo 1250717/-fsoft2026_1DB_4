@@ -1,5 +1,5 @@
-#include "Project\Headers\Controller\CamionistaController.h"
-#include "Project\Headers\Model\CamiaoDTO.h"
+#include "..\..\Headers\Controller\CamionistaController.h"
+#include "..\..\Headers\Model\CamiaoDTO.h"
 CamionistaController::CamionistaController(CamionistaService *service) {
     this->service = service;
 }

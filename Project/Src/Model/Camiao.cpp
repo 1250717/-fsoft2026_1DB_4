@@ -1,6 +1,6 @@
-#include "Project\Headers\Model\Camiao.h"
-#include "Project\Headers\Model\Camionista.h"
-#include "Project\Headers\Model\Carga.h"
+#include "..\..\Headers\Model\Camiao.h"
+#include "..\..\Headers\Model\Camionista.h"
+#include "..\..\Headers\Model\Carga.h"
 
 
 Camiao::Camiao(std::string matricula, float capacidadeMaxima) {

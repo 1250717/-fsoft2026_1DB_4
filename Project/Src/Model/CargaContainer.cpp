@@ -1,4 +1,4 @@
-#include "Project\Headers\Model\CargaContainer.h"
+#include "..\..\Headers\Model\CargaContainer.h"
 
 void CargaContainer::guardar(Carga carga) {
     cargas.push_back(carga);

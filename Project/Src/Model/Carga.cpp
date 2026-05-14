@@ -1,4 +1,4 @@
-#include "Project\Headers\Model\Carga.h"
+#include "..\..\Headers\Model\Carga.h"
 
 Carga::Carga(float peso, Localidade *destino) {
     this->peso = peso;

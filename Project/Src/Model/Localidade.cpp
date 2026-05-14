@@ -1,4 +1,4 @@
-#include "Project\Headers\Model\Localidade.h"
+#include "..\..\Headers\Model\Localidade.h"
 #include <cmath>
 
 Localidade::Localidade(std::string nome, float coordenadaX, float coordenadaY) {

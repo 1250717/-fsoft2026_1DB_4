@@ -1,7 +1,7 @@
 #ifndef MENUPRINCIPAL_H
 #define MENUPRINCIPAL_H
 
-#include "Project\Headers\Controller\CamionistaController.h"
+#include "..\Controller\CamionistaController.h"
 
 class MenuPrincipal {
 private:

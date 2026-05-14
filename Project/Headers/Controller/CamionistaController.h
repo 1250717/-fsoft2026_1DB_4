@@ -1,8 +1,8 @@
 #ifndef CAMIONISTACONTROLLER_H
 #define CAMIONISTACONTROLLER_H
 
-#include "CamionistaService.h"
-#include "Project\Headers\Model\CamiaoDTO.h"
+#include "..\Service\CamionistaService.h"
+#include "..\Model\CamiaoDTO.h"
 #include <string>
 
 class CamionistaController{

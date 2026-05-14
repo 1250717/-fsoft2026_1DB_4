@@ -2,10 +2,10 @@
 #define CAMIONISTASERVICE_H
 
 #include <string>
-#include "Project\Headers\Model\CamionistaContainer.h"
-#include "Project\Headers\Model\CamiaoDTO.h"
-#include "Project\Headers\Model\Camionista.h"
-#include "Project\Headers\Model\Camiao.h"
+#include "..\Model\CamionistaContainer.h"
+#include "..\Model\CamiaoDTO.h"
+#include "..\Model\Camionista.h"
+#include "..\Model\Camiao.h"
 
 class CamionistaService{
 private:

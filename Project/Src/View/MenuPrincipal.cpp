@@ -1,6 +1,6 @@
-#include "Project\Headers\View\MenuPrincipal.h"
-#include "Project\Headers\View\MenuGestor.h"
-#include "Project\Headers\View\MenuCamionista.h"
+#include "..\..\Headers\View\MenuPrincipal.h"
+#include "..\..\Headers\View\MenuGestor.h"
+#include "..\..\Headers\View\MenuCamionista.h"
 #include <iostream>
 
 using namespace std;

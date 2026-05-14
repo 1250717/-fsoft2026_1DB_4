@@ -1,4 +1,4 @@
-#include "Project\Headers\Model\Empresa.h"
+#include "..\..\Headers\Model\Empresa.h"
 
 Empresa::Empresa(std::string nif, std::string nome) {
     this->nif = nif;
