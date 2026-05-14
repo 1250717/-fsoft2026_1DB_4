@@ -21,8 +21,7 @@ void MenuPrincipal::mostrar() {
         cin >> opcao;
         
         if(opcao == 1) {
-            MenuGestor menuGestor;
-            menuGestor.mostrar();
+            break;
         }
         else if(opcao == 2) {
             MenuCamionista menuCamionista(camionistaController);
