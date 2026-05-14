@@ -12,7 +12,7 @@ MenuPrincipal::MenuPrincipal(CamionistaController &camionistaController){
 void MenuPrincipal::mostrar() {
 
     while(true) {
-        cout << "Introduza opção: \n";
+        cout << "Introduza opcao: \n";
         cout << "1. Gestor\n";
         cout << "2. Camionista\n";
         cout << "0. Sair\n";
