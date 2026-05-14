@@ -1,17 +1,16 @@
 #ifndef GESTORCONTROLLER_H
 #define GESTORCONTROLLER_H
 
-#include "..\Model\CamiaoContainer.h"
-#include "..\Model\CamionistaContainer.h"
-#include "..\Model\CargaContainer.h"
-#include "..\Model\RotaContainer.h"
 #include "..\Service\GestorService.h"
-#include <string>
+#include "..\View\MenuGestor.h"
 
 class GestorController {
 private:
+    GestorService *service;
+    MenuGestor *view;
 
 public:
+    GestorController(GestorService *service, MenuGestor *view);
 
     void iniciar();
     bool registarCamiao (std::string matricula, std::string capacidade);
@@ -20,7 +19,7 @@ public:
     bool atribuitCamionista (std::string matricula, std::string nome);
     bool removerCamionista (std::string nome);
     bool removerCamiao (std::string matricula, std::string capacidade);
-    bool removerCarda (float peso, std::string destino);
+    bool removerCarga (float peso, std::string destino);
 };
 
 

@@ -9,6 +9,9 @@
 
 class GestorService {
 private:
+    CamionistaContainer *camionistaContainer;
+    CamiaoContainer *camiaoContainer;
+    CargaContainer *cargaContainer;
     
 public:
     
