@@ -13,6 +13,7 @@ private:
 
 public:
 
+    void iniciar();
     bool registarCamiao (std::string matricula, std::string capacidade);
     bool registarCamionista (std::string nome);
     bool registarCarga (float pesa, std::string destino);
@@ -21,5 +22,7 @@ public:
     bool removerCamiao (std::string matricula, std::string capacidade);
     bool removerCarda (float peso, std::string destino);
 };
+
+
 
 #endif
