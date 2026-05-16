@@ -34,4 +34,6 @@ void MenuCamionista::mostrarEstadoCamiao(CamiaoDTO camiao){
         }
     }
     std::cout << "------------------------\n";
+    //cargas disponiveis estao no container
+    //service é que tem de ir la
 }
