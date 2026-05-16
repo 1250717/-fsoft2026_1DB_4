@@ -12,9 +12,13 @@ private:
     CamionistaContainer *camionistaContainer;
     CamiaoContainer *camiaoContainer;
     CargaContainer *cargaContainer;
+    RotaContainer *rotaContainer;
     
 public:
+    GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer);
     
+    
+
 };
 
 #endif
