@@ -10,7 +10,8 @@ public:
     float distanciaTotal;
     std::string nomeCamionista;
     std::string matriculaCamiao;
-    std::vector<std::string> cargas; // descrição simples de cada carga
+    std::vector<std::string> cargas;
+    std::vector<std::string> destinosOrdemFIFO; // destinos na ordem de entrega // descrição simples de cada carga
 };
 
 #endif
