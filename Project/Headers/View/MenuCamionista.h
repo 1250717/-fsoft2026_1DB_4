@@ -1,16 +1,14 @@
 #ifndef MENUCAMIONISTA_H
 #define MENUCAMIONISTA_H
-#include "..\Controller\CamionistaController.h"
 
-class MenuCamionista{
-private:
-    CamionistaController *controller;
-    std::string nomeCamionista;
+#include <string>
+#include "..\Model\CamiaoDTO.h"
+
+class MenuCamionista {
 public:
-    MenuCamionista(CamionistaController *controller);
-    void mostrar();
-    bool login();//pergunta pelo nome, passa ao controller que passa ao service que vai buscar ao model
-
+    std::string pedirNome();
+    int mostrarOpcoes();
+    void mostrarEstadoCamiao(CamiaoDTO camiao);
 };
 
 #endif

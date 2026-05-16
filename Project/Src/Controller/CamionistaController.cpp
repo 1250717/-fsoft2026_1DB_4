@@ -1,9 +1,10 @@
 #include "..\..\Headers\Controller\CamionistaController.h"
 #include "..\..\Headers\Model\CamiaoDTO.h"
+#include "..\..\Headers\View\MenuCamionista.h"
+
 CamionistaController::CamionistaController(CamionistaService *service) {
     this->service = service;
 }
-
 
 bool CamionistaController::verificarLogin(std::string nome) {
     return service->verificarLogin(nome); //chama o servico, é um intermediario
@@ -13,3 +14,18 @@ CamiaoDTO CamionistaController::visualizarEstadoCamiao(std::string nomeCamionist
     return service->visualizarEstadoCamiao(nomeCamionista);
 }
 
+void CamionistaController::mostrarMenu(){
+    std::string nome = menu.pedirNome();
+    
+    if(service->verificarLogin(nome)){
+        while(true){
+            int opcao = menu.mostrarOpcoes();  // recebe opcao
+            
+            if(opcao == 0) break;
+            else if(opcao == 1){
+                CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
+                menu.mostrarEstadoCamiao(camiao);  // passa ao menu para mostrar
+            }
+        }
+    }
+}
