@@ -15,7 +15,7 @@ CamiaoDTO CamionistaController::visualizarEstadoCamiao(std::string nomeCamionist
 }
 
 void CamionistaController::mostrarMenu(){
-    std::string nome = menu.pedirNome();
+    std::string nome = menu.pedirNome(); // Camionista controller tem atributo menu que é MenuCamionista
     
     if(service->verificarLogin(nome)){
         while(true){
