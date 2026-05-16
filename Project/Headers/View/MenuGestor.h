@@ -10,7 +10,6 @@ public:
     MenuGestor(GestorService *service);
 
     void mostrar();
-    int lerOpcao();
 };
 
 

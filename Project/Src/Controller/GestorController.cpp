@@ -5,7 +5,6 @@ void GestorController::iniciar(){
     int opcao;
     do{
         view->mostrar();
-        opcao = view->lerOpcao();
         switch (opcao){
             case 1: registarCamiao(std::string matricula, std::string capacidade); break;
             case 2: registarCamionista(); break;

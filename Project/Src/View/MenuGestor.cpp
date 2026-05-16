@@ -15,5 +15,7 @@ void MenuGestor::mostrar(){
     std::cout << "\n 9 - Visualizar Rotas Concluidas";
     std::cout << "\n 0 - Voltar para menu principal";
     std::cout << "\n Opcao: ";
-    std::cin >> lerOpcao();
+
+    int opcao;
+    std::cin >> opcao;
 }
