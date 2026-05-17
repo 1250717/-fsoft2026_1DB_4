@@ -15,10 +15,11 @@ private:
     RotaContainer *rotaContainer;
     
 public:
-    GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer);
-    
-    
+    GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
+        CargaContainer *cargaContainer, RotaContainer *rotaContainer);
 
+    void registrarCamiao(std::string matricula, float capacidade);
+    std::vector<CamiaoDTO> getTodosCamioes();
 };
 
 #endif

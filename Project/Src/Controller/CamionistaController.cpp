@@ -22,7 +22,7 @@ void CamionistaController::mostrarMenu(){
             int opcao = menu.mostrarOpcoes();  // recebe opcao
             
             if(opcao == 0) break;
-            else if(opcao == 1){
+            else if(opcao == 1){ // visualizar estado camiao
                 CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
                 menu.mostrarEstadoCamiao(camiao);  // passa ao menu para mostrar
             }

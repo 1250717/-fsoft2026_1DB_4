@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-void MenuGestor::mostrar(){
+int MenuGestor::mostrarOpcoes(){
     std::cout << "\n -------- Gerir Empresa --------\n";
     std::cout << "\n 1 - Registar Camião";
     std::cout << "\n 2 - Registar Camionista";
@@ -18,4 +18,41 @@ void MenuGestor::mostrar(){
 
     int opcao;
     std::cin >> opcao;
+    return opcao;
+}
+
+std::string MenuGestor::pedirNome(){
+    std::cout << "Nome do Gestor: ";
+    std::string nome;
+    std::cin >> nome;
+    return nome;
+}
+
+std::string MenuGestor::pedirMatricula(){
+    std::cout << "Introduza matricula: ";
+    std::string matricula;
+    std::cin >> matricula;
+    return matricula;
+}
+
+float MenuGestor::pedirCapacidadeMaxima(){
+    std::cout << "Introduza matricula: ";
+    float capacidadeMaxima;
+    std::cin >> capacidadeMaxima;
+    return capacidadeMaxima;
+}
+
+void MenuGestor::mostrarErro(std::string mensagem){
+    std::cout << "\nErro: " << mensagem << "\n";
+}
+
+void MenuGestor::mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes){
+    std::cout << "\nCamiao registado com sucesso!\n";
+    std::cout << "\n---- Lista de Camioes ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula 
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
 }

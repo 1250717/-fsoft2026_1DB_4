@@ -1,16 +1,20 @@
 #include "Headers\Model\Empresa.h"
 #include "Headers\Service\CamionistaService.h"
-#include "Headers\Controller\CamionistaController.h"
-#include "Headers\View\MenuPrincipal.h"
+#include "Headers\Service\GestorService.h"
 #include "Headers\Controller\MenuPrincipalController.h"
 
-
 int main() {
-    Empresa empresa("12345678", "Empresa Transportes"); // cria os containers
+    Empresa empresa("12345678", "Empresa Transportes");
 
-    CamionistaService service(&empresa.getCamionistaContainer()); //ligacao service e o model
+    CamionistaService camionistaService(&empresa.getCamionistaContainer());
+    
+    GestorService gestorService(
+        &empresa.getCamionistaContainer(),
+        &empresa.getCamiaoContainer(),
+        &empresa.getCargaContainer(),
+        &empresa.getRotaContainer()
+    );
 
-    MenuPrincipalController controller(&service); // controller do menu principal precisa de um service
-    controller.mostrarMenu(); //chamar menu Principal
-    //Menu principal Controller tem uma funcao mostrarmenu()
+    MenuPrincipalController controller(&camionistaService, &gestorService);
+    controller.mostrarMenu();
 }

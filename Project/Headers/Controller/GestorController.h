@@ -7,19 +7,13 @@
 class GestorController {
 private:
     GestorService *service;
-    MenuGestor *view;
+    MenuGestor menu; //criamos aqui, porque o controller é que chama o menu, depois recebe informacao
+    //e toma uma decisao
+    std::string nomeGestor;
 
 public:
-    GestorController(GestorService *service, MenuGestor *view);
-
-    void iniciar();
-    bool registarCamiao (std::string matricula, std::string capacidade);
-    bool registarCamionista (std::string nome);
-    bool registarCarga (float pesa, std::string destino);
-    bool atribuitCamionista (std::string matricula, std::string nome);
-    bool removerCamionista (std::string nome);
-    bool removerCamiao (std::string matricula, std::string capacidade);
-    bool removerCarga (float peso, std::string destino);
+    GestorController(GestorService *service);
+    void mostrarMenu();
 };
 
 
