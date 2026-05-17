@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "..\Model\CamiaoDTO.h"
-#include "..\Model\CamionistaDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
+#include "..\Dtos\CamionistaDTO.h"
 
 
 class MenuGestor{

@@ -1,6 +1,6 @@
 #include "..\..\Headers\Controller\GestorController.h"
-#include "..\..\Headers\Model\CamiaoDTO.h"
-#include "..\..\Headers\Model\CamionistaDTO.h"
+#include "..\..\Headers\Dtos\CamiaoDTO.h"
+#include "..\..\Headers\Dtos\CamionistaDTO.h"
 #include <iostream>
 
 GestorController::GestorController(GestorService *service){

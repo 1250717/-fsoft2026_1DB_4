@@ -1,6 +1,6 @@
 #include "..\..\Headers\Service\GestorService.h"
-#include "..\..\Headers\Model\CamiaoDTO.h"
-#include "..\..\Headers\Model\CamionistaDTO.h"
+#include "..\..\Headers\Dtos\CamiaoDTO.h"
+#include "..\..\Headers\Dtos\CamionistaDTO.h"
 #include "..\..\Headers\Mapper\CamiaoMapper.h"
 #include "..\..\Headers\Mapper\CamionistaMapper.h"
 #include <stdexcept>

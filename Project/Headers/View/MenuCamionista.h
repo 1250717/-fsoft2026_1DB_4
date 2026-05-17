@@ -2,7 +2,7 @@
 #define MENUCAMIONISTA_H
 
 #include <string>
-#include "..\Model\CamiaoDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
 
 class MenuCamionista {
 public:

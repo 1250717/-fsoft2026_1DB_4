@@ -1,5 +1,5 @@
 #include "..\..\Headers\Controller\CamionistaController.h"
-#include "..\..\Headers\Model\CamiaoDTO.h"
+#include "..\..\Headers\Dtos\CamiaoDTO.h"
 #include "..\..\Headers\View\MenuCamionista.h"
 
 CamionistaController::CamionistaController(CamionistaService *service) {
