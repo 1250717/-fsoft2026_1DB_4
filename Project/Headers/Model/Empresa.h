@@ -6,6 +6,7 @@
 #include "CamionistaContainer.h"
 #include "CargaContainer.h"
 #include "RotaContainer.h"
+#include "LocalidadeContainer.h"
 
 class Empresa {
 private:
@@ -17,6 +18,7 @@ private:
     CamionistaContainer camionistaContainer;
     CargaContainer cargaContainer;
     RotaContainer rotaContainer;
+    LocalidadeContainer localidadeContainer;
 
 public:
     Empresa(std::string nif, std::string nome);
@@ -26,6 +28,7 @@ public:
     CamionistaContainer& getCamionistaContainer();
     CargaContainer& getCargaContainer();
     RotaContainer& getRotaContainer();
+    LocalidadeContainer& getLocalidadeContainer();
 };
 
 #endif

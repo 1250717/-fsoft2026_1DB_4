@@ -3,8 +3,8 @@
 Empresa::Empresa(std::string nif, std::string nome) {
     this->nif = nif;
     this->nome = nome;
-    this->coordenadaX = 0.0f; //0.0 é tratado como double
-    this->coordenadaY = 0.0f;// definimls como float por isso temos de ter .f
+    this->coordenadaX = 0.0f;
+    this->coordenadaY = 0.0f;
 }
 
 float Empresa::getCoordenadaX() {
@@ -29,4 +29,8 @@ CargaContainer& Empresa::getCargaContainer() {
 
 RotaContainer& Empresa::getRotaContainer() {
     return this->rotaContainer;
+}
+
+LocalidadeContainer& Empresa::getLocalidadeContainer() {
+    return this->localidadeContainer;
 }
