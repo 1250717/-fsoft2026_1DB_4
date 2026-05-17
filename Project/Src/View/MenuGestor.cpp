@@ -21,8 +21,15 @@ int MenuGestor::mostrarOpcoes(){
     return opcao;
 }
 
-std::string MenuGestor::pedirNome(){
+std::string MenuGestor::pedirNomeGestor(){
     std::cout << "Nome do Gestor: ";
+    std::string nome;
+    std::cin >> nome;
+    return nome;
+}
+
+std::string MenuGestor::pedirNomeCamionista(){
+    std::cout << "Nome do Camionista a adicionar: ";
     std::string nome;
     std::cin >> nome;
     return nome;
@@ -36,7 +43,7 @@ std::string MenuGestor::pedirMatricula(){
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
-    std::cout << "Introduza matricula: ";
+    std::cout << "Introduza capacidade maxima: ";
     float capacidadeMaxima;
     std::cin >> capacidadeMaxima;
     return capacidadeMaxima;
@@ -54,5 +61,14 @@ void MenuGestor::mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes){
                   << " | Cap. Max: " << camioes[i].capacidadeMaxima
                   << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
                   << " | Estado: " << camioes[i].estado << "\n";
+    }
+}
+
+void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas){
+    std::cout << "\nCamionista registado com sucesso!\n";
+    std::cout << "\n---- Lista de Camionistas ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
     }
 }

@@ -1,4 +1,6 @@
 #include "..\..\Headers\Controller\GestorController.h"
+#include "..\..\Headers\Model\CamiaoDTO.h"
+#include "..\..\Headers\Model\CamionistaDTO.h"
 #include <iostream>
 
 GestorController::GestorController(GestorService *service){
@@ -12,7 +14,7 @@ void GestorController::mostrarMenu(){
     //mas quero guardar o nome do gestor
     //ou seja chamamos o menu que criamos no .h
     //MenuGestor menu
-    nomeGestor = menu.pedirNome();
+    nomeGestor = menu.pedirNomeGestor();
     while(true){
         int opcao = menu.mostrarOpcoes();
 
@@ -45,6 +47,18 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());  // controller delega a impressão ao menu
                 //what devolve a mensagem
                 //que metemos no throw
+            }
+        }
+        else if(opcao == 2){//registar Camionista
+            std::string nomeCamionista = menu.pedirNomeCamionista();
+
+            try{
+                service->registrarCamionista(nomeCamionista);
+                std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
+                menu.mostrarSucessoRegistarCamionista(camionistas);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
             }
         }
     }
