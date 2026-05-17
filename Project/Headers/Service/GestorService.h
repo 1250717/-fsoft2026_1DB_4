@@ -2,13 +2,13 @@
 #define GESTORSERVICE_H
 
 #include <string>
+#include <vector>
 #include "..\Model\CamiaoContainer.h"
 #include "..\Model\CamionistaContainer.h"
 #include "..\Model\CargaContainer.h"
 #include "..\Model\RotaContainer.h"
-#include <vector>
-#include "..\Model\CamiaoDTO.h"
-#include "..\Model\CamionistaDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
+#include "..\Dtos\CamionistaDTO.h"
 
 class GestorService {
 private:

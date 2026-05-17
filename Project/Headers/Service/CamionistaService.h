@@ -3,7 +3,7 @@
 
 #include <string>
 #include "..\Model\CamionistaContainer.h"
-#include "..\Model\CamiaoDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
 #include "..\Model\Camionista.h"
 #include "..\Model\Camiao.h"
 

@@ -2,7 +2,7 @@
 #define CAMIONISTACONTROLLER_H
 
 #include "..\Service\CamionistaService.h"
-#include "..\Model\CamiaoDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
 #include "..\View\MenuCamionista.h"
 #include <string>
 
@@ -18,7 +18,6 @@ public:
 
     void mostrarMenu();
 
-    
 };
 
 #endif

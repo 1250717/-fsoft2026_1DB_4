@@ -2,7 +2,7 @@
 #define CAMIONISTAMAPPER_H
 
 #include "..\Model\Camionista.h"
-#include "..\Model\CamionistaDTO.h"
+#include "..\Dtos\CamionistaDTO.h"
 
 class CamionistaMapper {
 public:

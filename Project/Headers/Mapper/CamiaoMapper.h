@@ -2,7 +2,7 @@
 #define CAMIAOMAPPER_H
 
 #include "..\Model\Camiao.h"
-#include "..\Model\CamiaoDTO.h"
+#include "..\Dtos\CamiaoDTO.h"
 
 class CamiaoMapper {
 public:
