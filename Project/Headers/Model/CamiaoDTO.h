@@ -6,6 +6,8 @@
 
 class CamiaoDTO {
 public:
+    std::string matricula;
+    std::string estado;
     float capacidadeMaxima;
     float capacidadeDisponivel;
     std::vector<std::string> cargas;  // cargas atribuídas ao camião
