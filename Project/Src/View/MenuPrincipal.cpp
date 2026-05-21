@@ -2,6 +2,7 @@
 #include "..\..\Headers\View\MenuGestor.h"
 #include "..\..\Headers\View\MenuCamionista.h"
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -14,9 +15,17 @@ int MenuPrincipal::mostrar() {
         cout << "0. Sair\n";
         cin >> opcao;
 
-        if(opcao >= 0 && opcao <= 2)
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Erro: introduz um número de 0 a 2.\n";
+            continue;
+        }
+
+        if(opcao >= 0 && opcao <= 2){
             return opcao; // devolve diretamente
-        else
+        }else{
             cout << "Opcao invalida.\n";
+        }
     }
 }
