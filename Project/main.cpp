@@ -6,7 +6,7 @@
 int main() {
     Empresa empresa("12345678", "Empresa Transportes");
 
-    CamionistaService camionistaService(&empresa.getCamionistaContainer());
+    CamionistaService camionistaService( &empresa.getCamionistaContainer(), &empresa.getCargaContainer());
     
     GestorService gestorService(
         &empresa.getCamionistaContainer(),

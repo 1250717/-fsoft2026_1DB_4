@@ -3,12 +3,22 @@
 
 #include <string>
 #include "..\Dtos\CamiaoDTO.h"
+#include "..\Dtos\CargaDTO.h"
 
 class MenuCamionista {
 public:
     std::string pedirNome();
     int mostrarOpcoes();
     void mostrarEstadoCamiao(CamiaoDTO camiao);
+    
+    void mostrarCargasDisponiveis(std::vector<CargaDTO> cargas);
+    int pedirIndiceCarga();
+    void mostrarSucessoAdicionarCarga(CamiaoDTO camiao);
+    void mostrarErro(std::string mensagem);
+
+    void mostrarCargasDoCamiao(std::vector<CargaDTO> cargas);
+    bool pedirConfirmacao();
+    void mostrarSucessoRemoverCarga(CamiaoDTO camiao);
 };
 
 #endif

@@ -5,6 +5,7 @@
 
 class CargaDTO {
 public:
+    int indice; 
     float peso;
     std::string estado;
     std::string nomeDestino; // nome da localidade destino
