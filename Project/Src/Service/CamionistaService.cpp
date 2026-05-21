@@ -98,8 +98,9 @@ void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga
     
     // 6. Estado da carga volta a "Disponivel"
     carga->setEstado("Disponivel");
+}
 
-    RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
+RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
     Camiao* camiao = camionista->getCamiao();
     std::vector<Carga*>& cargas = camiao->getCargas();
