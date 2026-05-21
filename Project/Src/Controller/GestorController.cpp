@@ -61,6 +61,11 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());
             }
         }
+        else if(opcao==8){
+            std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
+            std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
+            menu.visualizarCadastros(camioes, camionistas);
+        }
     }
 
 }

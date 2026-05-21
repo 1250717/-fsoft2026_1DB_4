@@ -72,3 +72,19 @@ void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> cam
                   << " | Estado: " << camionistas[i].estado << "\n";
     }
 }
+
+void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas){
+    std::cout << "\n---- Lista de Camionistas ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
+    }
+
+    std::cout << "\n---- Lista de Camioes ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula 
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+}
