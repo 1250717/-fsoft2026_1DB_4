@@ -182,4 +182,3 @@ void CamionistaService::iniciarEntrega(std::string nomeCamionista){
     }
     camiao->setCapacidadeDisponivel(camiao->getCapacidadeMaxima());
 }
-}

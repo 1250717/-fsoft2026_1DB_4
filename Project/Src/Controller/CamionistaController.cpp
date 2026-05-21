@@ -43,13 +43,13 @@ void CamionistaController::mostrarMenu(){
                 menu.mostrarCargasDisponiveis(disponiveis);
                 int indice = menu.pedirIndiceCarga();
                 
-                try{
+                try{ // tenta adicionar, se der erro mostra mensagem
                     service->adicionarCarga(nome, indice);
                     CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
                     menu.mostrarSucessoAdicionarCarga(camiao);
                 }
                 catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
+                    menu.mostrarErro(e.what());// o e.what devolve a mensagem do erro
                 }
             }
             
