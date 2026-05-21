@@ -72,3 +72,31 @@ void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> cam
                   << " | Estado: " << camionistas[i].estado << "\n";
     }
 }
+
+std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
+    std::cout << "\n---- Lista de Camioes ----\n";  
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+    std::cout << "Introduza a matricula do camiao a remover: ";
+    std::string matricula;
+    std::cin >> matricula;
+    return matricula;
+}
+
+bool MenuGestor::pedirConfirmacao(){
+    std::cout << "\nTem a certeza? (s/n): ";
+    char resposta;
+    std::cin >> resposta;
+    return resposta == 's';
+}
+
+void MenuGestor::mostrarSucessoRemoverCamiao(std::vector<CamiaoDTO> camioes){
+    std::cout << "\nCamiao removido com sucesso!\n";
+    std::cout << "\n---- Lista de Camioes ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+}
