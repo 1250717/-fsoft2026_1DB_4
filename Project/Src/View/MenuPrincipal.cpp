@@ -18,7 +18,7 @@ int MenuPrincipal::mostrar() {
         if(cin.fail()){
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Erro: introduz um número de 0 a 2.\n";
+            cout << "Erro: introduz uma opção.\n";
             continue;
         }
 
