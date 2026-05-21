@@ -85,6 +85,32 @@ void CamionistaController::mostrarMenu(){
                     menu.mostrarErro(e.what());
                 }
             }
+            else if(opcao == 4){ // UC4 - Iniciar Entrega
+                try{
+                    // 1. Calcular rota (sem alterar estado)
+                    RotaDTO rota = service->calcularRota(nome);
+                    
+                    // 2. Mostrar itinerario ao utilizador
+                    menu.mostrarItinerario(rota);
+                    
+                    // 3. Pedir confirmacao
+                    std::cout << "Confirma o inicio da entrega? (s/n): ";
+                    std::string resposta;
+                    std::cin >> resposta;
+                    
+                    if(resposta != "s" && resposta != "S"){
+                        menu.mostrarErro("Operacao cancelada.");
+                        continue;
+                    }
+                    
+                    // 4. Iniciar entrega (altera estado)
+                    service->iniciarEntrega(nome);
+                    menu.mostrarSucessoIniciarEntrega();
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
         }
     }
 }

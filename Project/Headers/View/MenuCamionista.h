@@ -4,6 +4,7 @@
 #include <string>
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CargaDTO.h"
+#include "..\Dtos\RotaDTO.h"
 
 class MenuCamionista {
 public:
@@ -19,6 +20,9 @@ public:
     void mostrarCargasDoCamiao(std::vector<CargaDTO> cargas);
     bool pedirConfirmacao();
     void mostrarSucessoRemoverCarga(CamiaoDTO camiao);
+
+    void mostrarItinerario(RotaDTO rota);
+    void mostrarSucessoIniciarEntrega();
 };
 
 #endif

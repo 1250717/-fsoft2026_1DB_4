@@ -91,3 +91,21 @@ void MenuCamionista::mostrarSucessoRemoverCarga(CamiaoDTO camiao){
     std::cout << "\nCarga removida com sucesso!\n";
     mostrarEstadoCamiao(camiao);
 }
+
+void MenuCamionista::mostrarItinerario(RotaDTO rota){
+    std::cout << "\n---- Itinerario da Rota ----\n";
+    std::cout << "Camionista: " << rota.nomeCamionista << "\n";
+    std::cout << "Camiao: " << rota.matriculaCamiao << "\n";
+    std::cout << "Partida: Empresa (0,0)\n";
+    std::cout << "Destinos (ordem FIFO):\n";
+    for(int i = 0; i < rota.destinosOrdemFIFO.size(); i++){
+        std::cout << "  " << i+1 << ". " << rota.destinosOrdemFIFO[i] << "\n";
+    }
+    std::cout << "Distancia total: " << rota.distanciaTotal << "\n";
+    std::cout << "----------------------------\n";
+}
+ 
+void MenuCamionista::mostrarSucessoIniciarEntrega(){
+    std::cout << "\nEntrega concluida com sucesso!\n";
+    std::cout << "Camionista e camiao voltaram ao estado Disponivel.\n";
+}

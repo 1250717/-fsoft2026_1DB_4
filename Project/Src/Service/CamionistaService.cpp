@@ -1,9 +1,13 @@
 #include "..\..\Headers\Service\CamionistaService.h"
+#include "..\..\Headers\Model\Rota.h"
+#include "..\..\Headers\Model\Localidade.h"
+#include "..\..\Headers\Dtos\RotaDTO.h"
 #include <stdexcept>
 
-CamionistaService::CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer){
+CamionistaService::CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer){
     this->camionistaContainer= camionistaContainer;
     this->cargaContainer= cargaContainer;
+    this->rotaContainer= rotaContainer;
 }
 
 bool CamionistaService::verificarLogin(std::string nome){
@@ -94,4 +98,87 @@ void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga
     
     // 6. Estado da carga volta a "Disponivel"
     carga->setEstado("Disponivel");
+
+    RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    Camiao* camiao = camionista->getCamiao();
+    std::vector<Carga*>& cargas = camiao->getCargas();
+    
+    if(cargas.empty()){
+        throw std::invalid_argument("O camiao nao tem cargas atribuidas.");
+    }
+    
+    // Empresa parte da localizacao (0,0)
+    Localidade empresa("Empresa", 0.0f, 0.0f);
+    
+    // Calcular distancia total FIFO
+    float distanciaTotal = 0.0f;
+    Localidade* anterior = &empresa;
+    
+    RotaDTO dto;
+    dto.nomeCamionista = nomeCamionista;
+    dto.matriculaCamiao = camiao->getMatricula();
+    
+    for(int i = 0; i < cargas.size(); i++){
+        Localidade* destino = cargas[i]->getDestino();
+        distanciaTotal += anterior->calcularDistancia(*destino);
+        dto.destinosOrdemFIFO.push_back(destino->getNome());
+        anterior = destino;
+    }
+    
+    dto.distanciaTotal = distanciaTotal;
+    dto.idRota = rotaContainer->getTodos().size() + 1;
+    
+    return dto;
+}
+ 
+void CamionistaService::iniciarEntrega(std::string nomeCamionista){
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    Camiao* camiao = camionista->getCamiao();
+    std::vector<Carga*>& cargas = camiao->getCargas();
+    
+    if(cargas.empty()){
+        throw std::invalid_argument("O camiao nao tem cargas atribuidas.");
+    }
+    
+    // 1. Calcular distancia total (igual ao calcularRota)
+    Localidade empresa("Empresa", 0.0f, 0.0f);
+    float distanciaTotal = 0.0f;
+    Localidade* anterior = &empresa;
+    for(int i = 0; i < cargas.size(); i++){
+        Localidade* destino = cargas[i]->getDestino();
+        distanciaTotal += anterior->calcularDistancia(*destino);
+        anterior = destino;
+    }
+    
+    // 2. Criar copia das cargas (Rota guarda por valor)
+    std::vector<Carga> cargasParaRota;
+    for(int i = 0; i < cargas.size(); i++){
+        cargasParaRota.push_back(*cargas[i]);
+    }
+    
+    // 3. Atualizar estado das cargas para "Entregue"
+    for(int i = 0; i < cargas.size(); i++){
+        cargas[i]->setEstado("Entregue");
+    }
+    
+    // 4. Criar e guardar a Rota
+    int idRota = rotaContainer->getTodos().size() + 1;
+    Rota rota(idRota, nomeCamionista, camiao->getMatricula(), distanciaTotal, cargasParaRota);
+    rotaContainer->guardar(rota);
+    
+    // 5. Desvincular camionista do camiao
+    camionista->setCamiao(nullptr);
+    camionista->setEstado("Disponivel");
+    
+    // 6. Camiao volta a "Disponivel"
+    camiao->setEstado("Disponivel");
+    camiao->setCamionista(nullptr);
+    
+    // 7. Limpar cargas do camiao e devolver capacidade total
+    while(!camiao->getCargas().empty()){
+        camiao->removerCarga(camiao->getCargas()[0]);
+    }
+    camiao->setCapacidadeDisponivel(camiao->getCapacidadeMaxima());
+}
 }
