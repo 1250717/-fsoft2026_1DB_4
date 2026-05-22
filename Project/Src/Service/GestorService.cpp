@@ -51,6 +51,10 @@ std::vector<CamionistaDTO> GestorService::getTodosCamionistas(){
 void GestorService::removerCamiao(std::string matricula){
     Camiao* camiao = camiaoContainer->procurar(matricula);
     
+    if(camiao == nullptr){
+        throw std::invalid_argument("Camiao nao encontrado.");
+    }
+    
     if(camiao->temCargas()){
         throw std::invalid_argument("Nao e possivel remover camiao com cargas pendentes.");
     }
