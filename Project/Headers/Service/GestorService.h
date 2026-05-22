@@ -9,6 +9,7 @@
 #include "..\Model\RotaContainer.h"
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
+#include "..\Dtos\RotaDTO.h"
 
 class GestorService {
 private:
@@ -28,6 +29,8 @@ public:
     std::vector<CamiaoDTO> getTodosCamioes();
 
     std::vector<CamionistaDTO> getTodosCamionistas();
+
+    std::vector<RotaDTO> getTodasRotas();
 };
 
 #endif

@@ -1,7 +1,7 @@
     #include "..\..\Headers\Controller\GestorController.h"
 #include "..\..\Headers\Dtos\CamiaoDTO.h"
 #include "..\..\Headers\Dtos\CamionistaDTO.h"
-
+#include "..\..\Headers\Dtos\RotaDTO.h"
 #include <iostream>
 
 GestorController::GestorController(GestorService *service){
@@ -61,6 +61,16 @@ void GestorController::mostrarMenu(){
             catch(std::invalid_argument &e){
                 menu.mostrarErro(e.what());
             }
+        }
+        else if(opcao == 9){// UC9 - Visualizar Rotas Concluidas
+            std::vector<RotaDTO> rotas = service->getTodasRotas();
+            
+            if(rotas.empty()){
+                menu.mostrarErro("Nao existem rotas concluidas.");
+                continue;
+            }
+            
+            menu.mostrarRotasConcluidas(rotas);
         }
     }
 

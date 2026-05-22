@@ -1,5 +1,7 @@
 #include "..\..\Headers\View\MenuCamionista.h"
 #include <iostream>
+
+#include <limits>
  
 using namespace std;
  
@@ -20,6 +22,11 @@ int MenuCamionista::mostrarOpcoes(){
  
     int opcao;
     std::cin >> opcao;
+    if(std::cin.fail()){
+        std::cin.clear();                                              // limpa estado de erro
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // descarta buffer
+        return -1;  // opção inválida — o while ignora
+    }
     return opcao;
 }
  

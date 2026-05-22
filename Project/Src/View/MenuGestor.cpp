@@ -72,3 +72,25 @@ void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> cam
                   << " | Estado: " << camionistas[i].estado << "\n";
     }
 }
+
+
+
+
+
+
+
+// visualizar rotas concluidas
+void MenuGestor::mostrarRotasConcluidas(std::vector<RotaDTO> rotas){
+    std::cout << "\n---- Rotas Concluidas ----\n";
+    for(int i = 0; i < rotas.size(); i++){
+        std::cout << "\nRota #" << rotas[i].idRota << "\n";
+        std::cout << "  Camionista: " << rotas[i].nomeCamionista << "\n";
+        std::cout << "  Camiao: " << rotas[i].matriculaCamiao << "\n";
+        std::cout << "  Distancia total: " << rotas[i].distanciaTotal << "\n";
+        std::cout << "  Destinos (ordem FIFO):\n";
+        for(int j = 0; j < rotas[i].destinosOrdemFIFO.size(); j++){
+            std::cout << "    " << j+1 << ". " << rotas[i].destinosOrdemFIFO[j] << "\n";
+        }
+    }
+    std::cout << "--------------------------\n";
+}

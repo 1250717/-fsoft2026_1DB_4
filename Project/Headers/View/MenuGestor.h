@@ -5,7 +5,7 @@
 #include <vector>
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
-
+#include "..\Dtos\RotaDTO.h"
 
 class MenuGestor{
 public:
@@ -22,6 +22,7 @@ public:
     void mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas);
 
     void mostrarErro(std::string mensagem);
+    void mostrarRotasConcluidas(std::vector<RotaDTO> rotas);
 };
 
 
