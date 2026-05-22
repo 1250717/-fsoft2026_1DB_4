@@ -2,6 +2,7 @@
 #include "..\..\Headers\Model\Rota.h"
 #include "..\..\Headers\Model\Localidade.h"
 #include "..\..\Headers\Dtos\RotaDTO.h"
+
 #include <stdexcept>
 
 CamionistaService::CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer){
@@ -39,6 +40,7 @@ CamiaoDTO CamionistaService::visualizarEstadoCamiao(std::string nomeCamionista){
     return dto;
 }
 
+
 std::vector<CargaDTO> CamionistaService::getCargasDoCamiao(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
     Camiao* camiao = camionista->getCamiao();
@@ -65,6 +67,7 @@ std::vector<CargaDTO> CamionistaService::getCargasDoCamiao(std::string nomeCamio
     return dtos;
 }
  
+
 void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga){
     // 1. Obter camionista e camião
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
@@ -100,6 +103,7 @@ void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga
     carga->setEstado("Disponivel");
 }
 
+
 RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
     Camiao* camiao = camionista->getCamiao();
@@ -132,6 +136,7 @@ RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
     
     return dto;
 }
+
  
 void CamionistaService::iniciarEntrega(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
@@ -182,3 +187,8 @@ void CamionistaService::iniciarEntrega(std::string nomeCamionista){
     }
     camiao->setCapacidadeDisponivel(camiao->getCapacidadeMaxima());
 }
+
+
+
+
+

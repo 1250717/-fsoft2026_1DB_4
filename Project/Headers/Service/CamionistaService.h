@@ -6,18 +6,24 @@
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Model\Camionista.h"
 #include "..\Model\Camiao.h"
+
 #include "..\Dtos\CargaDTO.h"
 #include "..\Model\CargaContainer.h"
+
 #include "..\Model\RotaContainer.h"
 #include "..\Dtos\RotaDTO.h"
 
+
+
 class CamionistaService{
 private:
+
     CamionistaContainer *camionistaContainer;
     CargaContainer *cargaContainer;
     RotaContainer *rotaContainer;
 
 public:
+
     CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer);
 
     bool verificarLogin(std::string nome);
@@ -35,3 +41,9 @@ public:
 };
 
 #endif
+
+
+
+
+
+

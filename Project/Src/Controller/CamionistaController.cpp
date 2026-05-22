@@ -1,10 +1,13 @@
+
 #include "..\..\Headers\Controller\CamionistaController.h"
 #include "..\..\Headers\Dtos\CamiaoDTO.h"
 #include "..\..\Headers\Dtos\CargaDTO.h"
 #include "..\..\Headers\View\MenuCamionista.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
+
  
 CamionistaController::CamionistaController(CamionistaService *service) {
     this->service = service;
@@ -17,8 +20,10 @@ bool CamionistaController::verificarLogin(std::string nome) {
 CamiaoDTO CamionistaController::visualizarEstadoCamiao(std::string nomeCamionista){
     return service->visualizarEstadoCamiao(nomeCamionista);
 }
+
  
 void CamionistaController::mostrarMenu(){
+
     std::string nome = menu.pedirNome();
     
     if(service->verificarLogin(nome)){
@@ -85,6 +90,7 @@ void CamionistaController::mostrarMenu(){
                     menu.mostrarErro(e.what());
                 }
             }
+            
             else if(opcao == 4){ // UC4 - Iniciar Entrega
                 try{
                     // 1. Calcular rota (sem alterar estado)
@@ -114,3 +120,8 @@ void CamionistaController::mostrarMenu(){
         }
     }
 }
+
+
+
+
+
