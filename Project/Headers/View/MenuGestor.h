@@ -5,6 +5,7 @@
 #include <vector>
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
+#include "..\Dtos\CargaDTO.h"
 
 
 class MenuGestor{
@@ -17,9 +18,11 @@ public:
     std::string pedirMatricula();
     
     float pedirCapacidadeMaxima();
+    float pedirPesoCarga();
 
     void mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes);
     void mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas);
+    void mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas);
 
     void mostrarErro(std::string mensagem);
 };

@@ -9,6 +9,7 @@
 #include "..\Model\RotaContainer.h"
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
+#include "..\Dtos\CargaDTO.h"
 
 class GestorService {
 private:
@@ -25,9 +26,13 @@ public:
 
     void registrarCamionista(std::string nomeCamionista);
 
+    void registarCarga(float peso);
+
     std::vector<CamiaoDTO> getTodosCamioes();
 
     std::vector<CamionistaDTO> getTodosCamionistas();
+
+    std::vector<CargaDTO>getTodasCargas();
 };
 
 #endif

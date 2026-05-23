@@ -3,6 +3,8 @@
 #include "..\..\Headers\Dtos\CamionistaDTO.h"
 #include "..\..\Headers\Mapper\CamiaoMapper.h"
 #include "..\..\Headers\Mapper\CamionistaMapper.h"
+#include "..\..\Headers\Dtos\CargaDTO.h"
+#include "..\..\Headers\Mapper\CargaMapper.h"
 #include <stdexcept>
 
 GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
