@@ -8,11 +8,12 @@
 #include <stdexcept>
 
 GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
-        CargaContainer *cargaContainer, RotaContainer *rotaContainer){
+        CargaContainer *cargaContainer, RotaContainer *rotaContainer, LocalidadeContainer *localidadeContainer){
     this->camiaoContainer = camiaoContainer;
     this->camionistaContainer = camionistaContainer;
     this->cargaContainer = cargaContainer;
     this->rotaContainer = rotaContainer;
+    this->localidadeContainer = localidadeContainer;
 }
 
 void GestorService::registrarCamiao(std::string matricula, float capacidade){
@@ -32,6 +33,18 @@ void GestorService::registrarCamionista(std::string nomeCamionista){
     camionistaContainer->guardar(camionista);
 }
 
+void GestorService::registarCarga(float peso, std::string nomeDestino){
+    if(peso <= 0){
+        throw std::invalid_argument("O peso da carga deve ser maior que 0.");
+    }
+    Localidade* destino = localidadeContainer->procurar(nomeDestino);
+    if(destino == nullptr){
+        throw std::invalid_argument("Localidade destino nao encontrada.");
+    }
+    Carga carga(peso, nullptr);
+    cargaContainer->guardar(carga);
+}
+
 std::vector<CamiaoDTO> GestorService::getTodosCamioes(){
     std::vector<Camiao>& camioes = camiaoContainer->getTodos();
     std::vector<CamiaoDTO> dtos;
@@ -48,4 +61,17 @@ std::vector<CamionistaDTO> GestorService::getTodosCamionistas(){
         dtos.push_back(CamionistaMapper::toDTO(camionistas[i]));
     }
     return dtos;
+}
+
+std::vector<CargaDTO> GestorService::getTodasCargas(){
+    std::vector<Carga>& cargas = cargaContainer->getTodos();
+    std::vector<CargaDTO> dtos;
+    for(int i = 0; i < cargas.size(); i++){
+        dtos.push_back(CargaMapper::toDTO(cargas[i]));
+    }
+    return dtos;
+}
+
+std::vector<Localidade> GestorService::getTodasLocalidades(){
+    return localidadeContainer->getTodos();
 }

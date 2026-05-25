@@ -12,7 +12,8 @@ int main() {
         &empresa.getCamionistaContainer(),
         &empresa.getCamiaoContainer(),
         &empresa.getCargaContainer(),
-        &empresa.getRotaContainer()
+        &empresa.getRotaContainer(),
+        &empresa.getLocalidadeContainer()
     );
 
     MenuPrincipalController controller(&camionistaService, &gestorService);

@@ -1,6 +1,7 @@
 #include "..\..\Headers\Controller\GestorController.h"
 #include "..\..\Headers\Dtos\CamiaoDTO.h"
 #include "..\..\Headers\Dtos\CamionistaDTO.h"
+#include "..\..\Headers\Dtos\CargaDTO.h"
 #include <iostream>
 
 GestorController::GestorController(GestorService *service){
@@ -56,6 +57,20 @@ void GestorController::mostrarMenu(){
                 service->registrarCamionista(nomeCamionista);
                 std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
                 menu.mostrarSucessoRegistarCamionista(camionistas);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
+            }
+        }
+        else if(opcao==3){//registar Carga
+            float peso = menu.pedirPesoCarga();
+            std::vector<Localidade> localidades = service->getTodasLocalidades();
+            std::string nomeDestino = menu.pedirDestinoCarga(localidades);
+
+            try{
+                service->registarCarga(peso, nomeDestino);
+                std::vector<CargaDTO> cargas = service->getTodasCargas();
+                menu.mostrarSucessoRegistarCarga(cargas);
             }
             catch(std::invalid_argument &e){
                 menu.mostrarErro(e.what());

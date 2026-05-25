@@ -49,6 +49,24 @@ float MenuGestor::pedirCapacidadeMaxima(){
     return capacidadeMaxima;
 }
 
+float MenuGestor::pedirPesoCarga(){
+    std::cout << "Introduz o peso da carga (Kg): ";
+    float peso;
+    std::cin >> peso;
+    return peso;
+}
+
+std::string MenuGestor::pedirDestinoCarga(std::vector<Localidade> localidades){
+    std::cout << "\n---- Localidades disponiveis ----\n";
+    for(int i = 0; i < localidades.size(); i++){
+        std::cout << i+1 << ". " << localidades[i].getNome() << "\n";
+    }
+    std::cout << "Introduza o nome do destino: ";
+    std::string nomeDestino;
+    std::cin >> nomeDestino;
+    return nomeDestino;
+}
+
 void MenuGestor::mostrarErro(std::string mensagem){
     std::cout << "\nErro: " << mensagem << "\n";
 }
@@ -70,5 +88,15 @@ void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> cam
     for(int i = 0; i < camionistas.size(); i++){
         std::cout << i+1 << ". " << camionistas[i].nome
                   << " | Estado: " << camionistas[i].estado << "\n";
+    }
+}
+
+void MenuGestor::mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas){
+    std::cout << "\nCarga registada com sucesso!\n";
+    std::cout << "\n---- Lista de Cargas ----\n";
+    for(int i = 0; i < cargas.size(); i++){
+        std::cout << i+1 << ". Peso: " << cargas[i].peso 
+                  << " Kg | Estado: " << cargas[i].estado 
+                  << " | Destino: " << cargas[i].nomeDestino << "\n";
     }
 }
