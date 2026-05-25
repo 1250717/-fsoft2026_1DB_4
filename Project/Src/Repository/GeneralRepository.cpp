@@ -27,9 +27,16 @@ void GeneralRepository::carregar() {
     carregarCamionistas();
 }
 
+void GeneralRepository::guardar() {
+    guardarLocalidades();
+    guardarCargas();
+    guardarCamioes();
+    guardarCamionistas();
+    guardarRotas();
+}
 
 void GeneralRepository::carregarCamioes(){
-    ifstream ficheiro("Data/camioes.txt");
+    ifstream ficheiro("Dados/camioes.txt");
     if(!ficheiro.is_open()){
         cout << "Erro ao abrir camioes.txt\n";
         return;
@@ -100,7 +107,7 @@ void GeneralRepository::carregarCamioes(){
 }
 
 void GeneralRepository::carregarCamionistas(){
-    ifstream ficheiro("Data/camionistas.txt");
+    ifstream ficheiro("Dados/camionistas.txt");
     if(!ficheiro.is_open()){
         cout << "Erro ao abrir camionistas.txt\n";
         return;
@@ -142,7 +149,7 @@ void GeneralRepository::carregarCamionistas(){
 }
 
 void GeneralRepository::carregarCargas(){
-    ifstream ficheiro("Data/cargas.txt");
+    ifstream ficheiro("Dados/cargas.txt");
     if(!ficheiro.is_open()){
         cout << "Erro ao abrir cargas.txt\n";
         return;
@@ -161,7 +168,7 @@ void GeneralRepository::carregarCargas(){
                 campo++;
             }
             else if(campo == 0){
-                pesoStr += linha[i];
+                choose: pesoStr += linha[i];
             }
             else if(campo == 1){
                 estado += linha[i];
@@ -187,7 +194,7 @@ void GeneralRepository::carregarCargas(){
 }
 
 void GeneralRepository::carregarLocalidades(){
-    ifstream ficheiro("Data/localidades.txt");
+    ifstream ficheiro("Dados/localidades.txt");
     if(!ficheiro.is_open()){
         cout << "Erro ao abrir localidades.txt\n";
         return;
@@ -229,16 +236,8 @@ void GeneralRepository::carregarLocalidades(){
 void GeneralRepository::carregarRotas(){
 }
 
-void GeneralRepository::guardar() {
-    guardarLocalidades();
-    guardarCargas();
-    guardarCamioes();
-    guardarCamionistas();
-    guardarRotas();
-}
-
 void GeneralRepository::guardarLocalidades() {
-    ofstream ficheiro("Data/localidades.txt");
+    ofstream ficheiro("Dados/localidades.txt");
     if (!ficheiro.is_open()) return;
 
     vector<Localidade>& lista = localidadeContainer->getTodos();
@@ -251,7 +250,7 @@ void GeneralRepository::guardarLocalidades() {
 }
 
 void GeneralRepository::guardarCargas() {
-    ofstream ficheiro("Data/cargas.txt");
+    ofstream ficheiro("Dados/cargas.txt");
     if (!ficheiro.is_open()) return;
 
     vector<Carga>& lista = cargaContainer->getTodos();
@@ -264,7 +263,7 @@ void GeneralRepository::guardarCargas() {
 }
 
 void GeneralRepository::guardarCamioes() {
-    ofstream ficheiro("Data/camioes.txt");
+    ofstream ficheiro("Dados/camioes.txt");
     if (!ficheiro.is_open()) return;
 
     vector<Camiao>& listaCamioes = camiaoContainer->getTodos();
@@ -290,7 +289,7 @@ void GeneralRepository::guardarCamioes() {
 }
 
 void GeneralRepository::guardarCamionistas() {
-    ofstream ficheiro("Data/camionistas.txt");
+    ofstream ficheiro("Dados/camionistas.txt");
     if (!ficheiro.is_open()) return;
 
     vector<Camionista>& lista = camionistaContainer->getTodos();
