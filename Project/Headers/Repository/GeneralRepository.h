@@ -21,6 +21,12 @@ private:
     void carregarCargas();
     void carregarRotas();
 
+    void guardarLocalidades();
+    void guardarCargas();
+    void guardarCamioes();
+    void guardarCamionistas();
+    void guardarRotas();
+
 public:
     GeneralRepository(
         CamionistaContainer *camionistaContainer,

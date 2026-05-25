@@ -28,4 +28,6 @@ int main() {
 
     MenuPrincipalController controller(&camionistaService, &gestorService);
     controller.mostrarMenu();
+
+    repository.guardar();
 }

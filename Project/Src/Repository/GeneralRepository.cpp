@@ -27,8 +27,6 @@ void GeneralRepository::carregar() {
     carregarCamionistas();
 }
 
-void GeneralRepository::guardar() {
-}
 
 void GeneralRepository::carregarCamioes(){
     ifstream ficheiro("Data/camioes.txt");
@@ -229,4 +227,84 @@ void GeneralRepository::carregarLocalidades(){
 }
 
 void GeneralRepository::carregarRotas(){
+}
+
+void GeneralRepository::guardar() {
+    guardarLocalidades();
+    guardarCargas();
+    guardarCamioes();
+    guardarCamionistas();
+    guardarRotas();
+}
+
+void GeneralRepository::guardarLocalidades() {
+    ofstream ficheiro("Data/localidades.txt");
+    if (!ficheiro.is_open()) return;
+
+    vector<Localidade>& lista = localidadeContainer->getTodos();
+    for (int i = 0; i < lista.size(); i++) {
+        ficheiro << lista[i].getNome() << ","
+                 << lista[i].getCoordenadaX() << ","
+                 << lista[i].getCoordenadaY() << "\n";
+    }
+    ficheiro.close();
+}
+
+void GeneralRepository::guardarCargas() {
+    ofstream ficheiro("Data/cargas.txt");
+    if (!ficheiro.is_open()) return;
+
+    vector<Carga>& lista = cargaContainer->getTodos();
+    for (int i = 0; i < lista.size(); i++) {
+        ficheiro << lista[i].getPeso() << ","
+                 << lista[i].getEstado() << ","
+                 << lista[i].getDestino()->getNome() << "\n";
+    }
+    ficheiro.close();
+}
+
+void GeneralRepository::guardarCamioes() {
+    ofstream ficheiro("Data/camioes.txt");
+    if (!ficheiro.is_open()) return;
+
+    vector<Camiao>& listaCamioes = camiaoContainer->getTodos();
+    for (int i = 0; i < listaCamioes.size(); i++) {
+        ficheiro << listaCamioes[i].getMatricula() << ","
+                 << listaCamioes[i].getEstado() << ","
+                 << listaCamioes[i].getCapacidadeMaxima() << ","
+                 << listaCamioes[i].getCapacidadeDisponivel() << ",";
+        
+        if (listaCamioes[i].getCamionista() != nullptr) {
+            ficheiro << listaCamioes[i].getCamionista()->getNome();
+        }
+        
+        vector<Carga*>& listaCargas = listaCamioes[i].getCargas();
+        for (int j = 0; j < listaCargas.size(); j++) {
+            ficheiro << "," << listaCargas[j]->getPeso()
+                     << "," << listaCargas[j]->getEstado()
+                     << "," << listaCargas[j]->getDestino()->getNome();
+        }
+        ficheiro << "\n";
+    }
+    ficheiro.close();
+}
+
+void GeneralRepository::guardarCamionistas() {
+    ofstream ficheiro("Data/camionistas.txt");
+    if (!ficheiro.is_open()) return;
+
+    vector<Camionista>& lista = camionistaContainer->getTodos();
+    for (int i = 0; i < lista.size(); i++) {
+        ficheiro << lista[i].getNome() << ","
+                 << lista[i].getEstado() << ",";
+        
+        if (lista[i].getCamiao() != nullptr) {
+            ficheiro << lista[i].getCamiao()->getMatricula();
+        }
+        ficheiro << "\n";
+    }
+    ficheiro.close();
+}
+
+void GeneralRepository::guardarRotas() {
 }
