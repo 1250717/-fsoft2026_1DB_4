@@ -8,50 +8,27 @@ GestorController::GestorController(GestorService *service){
 }
 
 void GestorController::mostrarMenu(){
-    //quero chamar o menuGestor
-    //para guardar o nome do gestor atual
-    //nao vamos ter login
-    //mas quero guardar o nome do gestor
-    //ou seja chamamos o menu que criamos no .h
-    //MenuGestor menu
     nomeGestor = menu.pedirNomeGestor();
     while(true){
         int opcao = menu.mostrarOpcoes();
 
         if(opcao == 0){
-            break; // queremos sair do loop
-            //do menu Gestor
-            //podemos querer entrar como camionista
-            //com o break saimos deste loop
-            //mas continuamos no loop
-            //do menuPrincipal Controller
+            break;
         }
-        else if(opcao == 1){//Registar Camiao
-            //Gestor insere a matrícula do camião
+        else if(opcao == 1){
             std::string matricula = menu.pedirMatricula();
-            //Gestor insere a capacidade máxima do camião
             float capacidadeMaxima = menu.pedirCapacidadeMaxima();
-            try{//try diz executa isto e fica atento a erros
+            try{
                 service->registrarCamiao(matricula, capacidadeMaxima);
-                //se a matricula ja existe ele faz throw
-                //interrompe a função imediatamente 
-                //e envia um erro para quem a chamou.
-                
                 std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
                 menu.mostrarSucessoRegistarCamiao(camioes);
             }
-            catch(std::invalid_argument &e) {
-                //chamamos ao objeto que o throw
-                //criou de e
-                //mas podia ser erro por exemplo
-                menu.mostrarErro(e.what());  // controller delega a impressão ao menu
-                //what devolve a mensagem
-                //que metemos no throw
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
             }
         }
-        else if(opcao == 2){//registar Camionista
+        else if(opcao == 2){
             std::string nomeCamionista = menu.pedirNomeCamionista();
-
             try{
                 service->registrarCamionista(nomeCamionista);
                 std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
@@ -61,6 +38,23 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());
             }
         }
+        else if(opcao == 5){
+            std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
+            std::string matricula = menu.pedirSelecaoCamiao(camioes);
+            
+            bool confirmacao = menu.pedirConfirmacao();
+            if(confirmacao){
+                try{
+                    service->removerCamiao(matricula);
+                    std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
+                    menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            } else {
+                menu.mostrarErro("Acao cancelada.");
+            }
+        }
     }
-
 }

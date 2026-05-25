@@ -24,6 +24,8 @@ public:
     void registrarCamiao(std::string matricula, float capacidade);
 
     void registrarCamionista(std::string nomeCamionista);
+    
+    void removerCamiao(std::string matricula);
 
     std::vector<CamiaoDTO> getTodosCamioes();
 

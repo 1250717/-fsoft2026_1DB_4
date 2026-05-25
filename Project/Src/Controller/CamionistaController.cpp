@@ -28,4 +28,7 @@ void CamionistaController::mostrarMenu(){
             }
         }
     }
+    else {
+        menu.mostrarErro("Nao e permitido entrar sem estar registado no sistema.");
+    }
 }

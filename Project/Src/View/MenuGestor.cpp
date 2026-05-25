@@ -1,5 +1,6 @@
 #include "..\..\Headers\View\MenuGestor.h"
 #include <iostream>
+#include <limits>
 
 
 int MenuGestor::mostrarOpcoes(){
@@ -62,6 +63,42 @@ void MenuGestor::mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes){
                   << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
                   << " | Estado: " << camioes[i].estado << "\n";
     }
+}
+
+void MenuGestor::mostrarSucessoRemoverCamiao(std::vector<CamiaoDTO> camioes){
+    std::cout << "\nCamiao removido com sucesso!\n";
+}
+
+std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
+    while(true){
+        std::cout << "\n---- Lista de Camioes ----\n";
+        for(int i = 0; i < camioes.size(); i++){
+            std::cout << i+1 << ". " << camioes[i].matricula
+                      << " | Estado: " << camioes[i].estado << "\n";
+        }
+        std::cout << "Introduza o indice do camiao a remover: ";
+        int indice;
+        std::cin >> indice;
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Indice invalido. Tente novamente.\n";
+            continue;
+        }
+
+        if(indice >= 1 && indice <= (int)camioes.size()){
+            return camioes[indice-1].matricula;
+        }
+        std::cout << "\nIndice invalido. Tente novamente.\n";
+    }
+}
+
+bool MenuGestor::pedirConfirmacao(){
+    std::cout << "\nTem a certeza? (s/n): ";
+    char resposta;
+    std::cin >> resposta;
+    return resposta == 's';
 }
 
 void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas){

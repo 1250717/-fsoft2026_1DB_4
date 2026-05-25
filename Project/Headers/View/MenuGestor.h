@@ -15,10 +15,16 @@ public:
     std::string pedirNomeGestor();
     std::string pedirNomeCamionista();
     std::string pedirMatricula();
+    std::string pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes);
+
+    bool pedirConfirmacao();
+
+    void mostrarSucessoRemoverCamiao(std::vector<CamiaoDTO> camioes);
     
     float pedirCapacidadeMaxima();
 
     void mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes);
+    
     void mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas);
 
     void mostrarErro(std::string mensagem);

@@ -9,6 +9,7 @@ public:
     std::string pedirNome();
     int mostrarOpcoes();
     void mostrarEstadoCamiao(CamiaoDTO camiao);
+    void mostrarErro(std::string mensagem);
 };
 
 #endif

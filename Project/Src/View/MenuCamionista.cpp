@@ -37,3 +37,7 @@ void MenuCamionista::mostrarEstadoCamiao(CamiaoDTO camiao){
     //cargas disponiveis estao no container
     //service é que tem de ir la
 }
+
+void MenuCamionista::mostrarErro(std::string mensagem){
+    std::cout << "\nErro: " << mensagem << "\n";
+}
