@@ -20,6 +20,16 @@ GeneralRepository::GeneralRepository(
         this->localidadeContainer = localidadeContainer;
     }
 
+void GeneralRepository::carregar() {
+    carregarLocalidades();
+    carregarCargas();
+    carregarCamioes();
+    carregarCamionistas();
+}
+
+void GeneralRepository::guardar() {
+}
+
 void GeneralRepository::carregarCamioes(){
     ifstream ficheiro("Data/camioes.txt");
     if(!ficheiro.is_open()){
@@ -131,4 +141,92 @@ void GeneralRepository::carregarCamionistas(){
     }
 
     ficheiro.close();
+}
+
+void GeneralRepository::carregarCargas(){
+    ifstream ficheiro("Data/cargas.txt");
+    if(!ficheiro.is_open()){
+        cout << "Erro ao abrir cargas.txt\n";
+        return;
+    }
+
+    string linha;
+
+    while(getline(ficheiro, linha)){
+        string pesoStr = "";
+        string estado = "";
+        string nome_destino = "";
+        int campo = 0;
+
+        for(int i = 0; i < linha.size(); i++){
+            if(linha[i] == ','){
+                campo++;
+            }
+            else if(campo == 0){
+                pesoStr += linha[i];
+            }
+            else if(campo == 1){
+                estado += linha[i];
+            }
+            else if(campo == 2){
+                nome_destino += linha[i];
+            }
+        }
+
+        if(!nome_destino.empty()){
+            float peso = stof(pesoStr);
+            Localidade* localidadeDestino = localidadeContainer->procurar(nome_destino);
+
+            if(localidadeDestino != nullptr){
+                Carga carga(peso, localidadeDestino);
+                carga.setEstado(estado);
+                cargaContainer->guardar(carga);
+            }
+        }
+    }
+
+    ficheiro.close();
+}
+
+void GeneralRepository::carregarLocalidades(){
+    ifstream ficheiro("Data/localidades.txt");
+    if(!ficheiro.is_open()){
+        cout << "Erro ao abrir localidades.txt\n";
+        return;
+    }
+    
+    string linha;
+    while(getline(ficheiro, linha)){
+        string nome = "";
+        string coordxStr = "";
+        string coordyStr = "";
+        int campo = 0;
+
+        for(int i = 0; i < linha.size(); i++){
+            if(linha[i] == ','){
+                campo++;
+            }
+            else if(campo == 0){
+                nome += linha[i];
+            }
+            else if(campo == 1){
+                coordxStr += linha[i];
+            }
+            else if(campo == 2){
+                coordyStr += linha[i];
+            }
+        }
+        
+        if(!nome.empty() && !coordxStr.empty() && !coordyStr.empty()){
+            float coordx = stof(coordxStr);
+            float coordy = stof(coordyStr);
+
+            Localidade localidade(nome, coordx, coordy);
+            localidadeContainer->guardar(localidade);
+        }
+    }
+    ficheiro.close();
+}
+
+void GeneralRepository::carregarRotas(){
 }
