@@ -15,7 +15,7 @@ std::vector<Camionista>& CamionistaContainer::getTodos() {
 std::vector<Camionista*> CamionistaContainer::getDisponiveis() {
     std::vector<Camionista*> disponiveis;
     for (int i = 0; i < (int)camionistas.size(); i++) {
-        if (camionistas[i].getEstado() == "Disponível") {
+        if (camionistas[i].getEstado() == "Disponivel") {
             disponiveis.push_back(&camionistas[i]);
         }
     }

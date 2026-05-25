@@ -89,7 +89,7 @@ void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga
         }
     }
     if(!encontrada){
-        throw std::invalid_argument("Carga não está atribuída a este camião.");
+        throw std::invalid_argument("Carga nao esta atribuida a este camiao.");
     }
     
     // 4. Remover do camião

@@ -2,7 +2,7 @@
 
 Camionista::Camionista(std::string nome){
     this->nome = nome;
-    this->estado = "Disponível"; // Predefinido no relatório 
+    this->estado = "Disponivel"; // Predefinido no relatório 
     this->camiao = nullptr; // Predefinido no relatório 
 }
 

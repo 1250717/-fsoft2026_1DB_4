@@ -8,7 +8,7 @@ Camiao::Camiao(std::string matricula, float capacidadeMaxima) {
     this->capacidadeMaxima = capacidadeMaxima;
     this->capacidadeDisponivel = capacidadeMaxima; // Inicialmente o peso disponível é o total
     
-    this->estado = "Disponível"; // Predefinido no relatório 
+    this->estado = "Disponivel"; // Predefinido no relatório 
     this->camionista = nullptr;  // Predefinido no relatório
 }
 
