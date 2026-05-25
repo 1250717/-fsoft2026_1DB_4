@@ -41,13 +41,19 @@ void GestorController::mostrarMenu(){
         else if(opcao == 5){
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::string matricula = menu.pedirSelecaoCamiao(camioes);
-            try{
-                service->removerCamiao(matricula);
-                std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
-                menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
+            
+            bool confirmacao = menu.pedirConfirmacao();
+            if(confirmacao){
+                try{
+                    service->removerCamiao(matricula);
+                    std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
+                    menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            } else {
+                menu.mostrarErro("Acao cancelada.");
             }
         }
     }
