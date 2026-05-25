@@ -1,5 +1,6 @@
 #include "..\..\Headers\View\MenuGestor.h"
 #include <iostream>
+#include <limits>
 
 
 int MenuGestor::mostrarOpcoes(){
@@ -79,7 +80,14 @@ std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
         int indice;
         std::cin >> indice;
 
-        if(indice >= 1 && indice <= camioes.size()){
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Indice invalido. Tente novamente.\n";
+            continue;
+        }
+
+        if(indice >= 1 && indice <= (int)camioes.size()){
             return camioes[indice-1].matricula;
         }
         std::cout << "\nIndice invalido. Tente novamente.\n";
