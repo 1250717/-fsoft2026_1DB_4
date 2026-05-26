@@ -136,7 +136,7 @@ void CamionistaService::removerCarga(std::string nomeCamionista, int indiceCarga
     
     // Validacao: o camionista tem de ter um camiao atribuido
     if(camionista->getCamiao() == nullptr){
-        throw std::invalid_argument("Nao tem camiao atribuido. Contacte o gestor.");
+        throw std::invalid_argument("Nao tem camiao atribuido.");
     }
     
     Camiao* camiao = camionista->getCamiao();
