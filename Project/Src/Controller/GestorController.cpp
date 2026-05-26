@@ -71,7 +71,24 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro("Acao cancelada.");
             }
         }
-        else if(opcao==8){//Visualizar Cadastros
+        else if(opcao == 6){ //Remover Camionista
+            std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
+            std::string nomeCamionista = menu.pedirSelecaoCamionista(camionistas);
+            bool confirmacao = menu.pedirConfirmacao();
+            if(confirmacao){
+                try{
+                    service->removerCamionista(nomeCamionista);
+                    std::vector<CamionistaDTO> camionistasAtualizados = service->getTodosCamionistas();
+                    menu.mostrarSucessoRemoverCamionista(camionistasAtualizados);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            } else {
+                menu.mostrarErro("Ação cancelada.");
+            }
+        }
+        else if(opcao == 8){//Visualizar Cadastros
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             menu.visualizarCadastros(camioes, camionistas);

@@ -30,6 +30,8 @@ public:
     
     void removerCamiao(std::string matricula);
 
+    void removerCamionista(std::string nomeCamionista);
+
     void registarCarga(float peso, std::string nomeDestino);
 
     std::vector<CamiaoDTO> getTodosCamioes();
@@ -40,7 +42,7 @@ public:
 
     std::vector<Localidade>getTodasLocalidades();
 
-    void removerCamionista(std::string nome);
+    
 };
 
 #endif
