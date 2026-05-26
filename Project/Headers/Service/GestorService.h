@@ -31,6 +31,10 @@ public:
     std::vector<CamionistaDTO> getTodosCamionistas();
 
     std::vector<RotaDTO> getTodasRotas();
+
+    std::vector<CamionistaDTO> getCamionistasDisponiveis();
+    std::vector<CamiaoDTO> getCamioesDisponiveis();
+    void atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula);
 };
 
 #endif

@@ -4,7 +4,8 @@
 #include "..\..\Headers\Dtos\RotaDTO.h"
 
 #include <stdexcept>
-
+// Construtor: recebe ponteiros para os 3 containers que o service precisa
+// Guarda esses ponteiros como atributos para os usar nos métodos
 CamionistaService::CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer){
     this->camionistaContainer= camionistaContainer;
     this->cargaContainer= cargaContainer;
@@ -20,11 +21,11 @@ bool CamionistaService::verificarLogin(std::string nome){
 
 }
 
-
+// Devolve um DTO com a informação do camião atribuído ao camionista
 CamiaoDTO CamionistaService::visualizarEstadoCamiao(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
     Camiao* camiao = camionista->getCamiao();
-    
+    // Cria o DTO que vai transportar os dados para a view
     CamiaoDTO dto;
     dto.capacidadeMaxima = camiao->getCapacidadeMaxima();
     dto.capacidadeDisponivel = camiao->getCapacidadeDisponivel();
@@ -50,6 +51,8 @@ std::vector<CargaDTO> CamionistaService::getCargasDoCamiao(std::string nomeCamio
     std::vector<CargaDTO> dtos;
     
     // para cada carga do camião, descobrir o seu índice no container
+    // For exterior: percorre as cargas que estao no camiao
+    // For interior: procura essa mesma carga no container global
     for(int i = 0; i < cargas.size(); i++){
         for(int j = 0; j < todas.size(); j++){
             if(cargas[i] == &todas[j]){
@@ -189,6 +192,56 @@ void CamionistaService::iniciarEntrega(std::string nomeCamionista){
 }
 
 
+// Devolve a lista de cargas que estão disponíveis no sistema
+std::vector<CargaDTO> CamionistaService::getCargasDisponiveis(){
+    // Obtém o vetor de todas as cargas do container
+    std::vector<Carga>& todas = cargaContainer->getTodos();
+    std::vector<CargaDTO> dtos;
+    
+    // Percorre todas as cargas e filtra apenas as disponíveis
+    for(int i = 0; i < todas.size(); i++){
+        if(todas[i].getEstado() == "Disponivel"){
+            CargaDTO dto;
+            dto.indice = i;                                  // posição no container
+            dto.peso = todas[i].getPeso();
+            dto.nomeDestino = todas[i].getDestino()->getNome();
+            dto.estado = todas[i].getEstado();
+            dtos.push_back(dto);
+        }
+    }
+    
+    return dtos;
+}
 
-
-
+// Adiciona uma carga ao camião do camionista
+void CamionistaService::adicionarCarga(std::string nomeCamionista, int indiceCarga){
+    // Procura o camionista e o seu camião
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    Camiao* camiao = camionista->getCamiao();
+    
+    // Procura a carga pelo índice
+    Carga* carga = cargaContainer->procurar(indiceCarga);
+    
+    // Validação 1: a carga tem de existir
+    if(carga == nullptr){
+        throw std::invalid_argument("Carga inexistente.");
+    }
+    
+    // Validação 2: a carga tem de estar disponível
+    if(carga->getEstado() != "Disponivel"){
+        throw std::invalid_argument("Carga ja nao esta disponivel.");
+    }
+    
+    // Validação 3: o peso da carga não pode exceder a capacidade do camião
+    if(carga->getPeso() > camiao->getCapacidadeDisponivel()){
+        throw std::invalid_argument("Peso da carga excede a capacidade disponivel.");
+    }
+    
+    // Subtrai o peso da carga à capacidade disponível
+    float novaCapacidade = camiao->getCapacidadeDisponivel() - carga->getPeso();
+    camiao->setCapacidadeDisponivel(novaCapacidade);
+    
+    // Adiciona a carga ao camião e marca como "Atribuida"
+    camiao->adicionarCarga(carga);
+    carga->setEstado("Atribuida");
+}

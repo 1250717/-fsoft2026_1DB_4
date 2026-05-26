@@ -65,3 +65,33 @@ std::vector<RotaDTO> GestorService::getTodasRotas(){
         dtos.push_back(RotaMapper::toDTO(rotas[i]));
     }
     return dtos;
+}
+
+// Atribui um camionista a um camiao - associacao bidirecional
+void GestorService::atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula){
+    // Procurar o camionista pelo nome
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    if(camionista == nullptr){
+        throw std::invalid_argument("Camionista inexistente.");
+    }
+    
+    // Validacao: o camionista nao pode ja ter camiao
+    if(camionista->getCamiao() != nullptr){
+        throw std::invalid_argument("Camionista ja tem camiao atribuido.");
+    }
+    
+    // Procurar o camiao pela matricula
+    Camiao* camiao = camiaoContainer->procurar(matricula);
+    if(camiao == nullptr){
+        throw std::invalid_argument("Camiao inexistente.");
+    }
+    
+    // Validacao: o camiao nao pode ja ter camionista
+    if(camiao->getCamionista() != nullptr){
+        throw std::invalid_argument("Camiao ja tem camionista atribuido.");
+    }
+    
+    // Associacao bidirecional: camionista <-> camiao
+    camionista->setCamiao(camiao);
+    camiao->setCamionista(camionista);
+}
