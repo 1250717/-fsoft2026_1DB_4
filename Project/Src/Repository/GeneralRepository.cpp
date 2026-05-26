@@ -156,7 +156,6 @@ void GeneralRepository::carregarCargas(){
     }
 
     string linha;
-
     while(getline(ficheiro, linha)){
         string pesoStr = "";
         string estado = "";
@@ -166,14 +165,11 @@ void GeneralRepository::carregarCargas(){
         for(int i = 0; i < linha.size(); i++){
             if(linha[i] == ','){
                 campo++;
-            }
-            else if(campo == 0){
-                choose: pesoStr += linha[i];
-            }
-            else if(campo == 1){
+            } else if(campo == 0){
+                pesoStr += linha[i];
+            } else if(campo == 1){
                 estado += linha[i];
-            }
-            else if(campo == 2){
+            } else if(campo == 2){
                 nome_destino += linha[i];
             }
         }
@@ -210,14 +206,11 @@ void GeneralRepository::carregarLocalidades(){
         for(int i = 0; i < linha.size(); i++){
             if(linha[i] == ','){
                 campo++;
-            }
-            else if(campo == 0){
+            } else if(campo == 0){
                 nome += linha[i];
-            }
-            else if(campo == 1){
+            } else if(campo == 1){
                 coordxStr += linha[i];
-            }
-            else if(campo == 2){
+            } else if(campo == 2){
                 coordyStr += linha[i];
             }
         }

@@ -15,7 +15,7 @@ void GestorController::mostrarMenu(){
         if(opcao == 0){
             break;
         }
-        else if(opcao == 1){
+        else if(opcao == 1){//registar camiao
             std::string matricula = menu.pedirMatricula();
             float capacidadeMaxima = menu.pedirCapacidadeMaxima();
             try{
