@@ -1,0 +1,3 @@
+Joao,Disponível,
+Pedro,Disponível,
+Afonso,Disponível,

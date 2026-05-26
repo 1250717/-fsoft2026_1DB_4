@@ -16,3 +16,11 @@ float Localidade::calcularDistancia(Localidade& outra) {
     float difY = outra.coordenadaY - this->coordenadaY;// distancia Y
     return std::sqrt(difX * difX + difY * difY); //raiz quadrada da soma, distancia total
 }
+
+float Localidade::getCoordenadaX() {
+    return this->coordenadaX;
+}
+
+float Localidade::getCoordenadaY() {
+    return this->coordenadaY;
+}

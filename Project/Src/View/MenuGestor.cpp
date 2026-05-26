@@ -1,5 +1,6 @@
 #include "..\..\Headers\View\MenuGestor.h"
 #include <iostream>
+#include <limits>
 
 
 int MenuGestor::mostrarOpcoes(){
@@ -7,7 +8,7 @@ int MenuGestor::mostrarOpcoes(){
     std::cout << "\n 1 - Registar Camião";
     std::cout << "\n 2 - Registar Camionista";
     std::cout << "\n 3 - Registar Carga";
-    std::cout << "\n 4 - Atribuir camionista a camião";
+    std::cout << "\n 4 - Atribuir Camionista a Camião";
     std::cout << "\n 5 - Remover Camião";
     std::cout << "\n 6 - Remover Camionista";
     std::cout << "\n 7 - Eliminar Carga";
@@ -49,6 +50,24 @@ float MenuGestor::pedirCapacidadeMaxima(){
     return capacidadeMaxima;
 }
 
+float MenuGestor::pedirPesoCarga(){
+    std::cout << "Introduz o peso da carga (Kg): ";
+    float peso;
+    std::cin >> peso;
+    return peso;
+}
+
+std::string MenuGestor::pedirDestinoCarga(std::vector<Localidade> localidades){
+    std::cout << "\n---- Localidades disponiveis ----\n";
+    for(int i = 0; i < localidades.size(); i++){
+        std::cout << i+1 << ". " << localidades[i].getNome() << "\n";
+    }
+    std::cout << "Introduza o nome do destino: ";
+    std::string nomeDestino;
+    std::cin >> nomeDestino;
+    return nomeDestino;
+}
+
 void MenuGestor::mostrarErro(std::string mensagem){
     std::cout << "\nErro: " << mensagem << "\n";
 }
@@ -64,6 +83,50 @@ void MenuGestor::mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes){
     }
 }
 
+void MenuGestor::mostrarSucessoRemoverCamiao(std::vector<CamiaoDTO> camioes){
+    std::cout << "\nCamiao removido com sucesso!\n";
+    std::cout << "\n---- Lista de Camioes ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula 
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+}
+
+std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
+    while(true){
+        std::cout << "\n---- Lista de Camioes ----\n";
+        for(int i = 0; i < camioes.size(); i++){
+            std::cout << i+1 << ". " << camioes[i].matricula
+                      << " | Estado: " << camioes[i].estado << "\n";
+        }
+        std::cout << "Introduza o indice do camiao a remover: ";
+        int indice;
+        std::cin >> indice;
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Indice invalido. Tente novamente.\n";
+            continue;
+        }
+
+        if(indice >= 1 && indice <= (int)camioes.size()){
+            return camioes[indice-1].matricula;
+        } else {
+            std::cout << "\nIndice invalido. Tente novamente.\n";
+        }
+    }
+}
+
+bool MenuGestor::pedirConfirmacao(){
+    std::cout << "\nTem a certeza? (s/n): ";
+    char resposta;
+    std::cin >> resposta;
+    return resposta == 's' || resposta == 'S';
+}
+
 void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas){
     std::cout << "\nCamionista registado com sucesso!\n";
     std::cout << "\n---- Lista de Camionistas ----\n";
@@ -72,10 +135,6 @@ void MenuGestor::mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> cam
                   << " | Estado: " << camionistas[i].estado << "\n";
     }
 }
-
-
-
-
 
 
 
@@ -93,4 +152,92 @@ void MenuGestor::mostrarRotasConcluidas(std::vector<RotaDTO> rotas){
         }
     }
     std::cout << "--------------------------\n";
+}
+
+void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas){
+    std::cout << "\n---- Lista de Camionistas ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
+    }
+
+    std::cout << "\n---- Lista de Camioes ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula 
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+}
+
+void MenuGestor::mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas){
+    std::cout << "\nCarga registada com sucesso!\n";
+    std::cout << "\n---- Lista de Cargas ----\n";
+    for(int i = 0; i < cargas.size(); i++){
+        std::cout << i+1 << ". Peso: " << cargas[i].peso 
+                  << " Kg | Estado: " << cargas[i].estado 
+                  << " | Destino: " << cargas[i].nomeDestino << "\n";
+    }
+}
+
+std::string MenuGestor::pedirSelecaoCamionista(std::vector<CamionistaDTO> camionistas){
+    while (true){   
+        std::cout << "\n---- Lista de Camionistas ----\n";
+        for(int i = 0; i < camionistas.size(); i++){
+            std::cout << i+1 << "." << camionistas[i].nome
+                    << " | Estado: " << camionistas[i].estado << "\n";
+        }
+        std::cout << "Introduz o indíce do camionista a remover: ";
+        int indice;
+        std::cin >> indice;
+        
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Indice invalido. Tente novamente.\n";
+            continue;
+        }
+
+        if(indice >= 1 && indice <= (int)camionistas.size()){
+            return camionistas[indice-1].nome;
+        } else {
+            std::cout << "\nIndice invalido. Tente novamente.\n";
+        }
+    }
+}
+
+void MenuGestor::mostrarSucessoRemoverCamionista(std::vector<CamionistaDTO> camionistas){
+    std::cout << "\nCamionista removido com sucesso!\n";
+    std::cout << "\n---- Lista de Camionistas ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
+    }
+}
+
+// Mostra a lista de camionistas que ainda nao tem camiao atribuido
+void MenuGestor::mostrarCamionistasDisponiveis(std::vector<CamionistaDTO> camionistas){
+    std::cout << "\n---- Camionistas Disponiveis ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
+    }
+    std::cout << "---------------------------------\n";
+}
+ 
+// Mostra a lista de camioes que ainda nao tem camionista atribuido
+void MenuGestor::mostrarCamioesDisponiveis(std::vector<CamiaoDTO> camioes){
+    std::cout << "\n---- Camioes Disponiveis ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+    std::cout << "-----------------------------\n";
+}
+ 
+// Mensagem de sucesso apos atribuicao
+void MenuGestor::mostrarSucessoAtribuicao(std::string nomeCamionista, std::string matricula){
+    std::cout << "\nAtribuicao realizada com sucesso!\n";
+    std::cout << "Camionista " << nomeCamionista << " esta agora atribuido ao camiao " << matricula << ".\n";
 }
