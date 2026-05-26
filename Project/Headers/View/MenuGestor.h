@@ -34,6 +34,9 @@ public:
     void mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas);
 
     void mostrarErro(std::string mensagem);
+
+    std::string pedirSelecaoCamionista(std::vector<CamionistaDTO> camionistas);
+    void mostrarSucessoRemoverCamionista(std::vector<CamionistaDTO> camionistas);
 };
 
 

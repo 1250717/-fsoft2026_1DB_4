@@ -39,6 +39,8 @@ public:
     std::vector<CargaDTO>getTodasCargas();
 
     std::vector<Localidade>getTodasLocalidades();
+
+    void removerCamionista(std::string nome);
 };
 
 #endif

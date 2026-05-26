@@ -96,3 +96,23 @@ std::vector<CargaDTO> GestorService::getTodasCargas(){
 std::vector<Localidade> GestorService::getTodasLocalidades(){
     return localidadeContainer->getTodos();
 }
+
+void GestorService::removerCamionista(std::string nome){
+    Camionista* camionista = camionistaContainer->procurar(nome);
+    
+    if(camionista == nullptr){
+        throw std::invalid_argument("Camionista nao encontrado.");
+    }
+    
+    Camiao* camiao = camionista->getCamiao();
+    if(camiao != nullptr){
+        if(camiao->temCargasPorEstado("Atribuida") || camiao->temCargasPorEstado("Em Transito")){
+            throw std::invalid_argument("Nao e possivel remover camionista com cargas ativas.");
+        }
+        camiao->setCamionista(nullptr);
+        camiao->setEstado("Disponivel");
+        camionista->setCamiao(nullptr);
+    }
+    
+    camionistaContainer->remover(nome);
+}
