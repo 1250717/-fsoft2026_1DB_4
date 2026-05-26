@@ -5,6 +5,8 @@
 #include <vector>
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
+#include "..\Dtos\CargaDTO.h"
+#include "..\Model\Localidade.h"
 
 
 class MenuGestor{
@@ -20,13 +22,17 @@ public:
     bool pedirConfirmacao();
 
     void mostrarSucessoRemoverCamiao(std::vector<CamiaoDTO> camioes);
+    std::string pedirDestinoCarga(std::vector<Localidade> localidades);
     
     float pedirCapacidadeMaxima();
+    float pedirPesoCarga();
 
     void mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes);
     
     void mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas);
     void visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas);
+    void mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas);
+
     void mostrarErro(std::string mensagem);
 };
 

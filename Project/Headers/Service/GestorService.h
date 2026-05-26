@@ -7,8 +7,10 @@
 #include "..\Model\CamionistaContainer.h"
 #include "..\Model\CargaContainer.h"
 #include "..\Model\RotaContainer.h"
+#include "..\Model\LocalidadeContainer.h"
 #include "..\Dtos\CamiaoDTO.h"
 #include "..\Dtos\CamionistaDTO.h"
+#include "..\Dtos\CargaDTO.h"
 
 class GestorService {
 private:
@@ -16,10 +18,11 @@ private:
     CamiaoContainer *camiaoContainer;
     CargaContainer *cargaContainer;
     RotaContainer *rotaContainer;
+    LocalidadeContainer *localidadeContainer;
     
 public:
     GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
-        CargaContainer *cargaContainer, RotaContainer *rotaContainer);
+        CargaContainer *cargaContainer, RotaContainer *rotaContainer, LocalidadeContainer *localidadeContainer);
 
     void registrarCamiao(std::string matricula, float capacidade);
 
@@ -27,9 +30,15 @@ public:
     
     void removerCamiao(std::string matricula);
 
+    void registarCarga(float peso, std::string nomeDestino);
+
     std::vector<CamiaoDTO> getTodosCamioes();
 
     std::vector<CamionistaDTO> getTodosCamionistas();
+
+    std::vector<CargaDTO>getTodasCargas();
+
+    std::vector<Localidade>getTodasLocalidades();
 };
 
 #endif
