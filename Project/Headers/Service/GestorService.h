@@ -39,6 +39,10 @@ public:
 
     std::vector<CamionistaDTO> getTodosCamionistas();
 
+    std::vector<CargaDTO> getTodasCargas();
+
+    std::vector<Localidade> getTodasLocalidades();
+
     std::vector<RotaDTO> getTodasRotas();
 
     std::vector<CamionistaDTO> getCamionistasDisponiveis();

@@ -1,4 +1,4 @@
-    #include "..\..\Headers\Controller\GestorController.h"
+#include "..\..\Headers\Controller\GestorController.h"
 #include "..\..\Headers\Dtos\CamiaoDTO.h"
 #include "..\..\Headers\Dtos\CamionistaDTO.h"
 #include "..\..\Headers\Dtos\RotaDTO.h"
@@ -17,7 +17,8 @@ void GestorController::mostrarMenu(){
         if(opcao == 0){
             break;
         }
-        else if(opcao == 1){//Registar Camiao
+        // UC 9.1 - Registar Camiao
+        else if(opcao == 1){
             std::string matricula = menu.pedirMatricula();
             float capacidadeMaxima = menu.pedirCapacidadeMaxima();
             try{
@@ -29,7 +30,8 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());
             }
         }
-        else if(opcao == 2){//Registar Camionista
+        // UC 9.2 - Registar Camionista
+        else if(opcao == 2){
             std::string nomeCamionista = menu.pedirNomeCamionista();
             try{
                 service->registrarCamionista(nomeCamionista);
@@ -40,18 +42,8 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());
             }
         }
-        else if(opcao == 9){// UC9 - Visualizar Rotas Concluidas
-            std::vector<RotaDTO> rotas = service->getTodasRotas();
-            
-            if(rotas.empty()){
-                menu.mostrarErro("Nao existem rotas concluidas.");
-                continue;
-            }
-            
-            menu.mostrarRotasConcluidas(rotas);
-        }
-    }
-        else if(opcao==3){//Registar Carga
+        // UC 9.3 - Registar Carga
+        else if(opcao == 3){
             float peso = menu.pedirPesoCarga();
             std::vector<Localidade> localidades = service->getTodasLocalidades();
             std::string nomeDestino = menu.pedirDestinoCarga(localidades);
@@ -65,7 +57,39 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro(e.what());
             }
         }
-        else if(opcao == 5){//Remover Camião
+        // UC 9.4 - Atribuir Camionista a Camiao
+        else if(opcao == 4){
+            // 1. Pedir ao service os camionistas disponiveis (sem camiao)
+            std::vector<CamionistaDTO> camionistasDisp = service->getCamionistasDisponiveis();
+            
+            if(camionistasDisp.empty()){
+                menu.mostrarErro("Nao existem camionistas disponiveis.");
+                continue;
+            }
+            
+            menu.mostrarCamionistasDisponiveis(camionistasDisp);
+            std::string nomeCamionista = menu.pedirNomeCamionista();
+            
+            std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
+            
+            if(camioesDisp.empty()){
+                menu.mostrarErro("Nao existem camioes disponiveis.");
+                continue;
+            }
+            
+            menu.mostrarCamioesDisponiveis(camioesDisp);
+            std::string matricula = menu.pedirMatricula();
+            
+            try{
+                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
+                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
+            }
+        }
+        // UC 9.5 - Remover Camiao
+        else if(opcao == 5){
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::string matricula = menu.pedirSelecaoCamiao(camioes);
             
@@ -83,7 +107,8 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro("Acao cancelada.");
             }
         }
-        else if(opcao == 6){ //Remover Camionista
+        // UC 9.6 - Remover Camionista
+        else if(opcao == 6){
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             std::string nomeCamionista = menu.pedirSelecaoCamionista(camionistas);
             bool confirmacao = menu.pedirConfirmacao();
@@ -97,49 +122,25 @@ void GestorController::mostrarMenu(){
                     menu.mostrarErro(e.what());
                 }
             } else {
-                menu.mostrarErro("Ação cancelada.");
+                menu.mostrarErro("Acao cancelada.");
             }
         }
-        else if(opcao == 8){//Visualizar Cadastros
+        // UC 9.8 - Visualizar Cadastros
+        else if(opcao == 8){
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             menu.visualizarCadastros(camioes, camionistas);
         }
-        else if(opcao == 4){
-            // 1. Pedir ao service os camionistas disponiveis (sem camiao)
-            std::vector<CamionistaDTO> camionistasDisp = service->getCamionistasDisponiveis();
+        // UC 9.9 - Visualizar Rotas Concluidas
+        else if(opcao == 9){
+            std::vector<RotaDTO> rotas = service->getTodasRotas();
             
-            // Caminho alternativo: nao ha camionistas livres
-            if(camionistasDisp.empty()){
-                menu.mostrarErro("Nao existem camionistas disponiveis.");
+            if(rotas.empty()){
+                menu.mostrarErro("Nao existem rotas concluidas.");
                 continue;
             }
             
-            // 2. Mostrar a lista e pedir nome do camionista
-            menu.mostrarCamionistasDisponiveis(camionistasDisp);
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            
-            // 3. Pedir ao service os camioes disponiveis (sem camionista)
-            std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
-            
-            // Caminho alternativo: nao ha camioes livres
-            if(camioesDisp.empty()){
-                menu.mostrarErro("Nao existem camioes disponiveis.");
-                continue;
-            }
-            
-            // 4. Mostrar a lista e pedir matricula do camiao
-            menu.mostrarCamioesDisponiveis(camioesDisp);
-            std::string matricula = menu.pedirMatricula();
-            
-            // 5. Tentar atribuir - se falhar apanha excecao
-            try{
-                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
-                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
+            menu.mostrarRotasConcluidas(rotas);
         }
-    }   
+    }
 }
