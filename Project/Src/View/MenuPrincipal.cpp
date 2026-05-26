@@ -12,6 +12,7 @@ int MenuPrincipal::mostrar() {
         cout << "1. Gestor\n";
         cout << "2. Camionista\n";
         cout << "0. Sair\n";
+        cout << "Opcao: ";
         cin >> opcao;
 
         if(opcao >= 0 && opcao <= 2)
