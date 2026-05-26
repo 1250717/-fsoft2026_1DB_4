@@ -183,3 +183,12 @@ void GestorService::atribuirCamionistaACamiao(std::string nomeCamionista, std::s
     camionista->setCamiao(camiao);
     camiao->setCamionista(camionista);
 }
+
+std::vector<RotaDTO> GestorService::getTodasRotas(){
+    std::vector<Rota>& rotas = rotaContainer->getTodos();
+    std::vector<RotaDTO> dtos;
+    for(int i = 0; i < rotas.size(); i++){
+        dtos.push_back(RotaMapper::toDTO(rotas[i]));
+    }
+    return dtos;
+}
