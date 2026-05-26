@@ -5,11 +5,11 @@
 
 int MenuGestor::mostrarOpcoes(){
     std::cout << "\n -------- Gerir Empresa --------\n";
-    std::cout << "\n 1 - Registar Camião";
+    std::cout << "\n 1 - Registar Camiao";
     std::cout << "\n 2 - Registar Camionista";
     std::cout << "\n 3 - Registar Carga";
-    std::cout << "\n 4 - Atribuir Camionista a Camião";
-    std::cout << "\n 5 - Remover Camião";
+    std::cout << "\n 4 - Atribuir Camionista a Camiao";
+    std::cout << "\n 5 - Remover Camiao";
     std::cout << "\n 6 - Remover Camionista";
     std::cout << "\n 7 - Eliminar Carga";
     std::cout << "\n 8 - Visualizar Cadastros";

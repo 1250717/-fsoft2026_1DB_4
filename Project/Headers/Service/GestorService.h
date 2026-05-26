@@ -20,6 +20,8 @@ private:
     CargaContainer *cargaContainer;
     RotaContainer *rotaContainer;
     LocalidadeContainer *localidadeContainer;
+
+     bool validarFormatoMatricula(std::string matricula);
     
 public:
     GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
