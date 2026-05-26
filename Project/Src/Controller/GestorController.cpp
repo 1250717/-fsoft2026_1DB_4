@@ -93,5 +93,41 @@ void GestorController::mostrarMenu(){
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             menu.visualizarCadastros(camioes, camionistas);
         }
-    }
+        else if(opcao == 4){
+            // 1. Pedir ao service os camionistas disponiveis (sem camiao)
+            std::vector<CamionistaDTO> camionistasDisp = service->getCamionistasDisponiveis();
+            
+            // Caminho alternativo: nao ha camionistas livres
+            if(camionistasDisp.empty()){
+                menu.mostrarErro("Nao existem camionistas disponiveis.");
+                continue;
+            }
+            
+            // 2. Mostrar a lista e pedir nome do camionista
+            menu.mostrarCamionistasDisponiveis(camionistasDisp);
+            std::string nomeCamionista = menu.pedirNomeCamionista();
+            
+            // 3. Pedir ao service os camioes disponiveis (sem camionista)
+            std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
+            
+            // Caminho alternativo: nao ha camioes livres
+            if(camioesDisp.empty()){
+                menu.mostrarErro("Nao existem camioes disponiveis.");
+                continue;
+            }
+            
+            // 4. Mostrar a lista e pedir matricula do camiao
+            menu.mostrarCamioesDisponiveis(camioesDisp);
+            std::string matricula = menu.pedirMatricula();
+            
+            // 5. Tentar atribuir - se falhar apanha excecao
+            try{
+                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
+                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
+            }
+        }
+    }   
 }

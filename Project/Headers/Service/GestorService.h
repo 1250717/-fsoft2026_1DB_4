@@ -42,6 +42,11 @@ public:
 
     std::vector<Localidade>getTodasLocalidades();
 
+ std::vector<CamionistaDTO> getCamionistasDisponiveis();
+
+    std::vector<CamiaoDTO> getCamioesDisponiveis();
+    
+    void atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula);
     
 };
 

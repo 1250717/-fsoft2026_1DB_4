@@ -37,6 +37,10 @@ public:
 
     std::string pedirSelecaoCamionista(std::vector<CamionistaDTO> camionistas);
     void mostrarSucessoRemoverCamionista(std::vector<CamionistaDTO> camionistas);
+    
+    void mostrarCamionistasDisponiveis(std::vector<CamionistaDTO> camionistas);
+    void mostrarCamioesDisponiveis(std::vector<CamiaoDTO> camioes);
+    void mostrarSucessoAtribuicao(std::string nomeCamionista, std::string matricula);
 };
 
 

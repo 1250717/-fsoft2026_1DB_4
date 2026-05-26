@@ -117,3 +117,60 @@ void GestorService::removerCamionista(std::string nomeCamionista){
     
     camionistaContainer->remover(nomeCamionista);
 }
+// Devolve a lista de camionistas sem camiao atribuido
+std::vector<CamionistaDTO> GestorService::getCamionistasDisponiveis(){
+    // Obtem referencia ao vetor de todos os camionistas
+    std::vector<Camionista>& todos = camionistaContainer->getTodos();
+    std::vector<CamionistaDTO> dtos;
+    
+    // Filtra: so adiciona os que ainda nao tem camiao
+    for(int i = 0; i < todos.size(); i++){
+        if(todos[i].getCamiao() == nullptr){
+            dtos.push_back(CamionistaMapper::toDTO(todos[i]));
+        }
+    }
+    return dtos;
+}
+ 
+// Devolve a lista de camioes sem camionista atribuido
+std::vector<CamiaoDTO> GestorService::getCamioesDisponiveis(){
+    // Obtem referencia ao vetor de todos os camioes
+    std::vector<Camiao>& todos = camiaoContainer->getTodos();
+    std::vector<CamiaoDTO> dtos;
+    
+    // Filtra: so adiciona os que ainda nao tem camionista
+    for(int i = 0; i < todos.size(); i++){
+        if(todos[i].getCamionista() == nullptr){
+            dtos.push_back(CamiaoMapper::toDTO(todos[i]));
+        }
+    }
+    return dtos;
+}
+ 
+// Atribui um camionista a um camiao - associacao bidirecional
+void GestorService::atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula){
+    // Procurar o camionista pelo nome
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    if(camionista == nullptr){
+        throw std::invalid_argument("Camionista inexistente.");
+    }
+    
+    // Validacao: o camionista nao pode ja ter camiao
+    if(camionista->getCamiao() != nullptr){
+        throw std::invalid_argument("Camionista ja tem camiao atribuido.");
+    }
+    
+    // Procurar o camiao pela matricula
+    Camiao* camiao = camiaoContainer->procurar(matricula);
+    if(camiao == nullptr){
+        throw std::invalid_argument("Camiao inexistente.");
+    }
+    
+    // Validacao: o camiao nao pode ja ter camionista
+    if(camiao->getCamionista() != nullptr){
+        throw std::invalid_argument("Camiao ja tem camionista atribuido.");
+    }
+    
+    // Associacao bidirecional: camionista <-> camiao
+    camionista->setCamiao(camiao);
+    camiao->setCamionista(camionista);

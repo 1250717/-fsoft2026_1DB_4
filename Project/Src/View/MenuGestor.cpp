@@ -196,3 +196,30 @@ void MenuGestor::mostrarSucessoRemoverCamionista(std::vector<CamionistaDTO> cami
                   << " | Estado: " << camionistas[i].estado << "\n";
     }
 }
+
+// Mostra a lista de camionistas que ainda nao tem camiao atribuido
+void MenuGestor::mostrarCamionistasDisponiveis(std::vector<CamionistaDTO> camionistas){
+    std::cout << "\n---- Camionistas Disponiveis ----\n";
+    for(int i = 0; i < camionistas.size(); i++){
+        std::cout << i+1 << ". " << camionistas[i].nome
+                  << " | Estado: " << camionistas[i].estado << "\n";
+    }
+    std::cout << "---------------------------------\n";
+}
+ 
+// Mostra a lista de camioes que ainda nao tem camionista atribuido
+void MenuGestor::mostrarCamioesDisponiveis(std::vector<CamiaoDTO> camioes){
+    std::cout << "\n---- Camioes Disponiveis ----\n";
+    for(int i = 0; i < camioes.size(); i++){
+        std::cout << i+1 << ". " << camioes[i].matricula
+                  << " | Cap. Max: " << camioes[i].capacidadeMaxima
+                  << " | Estado: " << camioes[i].estado << "\n";
+    }
+    std::cout << "-----------------------------\n";
+}
+ 
+// Mensagem de sucesso apos atribuicao
+void MenuGestor::mostrarSucessoAtribuicao(std::string nomeCamionista, std::string matricula){
+    std::cout << "\nAtribuicao realizada com sucesso!\n";
+    std::cout << "Camionista " << nomeCamionista << " esta agora atribuido ao camiao " << matricula << ".\n";
+}
