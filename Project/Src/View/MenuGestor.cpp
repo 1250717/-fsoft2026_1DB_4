@@ -241,3 +241,27 @@ void MenuGestor::mostrarSucessoAtribuicao(std::string nomeCamionista, std::strin
     std::cout << "\nAtribuicao realizada com sucesso!\n";
     std::cout << "Camionista " << nomeCamionista << " esta agora atribuido ao camiao " << matricula << ".\n";
 }
+
+int MenuGestor::pedirSelecaoCarga(std::vector<CargaDTO> cargas){
+    std::cout << "\n---- Lista de Cargas ----\n";
+    for(int i = 0; i < cargas.size(); i++){
+        std::cout << i+1 << ". Peso: " << cargas[i].peso
+                  << " | Estado: " << cargas[i].estado
+                  << " | Destino: " << cargas[i].nomeDestino << "\n";
+    }
+
+    std::cout << "Introduz o indice da carga a eliminar: ";
+    int indice;
+    std::cin >> indice;
+    return indice-1;
+}
+
+void MenuGestor::mostrarSucessoEliminarCarga(std::vector<CargaDTO> cargas){
+    std::cout << "\nCarga eliminada com sucesso!\n";
+    std::cout << "\n---- Lista de Cargas ----\n";
+    for(int i = 0; i < cargas.size(); i++){
+        std::cout << i+1 << ". Peso: " << cargas[i].peso
+                  << " kg | Estado: " << cargas[i].estado
+                  << " | Destino: " << cargas[i].nomeDestino << "\n";
+    }
+}

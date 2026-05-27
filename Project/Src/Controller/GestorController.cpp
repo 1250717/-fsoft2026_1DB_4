@@ -125,8 +125,36 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro("Acao cancelada.");
             }
         }
-        // UC 9.8 - Visualizar Cadastros
-        else if(opcao == 8){
+        else if(opcao == 7){//eliminar carga
+            std::vector<CargaDTO> cargas = service->getTodasCargas();
+            int indice = menu.pedirSelecaoCarga(cargas);
+
+            try{
+                service->eliminarCarga(indice);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
+                continue;
+            }
+
+            //se chegou aqui, carga não está em transito
+            //pede confirmação
+            bool confirmacao = menu.pedirConfirmacao();
+
+            if(confirmacao){
+                try{
+                    service->eliminarCarga(indice, true);
+                    std::vector<CargaDTO> cargasAtualizadas = service->getTodasCargas();
+                    menu.mostrarSucessoEliminarCarga(cargasAtualizadas);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            } else {
+                menu.mostrarErro("Ação cancelada.");
+            }
+        }
+        else if(opcao == 8){//Visualizar Cadastros
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             menu.visualizarCadastros(camioes, camionistas);
