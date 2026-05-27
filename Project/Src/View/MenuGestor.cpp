@@ -47,7 +47,7 @@ float MenuGestor::pedirCapacidadeMaxima(){
     while(true){
         std::cout << "\nIntroduza capacidade maxima (Kg): ";
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
         // verifica se o input e inteiramente numerico (permite ponto decimal)
         bool valido = true;
         bool temPonto = false;
@@ -71,7 +71,7 @@ float MenuGestor::pedirPesoCarga(){
     while(true){
         std::cout << "\nIntroduz o peso da carga (Kg): ";
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
         bool valido = true;
         bool temPonto = false;
         for(int i = 0; i < input.size(); i++){
