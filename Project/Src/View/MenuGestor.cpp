@@ -44,17 +44,33 @@ std::string MenuGestor::pedirMatricula(){
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
-    std::cout << "Introduza capacidade maxima: ";
     float capacidadeMaxima;
-    std::cin >> capacidadeMaxima;
-    return capacidadeMaxima;
+    while(true){
+        std::cout << "Introduza capacidade maxima (Kg): ";
+        std::cin >> capacidadeMaxima;
+        if(std::cin.fail()){
+            std::cin.clear(); // limpa o erro
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // descarta input invalido
+            std::cout << "\nErro: introduza apenas numeros.\n";
+        } else {
+            return capacidadeMaxima;
+        }
+    }
 }
 
 float MenuGestor::pedirPesoCarga(){
-    std::cout << "Introduz o peso da carga (Kg): ";
     float peso;
-    std::cin >> peso;
-    return peso;
+    while(true){
+        std::cout << "Introduz o peso da carga (Kg): ";
+        std::cin >> peso;
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "\nErro: introduza apenas numeros.\n";
+        } else {
+            return peso;
+        }
+    }
 }
 
 std::string MenuGestor::pedirDestinoCarga(std::vector<Localidade> localidades){
