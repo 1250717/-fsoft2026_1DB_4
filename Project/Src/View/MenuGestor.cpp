@@ -44,33 +44,48 @@ std::string MenuGestor::pedirMatricula(){
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
-    float capacidadeMaxima;
     while(true){
-        std::cout << "Introduza capacidade maxima (Kg): ";
-        std::cin >> capacidadeMaxima;
-        if(std::cin.fail()){
-            std::cin.clear(); // limpa o erro
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // descarta input invalido
-            std::cout << "\nErro: introduza apenas numeros.\n";
+        std::cout << "\nIntroduza capacidade maxima (Kg): ";
+        std::string input;
+        std::cin >> input;
+        // verifica se o input e inteiramente numerico (permite ponto decimal)
+        bool valido = true;
+        bool temPonto = false;
+        for(int i = 0; i < input.size(); i++){
+            if(input[i] == '.' && !temPonto){
+                temPonto = true;
+            } else if(!isdigit(input[i])){
+                valido = false;
+                break;
+            }
+        }
+        if(valido && !input.empty()){
+            return std::stof(input);
         } else {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
-            return capacidadeMaxima;
+            std::cout << "\nErro: introduza apenas numeros.\n";
         }
     }
 }
 
 float MenuGestor::pedirPesoCarga(){
-    float peso;
     while(true){
-        std::cout << "Introduz o peso da carga (Kg): ";
-        std::cin >> peso;
-        if(std::cin.fail()){
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "\nErro: introduza apenas numeros.\n";
+        std::cout << "\nIntroduz o peso da carga (Kg): ";
+        std::string input;
+        std::cin >> input;
+        bool valido = true;
+        bool temPonto = false;
+        for(int i = 0; i < input.size(); i++){
+            if(input[i] == '.' && !temPonto){
+                temPonto = true;
+            } else if(!isdigit(input[i])){
+                valido = false;
+                break;
+            }
+        }
+        if(valido && !input.empty()){
+            return std::stof(input);
         } else {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
-            return peso;
+            std::cout << "\nErro: introduza apenas numeros.\n";
         }
     }
 }
