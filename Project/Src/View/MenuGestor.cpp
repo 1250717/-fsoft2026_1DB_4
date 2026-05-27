@@ -53,6 +53,7 @@ float MenuGestor::pedirCapacidadeMaxima(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // descarta input invalido
             std::cout << "\nErro: introduza apenas numeros.\n";
         } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
             return capacidadeMaxima;
         }
     }
@@ -68,6 +69,7 @@ float MenuGestor::pedirPesoCarga(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "\nErro: introduza apenas numeros.\n";
         } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
             return peso;
         }
     }
