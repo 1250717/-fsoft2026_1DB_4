@@ -209,6 +209,9 @@ void GestorService::atribuirCamionistaACamiao(std::string nomeCamionista, std::s
     // Associacao bidirecional: camionista <-> camiao
     camionista->setCamiao(camiao);
     camiao->setCamionista(camionista);
+    camionista->setEstado("Atribuido");
+    camiao->setEstado("Atribuido");
+    
 }
 
 std::vector<RotaDTO> GestorService::getTodasRotas(){
