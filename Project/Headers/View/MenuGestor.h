@@ -37,6 +37,9 @@ public:
 
     std::string pedirSelecaoCamionista(std::vector<CamionistaDTO> camionistas);
     void mostrarSucessoRemoverCamionista(std::vector<CamionistaDTO> camionistas);
+
+    int pedirSelecaoCarga(std::vector<CargaDTO> cargas);
+    void mostrarSucessoEliminarCarga(std::vector<CargaDTO> cargas);
 };
 
 

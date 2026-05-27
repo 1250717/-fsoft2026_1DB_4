@@ -41,7 +41,7 @@ void GestorService::registarCarga(float peso, std::string nomeDestino){
     if(destino == nullptr){
         throw std::invalid_argument("Localidade destino nao encontrada.");
     }
-    Carga carga(peso, nullptr);
+    Carga carga(peso, destino);
     cargaContainer->guardar(carga);
 }
 
@@ -116,4 +116,44 @@ void GestorService::removerCamionista(std::string nomeCamionista){
     }
     
     camionistaContainer->remover(nomeCamionista);
+}
+
+void GestorService::eliminarCarga(int indice){
+    //apenas verifica se está em transito
+    Carga* carga = cargaContainer->procurar(indice);
+    if(carga == nullptr){
+        throw std::invalid_argument("Carga não encontrada.");
+    }
+    if(carga->getEstado() == "Em Transito"){
+        throw std::invalid_argument("Nao e possivel eliminar uma carga em transito.");
+    }
+    //se não estiver em transito não faz nada
+    //o controller vai pedir confirmação
+}
+
+void GestorService::eliminarCarga(int indice, bool confirmar){
+    //já confirmou
+    //vai remover
+    Carga* carga = cargaContainer->procurar(indice);
+    if(carga == nullptr){
+        throw std::invalid_argument("Carga não encontrada.");
+    }
+    //se a carga estava atribuida a um camião, liberta
+    if(carga->getEstado() == "Atribuida"){
+        //encontra o camiao que tem a carga atribuida e atualiza a carga para disponivel
+        std::vector<Camiao>& camioes = camiaoContainer->getTodos();
+        for(int i = 0; i < (int)camioes.size(); i++){
+            std::vector<Carga*>& cargasDoCamiao = camioes[i].getCargas();
+            for(int j = 0; j < (int)cargasDoCamiao.size(); j++){
+                if(cargasDoCamiao[j] == carga){
+                    // encontrou o camiao que tem esta carga - liberta a capacidade
+                    float novaCapacidade = camioes[i].getCapacidadeDisponivel() + carga->getPeso();
+                    camioes[i].setCapacidadeDisponivel(novaCapacidade);
+                    camioes[i].removerCarga(carga);
+                    break;
+                }
+            }
+        }
+    }
+    cargaContainer->remover(indice);
 }
