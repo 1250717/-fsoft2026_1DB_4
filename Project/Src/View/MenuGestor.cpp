@@ -56,10 +56,11 @@ std::string MenuGestor::pedirMatricula(){
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
     while(true){
         std::cout << "\nIntroduza capacidade maxima (Kg): ";
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
         // verifica se o input e inteiramente numerico (permite ponto decimal)
         bool valido = true;
         bool temPonto = false;
@@ -80,10 +81,11 @@ float MenuGestor::pedirCapacidadeMaxima(){
 }
 
 float MenuGestor::pedirPesoCarga(){
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
     while(true){
         std::cout << "\nIntroduz o peso da carga (Kg): ";
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
         bool valido = true;
         bool temPonto = false;
         for(int i = 0; i < input.size(); i++){
