@@ -37,10 +37,22 @@ std::string MenuGestor::pedirNomeCamionista(){
 }
 
 std::string MenuGestor::pedirMatricula(){
-    std::cout << "Introduza matricula: ";
-    std::string matricula;
-    std::cin >> matricula;
-    return matricula;
+    while(true){
+        std::cout << "Introduza matricula (formato AA-00-AA): ";
+        std::string matricula;
+        std::cin >> matricula;
+
+        // Valida o formato AA-00-AA
+        if(matricula.size() == 8 &&
+           matricula[2] == '-' && matricula[5] == '-' &&
+           isupper(matricula[0]) && isupper(matricula[1]) &&
+           isdigit(matricula[3]) && isdigit(matricula[4]) &&
+           isupper(matricula[6]) && isupper(matricula[7])){
+            return matricula;
+        } else {
+            std::cout << "\nErro: Formato da matricula invalido. Use o formato AA-00-AA.\n\n";
+        }
+    }
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
