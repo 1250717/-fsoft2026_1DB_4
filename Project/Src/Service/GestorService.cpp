@@ -19,7 +19,7 @@ GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoCon
 }
 
 // Metodo auxiliar - valida o formato da matricula portuguesa atual
-// Aceita apenas: AA-00-AA (formato desde 2005)
+// Aceita apenas: AA-00-AA 
 bool GestorService::validarFormatoMatricula(std::string matricula){
     // Tem de ter exatamente 8 caracteres
     if(matricula.size() != 8) return false;
