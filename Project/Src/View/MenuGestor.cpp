@@ -243,7 +243,7 @@ std::string MenuGestor::pedirSelecaoCamionista(std::vector<CamionistaDTO> camion
             std::cout << i+1 << "." << camionistas[i].nome
                     << " | Estado: " << camionistas[i].estado << "\n";
         }
-        std::cout << "Introduz o indíce do camionista a remover: ";
+        std::cout << "Introduz o indice do camionista a remover: ";
         int indice;
         std::cin >> indice;
         
