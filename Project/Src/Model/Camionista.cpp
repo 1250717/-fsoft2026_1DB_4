@@ -28,3 +28,10 @@ std::string Camionista::getEstado() {
     return this->estado;
 }
 
+bool Camionista::validarNome(std::string nome){
+    if(nome.size() < 2) return false;
+    for(int i = 0; i < nome.size(); i++){
+        if(!isalpha(nome[i])) return false;
+    }
+    return true;
+}

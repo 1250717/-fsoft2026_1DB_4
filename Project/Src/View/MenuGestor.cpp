@@ -30,10 +30,15 @@ std::string MenuGestor::pedirNomeGestor(){
 }
 
 std::string MenuGestor::pedirNomeCamionista(){
-    std::cout << "Nome do Camionista a adicionar: ";
-    std::string nome;
-    std::cin >> nome;
-    return nome;
+    while(true){
+        std::cout << "Nome do Camionista a adicionar: ";
+        std::string nome;
+        std::cin >> nome;
+        if(Camionista::validarNome(nome)){
+            return nome;
+        }
+        std::cout << "\nErro: Nome invalido. Use apenas letras e pelo menos 2 caracteres.\n\n";
+    }
 }
 
 std::string MenuGestor::pedirMatricula(){

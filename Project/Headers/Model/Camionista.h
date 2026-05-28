@@ -20,6 +20,8 @@ public:
     Camiao* getCamiao();
     std::string getNome();
     std::string getEstado();
+
+    static bool validarNome(std::string nome);
 };
 
 #endif

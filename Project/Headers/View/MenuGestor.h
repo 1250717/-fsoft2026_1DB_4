@@ -8,6 +8,7 @@
 #include "..\Dtos\RotaDTO.h"
 #include "..\Dtos\CargaDTO.h"
 #include "..\Model\Localidade.h"
+#include "..\Model\Camionista.h"
 
 
 class MenuGestor{
