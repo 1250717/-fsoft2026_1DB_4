@@ -19,8 +19,37 @@ void GestorController::mostrarMenu(){
         }
         // UC 9.1 - Registar Camiao
         else if(opcao == 1){
-            std::string matricula = menu.pedirMatricula();
-            float capacidadeMaxima = menu.pedirCapacidadeMaxima();
+            std::string matricula;
+            while(true){
+                matricula = menu.pedirMatricula();
+                if(matricula == "v") break;  // sai do loop da matricula
+                //o continue a seguir apanha o v e manda o programa para cima
+                try{
+                    service->validarFormatoMatricula(matricula);
+                    break;  // matricula válida, sai do loop
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            // se matricula == "v", o continue abaixo salta tudo o resto
+            // e volta ao topo do while exterior → int opcao = menu.mostrarOpcoes()
+            if(matricula == "v") continue;  // volta ao while exterior — menu do gestor
+            
+
+            float capacidadeMaxima;
+            while(true){
+                capacidadeMaxima = menu.pedirCapacidadeMaxima();
+                try{
+                    service->verificarCapacidade(capacidadeMaxima);
+                    break;  // capacidade válida, sai do loop
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                    // volta a pedir a capacidade
+                }
+            }
+
             try{
                 service->registrarCamiao(matricula, capacidadeMaxima);
                 std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
@@ -29,7 +58,7 @@ void GestorController::mostrarMenu(){
             catch(std::invalid_argument &e){
                 menu.mostrarErro(e.what());
             }
-        }
+}
         // UC 9.2 - Registar Camionista
         else if(opcao == 2){
             std::string nomeCamionista = menu.pedirNomeCamionista();

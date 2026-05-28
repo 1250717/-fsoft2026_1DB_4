@@ -20,8 +20,6 @@ private:
     CargaContainer *cargaContainer;
     RotaContainer *rotaContainer;
     LocalidadeContainer *localidadeContainer;
-
-     bool validarFormatoMatricula(std::string matricula);
     
 public:
     GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
@@ -38,7 +36,12 @@ public:
     void registarCarga(float peso, std::string nomeDestino);
 
     void eliminarCarga(int indice);
+
+    void validarFormatoMatricula(std::string matricula);
+
     void eliminarCarga(int indice, bool confrimar);
+
+    void verificarCapacidade(float capacidadeMaxima);
 
     std::vector<CamiaoDTO> getTodosCamioes();
 

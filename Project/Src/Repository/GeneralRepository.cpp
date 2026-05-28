@@ -21,14 +21,14 @@ GeneralRepository::GeneralRepository(
     }
 
 void GeneralRepository::carregar() {
-    carregarLocalidades();
+    carregarLocalidades(); //somos nos que mudamos o ficheiro txt das localidades
+    //so precisamos do carregar
     carregarCargas();
     carregarCamioes();
     carregarCamionistas();
 }
 
 void GeneralRepository::guardar() {
-    guardarLocalidades();
     guardarCargas();
     guardarCamioes();
     guardarCamionistas();
@@ -195,7 +195,13 @@ void GeneralRepository::carregarLocalidades(){
         cout << "Erro ao abrir localidades.txt\n";
         return;
     }
-    
+    /*Um ifstream é basicamente um
+    objeto que pede ao sistema operativo 
+    para abrir um ficheiro e recebe em troca um 
+    identificador numérico. A partir daí, em vez de ir ao disco 
+    byte a byte (o que seria lento), carrega blocos grandes para um buffer em RAM. 
+    Quando fazes getline, ele lê desse buffer até encontrar um '\n', 
+    devolve a linha, e quando o buffer esgota vai buscar mais ao disco. */
     string linha;
     while(getline(ficheiro, linha)){
         string nome = "";

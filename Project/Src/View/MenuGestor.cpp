@@ -38,45 +38,47 @@ std::string MenuGestor::pedirNomeCamionista(){
 
 std::string MenuGestor::pedirMatricula(){
     while(true){
-        std::cout << "Introduza matricula (formato AA-00-AA): ";
+        std::cout << "Introduza matricula (formato AA-00-AA) ou 'v' para voltar: ";
         std::string matricula;
         std::cin >> matricula;
-
-        // Valida o formato AA-00-AA
-        if(matricula.size() == 8 &&
-           matricula[2] == '-' && matricula[5] == '-' &&
-           isupper(matricula[0]) && isupper(matricula[1]) &&
-           isdigit(matricula[3]) && isdigit(matricula[4]) &&
-           isupper(matricula[6]) && isupper(matricula[7])){
-            return matricula;
-        } else {
-            std::cout << "\nErro: Formato da matricula invalido. Use o formato AA-00-AA.\n\n";
-        }
+        return matricula;
     }
 }
 
 float MenuGestor::pedirCapacidadeMaxima(){
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
     while(true){
         std::cout << "\nIntroduza capacidade maxima (Kg): ";
-        std::string input;
-        std::getline(std::cin, input);
-        // verifica se o input e inteiramente numerico (permite ponto decimal)
-        bool valido = true;
-        bool temPonto = false;
-        for(int i = 0; i < input.size(); i++){
-            if(input[i] == '.' && !temPonto){
-                temPonto = true;
-            } else if(!isdigit(input[i])){
-                valido = false;
-                break;
-            }
+        float capacidade;
+        std::cin >> capacidade;
+        // cin >> le apenas o que precisa para preencher a variavel
+        // para quando encontra um espaco ou um caractere que nao faz parte de um float
+        // ex: "500 abc" ou "500abc" → lê "500", o resto fica no buffer
+        // ignore() descarta esse resto ate ao '\n' inclusive
+
+        if(std::cin.fail()){
+            // fail() — a leitura falhou (ex: "abc" nao e um float)
+            //           o "abc\n" continua no buffer intacto
+
+            std::cin.clear();
+            // clear() — desbloqueia o cin para aceitar leituras futuras
+            //            NAO descarta nada — o "abc\n" ainda esta no buffer
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            // ignore() — descarta tudo no buffer ate ao '\n' inclusive
+            //             ex: buffer tinha "abc\n" → fica vazio
+
+            std::cout << "Erro: introduza um numero.\n";
+            continue;
         }
-        if(valido && !input.empty()){
-            return std::stof(input);
-        } else {
-            std::cout << "\nErro: introduza apenas numeros.\n";
-        }
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        // cin >> consumiu os digitos (ex: "500") e meteu-os em capacidade
+        // no buffer ficou apenas o '\n' do Enter
+        // se mais a frente houver um getline(), ele apanhava esse '\n'
+        // e devolvia uma string vazia sem esperar pelo utilizador
+        // ignore() descarta esse '\n' para evitar esse problema
+
+        return capacidade;
     }
 }
 

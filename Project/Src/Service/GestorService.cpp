@@ -19,40 +19,32 @@ GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoCon
 }
 
 // Metodo auxiliar - valida o formato da matricula portuguesa atual
-// Aceita apenas: AA-00-AA 
-bool GestorService::validarFormatoMatricula(std::string matricula){
-    // Tem de ter exatamente 8 caracteres
-    if(matricula.size() != 8) return false;
-    
-    // Os separadores nas posicoes 2 e 5 tem de ser '-'
-    if(matricula[2] != '-' || matricula[5] != '-') return false;
-    
-    // Posicoes 0 e 1 tem de ser letras maiusculas (A-Z)
-    if(matricula[0] < 'A' || matricula[0] > 'Z') return false;
-    if(matricula[1] < 'A' || matricula[1] > 'Z') return false;
-    
-    // Posicoes 3 e 4 tem de ser digitos (0-9)
-    if(matricula[3] < '0' || matricula[3] > '9') return false;
-    if(matricula[4] < '0' || matricula[4] > '9') return false;
-    
-    // Posicoes 6 e 7 tem de ser letras maiusculas (A-Z)
-    if(matricula[6] < 'A' || matricula[6] > 'Z') return false;
-    if(matricula[7] < 'A' || matricula[7] > 'Z') return false;
-    
-    return true;
+// Aceita apenas: AA-00-AA (formato desde 2005)
+void GestorService::validarFormatoMatricula(std::string matricula){
+    if(matricula.size() != 8){
+        throw std::invalid_argument("Formato da matricula invalido.");
+    }
+    if(matricula[2] != '-' || matricula[5] != '-'){
+        throw std::invalid_argument("Formato da matricula invalido.");
+    }
+    if(matricula[0] < 'A' || matricula[0] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[1] < 'A' || matricula[1] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[3] < '0' || matricula[3] > '9') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[4] < '0' || matricula[4] > '9') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[6] < 'A' || matricula[6] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[7] < 'A' || matricula[7] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+}
+
+void GestorService::verificarCapacidade(float capacidade){
+    if(capacidade <= 0 || capacidade > 10000){
+        throw std::invalid_argument("Capacidade tem de ser entre 0 e 10000 Kg.");
+    }
 }
 
 void GestorService::registrarCamiao(std::string matricula, float capacidade){
-    if(capacidade <= 0){
-        throw std::invalid_argument("Capacidade tem de ser positiva.");
-    }
-    if(!validarFormatoMatricula(matricula)){
-        throw std::invalid_argument("Formato da matricula invalido.");
-    }
-    if(camiaoContainer->procurar(matricula) != nullptr) { 
+    if(camiaoContainer->procurar(matricula) != nullptr){ 
         throw std::invalid_argument("Matricula ja existente.");
     }
-    // se chegou aqui, a matrícula não existe
     Camiao camiao(matricula, capacidade);
     camiaoContainer->guardar(camiao);
 }
