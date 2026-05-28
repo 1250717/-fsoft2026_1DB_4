@@ -22,41 +22,23 @@ private:
     LocalidadeContainer *localidadeContainer;
     
 public:
-    GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
-        CargaContainer *cargaContainer, RotaContainer *rotaContainer, LocalidadeContainer *localidadeContainer);
+    // vai buscar os containers a Empresa::getInstance() internamente
+    GestorService();
 
     void registrarCamiao(std::string matricula, float capacidade);
-
     void registrarCamionista(std::string nomeCamionista);
-    
     void removerCamiao(std::string matricula);
-
     void removerCamionista(std::string nomeCamionista);
-
     void registarCarga(float peso, std::string nomeDestino);
-
     void eliminarCarga(int indice);
-
-    void validarFormatoMatricula(std::string matricula);
-
     void eliminarCarga(int indice, bool confrimar);
-
-    void verificarCapacidade(float capacidadeMaxima);
-
     std::vector<CamiaoDTO> getTodosCamioes();
-
     std::vector<CamionistaDTO> getTodosCamionistas();
-
     std::vector<CargaDTO> getTodasCargas();
-
     std::vector<Localidade> getTodasLocalidades();
-
     std::vector<RotaDTO> getTodasRotas();
-
     std::vector<CamionistaDTO> getCamionistasDisponiveis();
-
     std::vector<CamiaoDTO> getCamioesDisponiveis();
-    
     void atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula);
 };
 
