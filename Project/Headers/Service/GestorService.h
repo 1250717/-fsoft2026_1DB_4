@@ -37,11 +37,7 @@ public:
 
     void eliminarCarga(int indice);
 
-    void validarFormatoMatricula(std::string matricula);
-
     void eliminarCarga(int indice, bool confrimar);
-
-    void verificarCapacidade(float capacidadeMaxima);
 
     std::vector<CamiaoDTO> getTodosCamioes();
 

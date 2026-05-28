@@ -22,6 +22,11 @@ private:
 public:
     Camiao(std::string matricula, float capacidadeMaxima);
 
+    // static — pertence à classe, não a um objeto
+    // pode ser chamado sem criar um Camiao: Camiao::validarMatricula(matricula)
+    static void validarMatricula(std::string matricula);
+    static void validarCapacidade(float capacidade);
+
     void setCamionista(Camionista *camionista);
 
     void setEstado(std::string estado);
