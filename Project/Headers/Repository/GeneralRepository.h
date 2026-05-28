@@ -28,13 +28,8 @@ private:
     void guardarRotas();
 
 public:
-    GeneralRepository(
-        CamionistaContainer *camionistaContainer,
-        CamiaoContainer *camiaoContainer,
-        CargaContainer *cargaContainer,
-        RotaContainer *rotaContainer,
-        LocalidadeContainer *localidadeContainer
-    );
+    // vai buscar os containers a Empresa::getInstance() internamente
+    GeneralRepository();
 
     void carregar();
     void guardar();

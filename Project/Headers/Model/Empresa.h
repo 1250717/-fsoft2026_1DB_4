@@ -10,6 +10,11 @@
 
 class Empresa {
 private:
+    //Um atributo static pertence à classe — existe uma só cópia 
+    //partilhada por todos os objetos, mesmo que não exista nenhum objeto criado.
+    // guarda o ponteiro para a unica instancia que existe
+    static Empresa* instance;
+
     std::string nif;
     std::string nome;
     float coordenadaX;
@@ -20,8 +25,13 @@ private:
     RotaContainer rotaContainer;
     LocalidadeContainer localidadeContainer;
 
-public:
+    // construtor privado — impede criar Empresa com "Empresa e(...)"
     Empresa(std::string nif, std::string nome);
+
+public:
+    // unico ponto de acesso — cria na primeira vez, devolve a mesma nas seguintes
+    static Empresa* getInstance(std::string nif = "", std::string nome = "");
+
     float getCoordenadaX();
     float getCoordenadaY();
     CamiaoContainer& getCamiaoContainer();

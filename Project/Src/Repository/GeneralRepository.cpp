@@ -3,22 +3,19 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "..\..\Headers\Model\Empresa.h"
 
 using namespace std;
 
-GeneralRepository::GeneralRepository(
-        CamionistaContainer *camionistaContainer,
-        CamiaoContainer *camiaoContainer,
-        CargaContainer *cargaContainer,
-        RotaContainer *rotaContainer,
-        LocalidadeContainer *localidadeContainer
-    ){
-        this->camiaoContainer = camiaoContainer;
-        this->camionistaContainer = camionistaContainer;
-        this->cargaContainer = cargaContainer;
-        this->rotaContainer = rotaContainer;
-        this->localidadeContainer = localidadeContainer;
-    }
+GeneralRepository::GeneralRepository(){
+    // vai buscar a instancia da empresa ja criada no main
+    Empresa* empresa = Empresa::getInstance();
+    this->camiaoContainer = &empresa->getCamiaoContainer();
+    this->camionistaContainer = &empresa->getCamionistaContainer();
+    this->cargaContainer = &empresa->getCargaContainer();
+    this->rotaContainer = &empresa->getRotaContainer();
+    this->localidadeContainer = &empresa->getLocalidadeContainer();
+}
 
 void GeneralRepository::carregar() {
     carregarLocalidades(); //somos nos que mudamos o ficheiro txt das localidades
