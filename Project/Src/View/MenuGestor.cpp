@@ -203,7 +203,7 @@ void MenuGestor::mostrarRotasConcluidas(std::vector<RotaDTO> rotas){
     std::cout << "--------------------------\n";
 }
 
-void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas){
+void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas, std::vector<CargaDTO> cargas){
     std::cout << "\n---- Lista de Camionistas ----\n";
     for(int i = 0; i < camionistas.size(); i++){
         std::cout << i+1 << ". " << camionistas[i].nome
@@ -216,6 +216,13 @@ void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector
                   << " | Cap. Max: " << camioes[i].capacidadeMaxima
                   << " | Cap. Disp: " << camioes[i].capacidadeDisponivel
                   << " | Estado: " << camioes[i].estado << "\n";
+    }
+
+    std::cout << "\n---- Lista de Cargas ----\n";
+    for(int i = 0; i < cargas.size(); i++){
+        std::cout << i+1 << ". Peso: " << cargas[i].peso
+                  << " Kg | Estado: " << cargas[i].estado
+                  << " | Destino: " << cargas[i].nomeDestino << "\n";
     }
 }
 
