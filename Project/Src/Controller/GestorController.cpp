@@ -186,7 +186,8 @@ void GestorController::mostrarMenu(){
         else if(opcao == 8){//Visualizar Cadastros
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
-            menu.visualizarCadastros(camioes, camionistas);
+            std::vector<CargaDTO> cargas = service->getTodasCargas();
+            menu.visualizarCadastros(camioes, camionistas, cargas);
         }
         // UC 9.9 - Visualizar Rotas Concluidas
         else if(opcao == 9){

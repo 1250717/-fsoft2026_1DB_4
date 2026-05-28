@@ -31,7 +31,7 @@ public:
     void mostrarSucessoRegistarCamiao(std::vector<CamiaoDTO> camioes);
     
     void mostrarSucessoRegistarCamionista(std::vector<CamionistaDTO> camionistas);
-    void visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas);
+    void visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas, std::vector<CargaDTO> cargas);
     void mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas);
 
     void mostrarErro(std::string mensagem);
