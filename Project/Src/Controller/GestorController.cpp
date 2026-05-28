@@ -10,7 +10,6 @@ GestorController::GestorController(GestorService *service){
 }
 
 void GestorController::mostrarMenu(){
-    nomeGestor = menu.pedirNomeGestor();
     while(true){
         int opcao = menu.mostrarOpcoes();
 
