@@ -8,11 +8,11 @@ using namespace std;
 int MenuPrincipal::mostrar() {
     int opcao;
     while(true) {
-        cout << "Introduza opcao:\n";
-        cout << "1. Gestor\n";
-        cout << "2. Camionista\n";
-        cout << "0. Sair\n";
-        cout << "Opcao: ";
+        cout << "\n Introduza opcao:";
+        cout << "\n 1 - Gestor";
+        cout << "\n 2 - Camionista";
+        cout << "\n 0 - Sair";
+        cout << "\n Opcao: ";
         cin >> opcao;
 
         if(opcao >= 0 && opcao <= 2)

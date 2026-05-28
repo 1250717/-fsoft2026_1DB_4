@@ -23,7 +23,7 @@ int MenuGestor::mostrarOpcoes(){
 }
 
 std::string MenuGestor::pedirNomeGestor(){
-    std::cout << "Nome do Gestor: ";
+    std::cout << " Nome do Gestor: ";
     std::string nome;
     std::cin >> nome;
     return nome;
