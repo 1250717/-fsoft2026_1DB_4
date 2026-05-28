@@ -7,17 +7,15 @@
 #include "..\..\Headers\Dtos\RotaDTO.h"
 #include "..\..\Headers\Dtos\CargaDTO.h"
 #include "..\..\Headers\Mapper\CargaMapper.h"
-#include "..\..\Headers\Model\Empresa.h"
 #include <stdexcept>
 
-GestorService::GestorService(){
-    // vai buscar a instancia da empresa ja criada no main
-    Empresa* empresa = Empresa::getInstance();
-    this->camiaoContainer = &empresa->getCamiaoContainer();
-    this->camionistaContainer = &empresa->getCamionistaContainer();
-    this->cargaContainer = &empresa->getCargaContainer();
-    this->rotaContainer = &empresa->getRotaContainer();
-    this->localidadeContainer = &empresa->getLocalidadeContainer();
+GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoContainer *camiaoContainer, 
+        CargaContainer *cargaContainer, RotaContainer *rotaContainer, LocalidadeContainer *localidadeContainer){
+    this->camiaoContainer = camiaoContainer;
+    this->camionistaContainer = camionistaContainer;
+    this->cargaContainer = cargaContainer;
+    this->rotaContainer = rotaContainer;
+    this->localidadeContainer = localidadeContainer;
 }
 
 // Metodo auxiliar - valida o formato da matricula portuguesa atual

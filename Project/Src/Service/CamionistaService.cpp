@@ -2,16 +2,13 @@
 #include "..\..\Headers\Model\Rota.h"
 #include "..\..\Headers\Model\Localidade.h"
 #include "..\..\Headers\Dtos\RotaDTO.h"
-#include "..\..\Headers\Model\Empresa.h"
 #include <stdexcept>
 
 // Construtor: recebe ponteiros para os 3 containers que o service precisa
-CamionistaService::CamionistaService(){
-    // vai buscar a instancia da empresa ja criada no main
-    Empresa* empresa = Empresa::getInstance();
-    this->camionistaContainer = &empresa->getCamionistaContainer();
-    this->cargaContainer = &empresa->getCargaContainer();
-    this->rotaContainer = &empresa->getRotaContainer();
+CamionistaService::CamionistaService(CamionistaContainer *camionistaContainer, CargaContainer *cargaContainer, RotaContainer *rotaContainer){
+    this->camionistaContainer = camionistaContainer;
+    this->cargaContainer = cargaContainer;
+    this->rotaContainer = rotaContainer;
 }
 
 // Verifica se um camionista existe no sistema com o nome dado

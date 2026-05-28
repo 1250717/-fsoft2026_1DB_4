@@ -5,30 +5,41 @@
 #include "Headers\Repository\GeneralRepository.h"
  
 int main() {
-    // Singleton — a classe recusa ser criada mais do que uma vez
-    // Empresa* e1 = Empresa::getInstance(); // cria na primeira vez
-    // Empresa* e2 = Empresa::getInstance(); // devolve a mesma — nao cria outra
-
-    // Nao Singleton — como esta agora:
-    // Empresa empresa("12345678", "Empresa Transportes"); // nos criamos o objeto
-    // nada impede que alguem faca:
-    // Empresa empresa1("111", "Empresa A");
-    // Empresa empresa2("222", "Empresa B"); // segunda empresa — possivel
-    // nos somos responsaveis por criar uma so e passar para quem precisa
-
-    // inicializa a unica instancia da empresa
-    Empresa::getInstance("12345678", "Empresa Transportes");
-
-    // os restantes vao buscar a empresa internamente via Empresa::getInstance()
-    GeneralRepository repository;
-    repository.carregar();
-
-    CamionistaService camionistaService;
-    GestorService gestorService;
+    // Criar a empresa
+    Empresa empresa("12345678", "Empresa Transportes");
  
+    // Criar o repositorio para carregar/guardar dados de ficheiros
+    GeneralRepository repository(
+        &empresa.getCamionistaContainer(),
+        &empresa.getCamiaoContainer(),
+        &empresa.getCargaContainer(),
+        &empresa.getRotaContainer(),
+        &empresa.getLocalidadeContainer()
+    );
+ 
+    // Carregar os dados guardados (se existirem)
+    repository.carregar();
+ 
+    // Criar os services - CamionistaService precisa de 3 containers
+    CamionistaService camionistaService(
+        &empresa.getCamionistaContainer(),
+        &empresa.getCargaContainer(),
+        &empresa.getRotaContainer()
+    );
+    
+    GestorService gestorService(
+        &empresa.getCamionistaContainer(),
+        &empresa.getCamiaoContainer(),
+        &empresa.getCargaContainer(),
+        &empresa.getRotaContainer(),
+        &empresa.getLocalidadeContainer()
+    );
+ 
+    // Iniciar o controlador principal
     MenuPrincipalController controller(&camionistaService, &gestorService);
     controller.mostrarMenu();
  
+    // Guardar os dados antes de terminar
     repository.guardar();
  
     return 0;
