@@ -12,7 +12,7 @@ int MenuGestor::mostrarOpcoes(){
     std::cout << "\n 5 - Remover Camiao";
     std::cout << "\n 6 - Remover Camionista";
     std::cout << "\n 7 - Eliminar Carga";
-    std::cout << "\n 8 - Visualizar Cadastros";
+    std::cout << "\n 8 - Visualizar Registros";
     std::cout << "\n 9 - Visualizar Rotas Concluidas";
     std::cout << "\n 0 - Voltar para menu principal";
     std::cout << "\n Opcao: ";
@@ -85,7 +85,7 @@ float MenuGestor::pedirCapacidadeMaxima(){
 float MenuGestor::pedirPesoCarga(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
     while(true){
-        std::cout << "\nIntroduz o peso da carga (Kg): ";
+        std::cout << "\nIntroduza o peso da carga (Kg): ";
         std::string input;
         std::getline(std::cin, input);
         bool valido = true;

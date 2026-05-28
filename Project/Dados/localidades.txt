@@ -4,7 +4,7 @@ Braga,18.5,41.5
 Coimbra,25.3,35.8
 Aveiro,22.1,38.2
 Faro,15.6,2.3
-Évora,30.4,10.2
-Setúbal,28.7,12.1
+Evora,30.4,10.2
+Setubal,28.7,12.1
 Viseu,27.8,32.6
-Guimarães,19.2,40.8
+Guimaraes,19.2,40.8
