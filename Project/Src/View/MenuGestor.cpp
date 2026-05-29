@@ -12,7 +12,7 @@ int MenuGestor::mostrarOpcoes(){
     std::cout << "\n 5 - Remover Camiao";
     std::cout << "\n 6 - Remover Camionista";
     std::cout << "\n 7 - Eliminar Carga";
-    std::cout << "\n 8 - Visualizar Cadastros";
+    std::cout << "\n 8 - Visualizar Registos";
     std::cout << "\n 9 - Visualizar Rotas Concluidas";
     std::cout << "\n 0 - Voltar para menu principal";
     std::cout << "\n Opcao: ";
@@ -30,7 +30,7 @@ std::string MenuGestor::pedirNomeGestor(){
 }
 
 std::string MenuGestor::pedirNomeCamionista(){
-    std::cout << "Nome do Camionista a adicionar: ";
+    std::cout << "Nome do Camionista a adicionar (ou 'v' para voltar): ";
     std::string nome;
     std::cin >> nome;
     return nome;
@@ -47,47 +47,60 @@ std::string MenuGestor::pedirMatricula(){
 
 float MenuGestor::pedirCapacidadeMaxima(){
     while(true){
-        std::cout << "\nIntroduza capacidade maxima (Kg): ";
-        float capacidade;
-        std::cin >> capacidade;
+        std::cout << "\nIntroduza capacidade maxima (Kg) ou 'v' para voltar: ";
+        std::string input;
+        std::getline(std::cin, input);
+
+        if(input == "v" || input == "V") return -1;
+
+        try{
+            float capacidade = std::stof(input);
+            return capacidade;
+        } catch(...){
+            std::cout << "Erro: introduza um numero.\n";
+        }
         // cin >> le apenas o que precisa para preencher a variavel
         // para quando encontra um espaco ou um caractere que nao faz parte de um float
         // ex: "500 abc" ou "500abc" → lê "500", o resto fica no buffer
         // ignore() descarta esse resto ate ao '\n' inclusive
+        
 
-        if(std::cin.fail()){
+        //if(std::cin.fail()){
             // fail() — a leitura falhou (ex: "abc" nao e um float)
             //           o "abc\n" continua no buffer intacto
 
-            std::cin.clear();
+          //  std::cin.clear();
             // clear() — desbloqueia o cin para aceitar leituras futuras
             //            NAO descarta nada — o "abc\n" ainda esta no buffer
 
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             // ignore() — descarta tudo no buffer ate ao '\n' inclusive
             //             ex: buffer tinha "abc\n" → fica vazio
 
-            std::cout << "Erro: introduza um numero.\n";
-            continue;
-        }
+            //std::cout << "Erro: introduza um numero.\n";
+            //continue;
+        //}
 
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         // cin >> consumiu os digitos (ex: "500") e meteu-os em capacidade
         // no buffer ficou apenas o '\n' do Enter
         // se mais a frente houver um getline(), ele apanhava esse '\n'
         // e devolvia uma string vazia sem esperar pelo utilizador
         // ignore() descarta esse '\n' para evitar esse problema
 
-        return capacidade;
+        //return input;
     }
 }
 
 float MenuGestor::pedirPesoCarga(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // limpa o \n do buffer
     while(true){
-        std::cout << "\nIntroduz o peso da carga (Kg): ";
+        std::cout << "\nIntroduz o peso da carga (Kg) ou 'v' para voltar: ";
         std::string input;
         std::getline(std::cin, input);
+
+        if(input == "v" || input == "V") return -1;
+
         bool valido = true;
         bool temPonto = false;
         for(int i = 0; i < input.size(); i++){
@@ -150,20 +163,23 @@ std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
             std::cout << i+1 << ". " << camioes[i].matricula
                       << " | Estado: " << camioes[i].estado << "\n";
         }
-        std::cout << "Introduza o indice do camiao a remover: ";
-        int indice;
-        std::cin >> indice;
-
-        if(std::cin.fail()){
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Indice invalido. Tente novamente.\n";
-            continue;
-        }
-
-        if(indice >= 1 && indice <= (int)camioes.size()){
-            return camioes[indice-1].matricula;
-        } else {
+        std::cout << "Introduza o indice do camiao a remover ou 'v' para voltar: ";
+        std::string input;
+        std::cin >> input;
+ 
+        if(input == "v" || input == "V") return "v";
+ 
+        // tenta converter para int
+        // se o utilizador escreveu "abc" ou outro texto, stoi lanca excecao
+        // o catch apanha essa excecao e mostra "Indice invalido"
+        try{
+            int indice = std::stoi(input);
+            if(indice >= 1 && indice <= (int)camioes.size()){
+                return camioes[indice-1].matricula;
+            }
+            std::cout << "\nIndice invalido. Tente novamente.\n";
+        } catch(...){
+            // stoi lancou excecao porque o input nao era um numero
             std::cout << "\nIndice invalido. Tente novamente.\n";
         }
     }
@@ -243,20 +259,19 @@ std::string MenuGestor::pedirSelecaoCamionista(std::vector<CamionistaDTO> camion
             std::cout << i+1 << "." << camionistas[i].nome
                     << " | Estado: " << camionistas[i].estado << "\n";
         }
-        std::cout << "Introduz o indíce do camionista a remover: ";
-        int indice;
-        std::cin >> indice;
-        
-        if(std::cin.fail()){
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Indice invalido. Tente novamente.\n";
-            continue;
-        }
-
-        if(indice >= 1 && indice <= (int)camionistas.size()){
-            return camionistas[indice-1].nome;
-        } else {
+        std::cout << "Introduza o indice do camionista a remover ou 'v' para voltar: ";
+        std::string input;
+        std::cin >> input;
+ 
+        if(input == "v" || input == "V") return "v";
+ 
+        try{
+            int indice = std::stoi(input);
+            if(indice >= 1 && indice <= (int)camionistas.size()){
+                return camionistas[indice-1].nome;
+            }
+            std::cout << "\nIndice invalido. Tente novamente.\n";
+        } catch(...){
             std::cout << "\nIndice invalido. Tente novamente.\n";
         }
     }
@@ -299,17 +314,30 @@ void MenuGestor::mostrarSucessoAtribuicao(std::string nomeCamionista, std::strin
 }
 
 int MenuGestor::pedirSelecaoCarga(std::vector<CargaDTO> cargas){
-    std::cout << "\n---- Lista de Cargas ----\n";
-    for(int i = 0; i < cargas.size(); i++){
-        std::cout << i+1 << ". Peso: " << cargas[i].peso
-                  << " | Estado: " << cargas[i].estado
-                  << " | Destino: " << cargas[i].nomeDestino << "\n";
-    }
+    while(true){
+        std::cout << "\n---- Lista de Cargas ----\n";
+        for(int i = 0; i < cargas.size(); i++){
+            std::cout << i+1 << ". Peso: " << cargas[i].peso
+                    << " | Estado: " << cargas[i].estado
+                    << " | Destino: " << cargas[i].nomeDestino << "\n";
+        }
 
-    std::cout << "Introduz o indice da carga a eliminar: ";
-    int indice;
-    std::cin >> indice;
-    return indice-1;
+        std::cout << "Introduza o indice da carga a eliminar ou 'v' para voltar: ";
+        std::string input;
+        std::cin >> input;
+    
+        if(input == "v" || input == "V") return -1;
+    
+        try{
+            int indice = std::stoi(input);
+            if(indice >= 1 && indice <= (int)cargas.size()){
+            return indice - 1;
+        }
+        std::cout << "\nIndice invalido. Tente novamente.\n";
+        } catch(...){
+            std::cout << "\nIndice invalido. Tente novamente.\n";
+        }
+    }
 }
 
 void MenuGestor::mostrarSucessoEliminarCarga(std::vector<CargaDTO> cargas){
