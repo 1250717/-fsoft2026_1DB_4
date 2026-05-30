@@ -24,9 +24,6 @@ GestorService::GestorService(){
 // Aceita apenas: AA-00-AA (formato desde 2005)
 
 void GestorService::registrarCamiao(std::string matricula, float capacidade){
-    if(camiaoContainer->procurar(matricula) != nullptr){ 
-        throw std::invalid_argument("Matricula ja existente.");
-    }
     Camiao camiao(matricula, capacidade); // construtor do Camiao valida tudo
     camiaoContainer->guardar(camiao);
 }
@@ -232,4 +229,12 @@ void GestorService::eliminarCarga(int indice, bool confirmar){
         }
     }
     cargaContainer->remover(indice);
+}
+
+bool GestorService::existeCamiao(std::string matricula){
+    Camiao* camiao = camiaoContainer->procurar(matricula);
+    if(camiao != nullptr){
+        return true; // encontrou — ja existe
+    }
+    return false; // nao encontrou — nao existe
 }

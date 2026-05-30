@@ -17,13 +17,16 @@ void GestorController::mostrarMenu(){
             break;
         }
         // UC 9.1 - Registar Camiao
-        else if(opcao == 1){
+       else if(opcao == 1){
             std::string matricula;
             while(true){
                 matricula = menu.pedirMatricula();
                 if(matricula == "v") break;
                 try{
                     Camiao::validarMatricula(matricula);
+                    if(service->existeCamiao(matricula)){
+                        throw std::invalid_argument("Matricula ja existente.");
+                    }
                     break;
                 }
                 catch(std::invalid_argument &e){
@@ -33,21 +36,27 @@ void GestorController::mostrarMenu(){
             if(matricula == "v") continue;
 
             float capacidadeMaxima;
-            bool voltar = false;
             while(true){
                 capacidadeMaxima = menu.pedirCapacidadeMaxima();
-                if(capacidadeMaxima == -1){ voltar = true; break; }
+                if(capacidadeMaxima == -1) break;
                 try{
-                    service->registrarCamiao(matricula, capacidadeMaxima);
-                    std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
-                    menu.mostrarSucessoRegistarCamiao(camioes);
+                    Camiao::validarCapacidade(capacidadeMaxima);
                     break;
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
                 }
             }
-            if(voltar) continue;
+            if(capacidadeMaxima == -1) continue;
+
+            try{
+                service->registrarCamiao(matricula, capacidadeMaxima);
+                std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
+                menu.mostrarSucessoRegistarCamiao(camioes);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
+            }
         }
         // UC 9.2 - Registar Camionista
         else if(opcao == 2){
