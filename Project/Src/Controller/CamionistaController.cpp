@@ -62,51 +62,46 @@ void CamionistaController::mostrarMenu(){
             }
             
             // Remover Carga
+            // Remover Carga
             else if(opcao == 3){
                 try{
                     std::vector<CargaDTO> cargasDoCamiao = service->getCargasDoCamiao(nome);
-                    
+
                     if(cargasDoCamiao.empty()){
                         menu.mostrarErro("O camiao nao tem cargas atribuidas.");
                         continue;
                     }
-                    
+
                     menu.mostrarCargasDisponiveis(cargasDoCamiao);
                     int indice = menu.pedirIndiceCarga();
-                    
-                    std::cout << "Confirma a remocao? (s/n): ";
-                    std::string resposta;
-                    std::cin >> resposta;
-                    
-                    if(resposta != "s" && resposta != "S"){
+
+                    bool confirmacao = menu.pedirConfirmacao();
+                    if(!confirmacao){
                         menu.mostrarErro("Operacao cancelada.");
                         continue;
                     }
-                    
+
                     service->removerCarga(nome, indice);
                     CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
-                    menu.mostrarSucessoAdicionarCarga(camiao);
+                    menu.mostrarSucessoRemoverCarga(camiao);
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
                 }
             }
-            
+
             // Iniciar Entrega
             else if(opcao == 4){
                 try{
                     RotaDTO rota = service->calcularRota(nome);
                     menu.mostrarItinerario(rota);
-                    
-                    std::cout << "Confirma o inicio da entrega? (s/n): ";
-                    std::string resposta;
-                    std::cin >> resposta;
-                    
-                    if(resposta != "s" && resposta != "S"){
+
+                    bool confirmacao = menu.pedirConfirmacao();
+                    if(!confirmacao){
                         menu.mostrarErro("Operacao cancelada.");
                         continue;
                     }
-                    
+
                     service->iniciarEntrega(nome);
                     menu.mostrarSucessoIniciarEntrega();
                 }

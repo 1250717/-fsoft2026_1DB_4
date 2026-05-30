@@ -20,32 +20,12 @@ GestorService::GestorService(CamionistaContainer *camionistaContainer, CamiaoCon
 
 // Metodo auxiliar - valida o formato da matricula portuguesa atual
 // Aceita apenas: AA-00-AA (formato desde 2005)
-void GestorService::validarFormatoMatricula(std::string matricula){
-    if(matricula.size() != 8){
-        throw std::invalid_argument("Formato da matricula invalido.");
-    }
-    if(matricula[2] != '-' || matricula[5] != '-'){
-        throw std::invalid_argument("Formato da matricula invalido.");
-    }
-    if(matricula[0] < 'A' || matricula[0] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
-    if(matricula[1] < 'A' || matricula[1] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
-    if(matricula[3] < '0' || matricula[3] > '9') throw std::invalid_argument("Formato da matricula invalido.");
-    if(matricula[4] < '0' || matricula[4] > '9') throw std::invalid_argument("Formato da matricula invalido.");
-    if(matricula[6] < 'A' || matricula[6] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
-    if(matricula[7] < 'A' || matricula[7] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
-}
-
-void GestorService::verificarCapacidade(float capacidade){
-    if(capacidade <= 0 || capacidade > 10000){
-        throw std::invalid_argument("Capacidade tem de ser entre 0 e 10000 Kg.");
-    }
-}
 
 void GestorService::registrarCamiao(std::string matricula, float capacidade){
     if(camiaoContainer->procurar(matricula) != nullptr){ 
         throw std::invalid_argument("Matricula ja existente.");
     }
-    Camiao camiao(matricula, capacidade);
+    Camiao camiao(matricula, capacidade); // construtor do Camiao valida tudo
     camiaoContainer->guardar(camiao);
 }
 
@@ -61,9 +41,6 @@ void GestorService::registrarCamionista(std::string nomeCamionista){
 }
 
 void GestorService::registarCarga(float peso, std::string nomeDestino){
-    if(peso <= 0){
-        throw std::invalid_argument("O peso da carga deve ser maior que 0.");
-    }
     Localidade* destino = localidadeContainer->procurar(nomeDestino);
     if(destino == nullptr){
         throw std::invalid_argument("Localidade destino nao encontrada.");

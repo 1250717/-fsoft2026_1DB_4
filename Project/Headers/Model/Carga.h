@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Localidade.h"
+#include <stdexcept>
+
 
 class Carga {
 private:
@@ -14,6 +16,9 @@ public:
     Carga(float peso,Localidade *destino);
     std::string getEstado();
     float getPeso();
+
+    void static verificarPeso(float peso);
+
     Localidade* getDestino();
     void setEstado(std::string estado);
 };

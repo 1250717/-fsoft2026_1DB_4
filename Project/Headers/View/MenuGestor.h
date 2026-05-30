@@ -12,6 +12,13 @@
 
 
 class MenuGestor{
+private:
+void listarCamioes(std::vector<CamiaoDTO> camioes);
+void listarCargas(std::vector<CargaDTO> cargas);
+void listarCamionistas(std::vector<CamionistaDTO> camionistas);
+
+
+//São private porque só são usadas internamente pelo MenuGestor
 public:
 
     int mostrarOpcoes();

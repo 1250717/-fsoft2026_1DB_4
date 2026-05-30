@@ -21,111 +21,107 @@ void GestorController::mostrarMenu(){
             std::string matricula;
             while(true){
                 matricula = menu.pedirMatricula();
-                if(matricula == "v") break;  // sai do loop da matricula
-                //o continue a seguir apanha o v e manda o programa para cima
-                try{
-                    service->validarFormatoMatricula(matricula);
-                    break;  // matricula válida, sai do loop
-                }
-                catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
-                }
-            }
-            // se matricula == "v", o continue abaixo salta tudo o resto
-            // e volta ao topo do while exterior → int opcao = menu.mostrarOpcoes()
-            if(matricula == "v") continue;  // volta ao while exterior — menu do gestor
-            
-
-            float capacidadeMaxima;
-            while(true){
-                capacidadeMaxima = menu.pedirCapacidadeMaxima();
-                try{
-                    service->verificarCapacidade(capacidadeMaxima);
-                    break;  // capacidade válida, sai do loop
-                }
-                catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
-                    // volta a pedir a capacidade
-                }
-            }
-
-            try{
-                service->registrarCamiao(matricula, capacidadeMaxima);
-                std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
-                menu.mostrarSucessoRegistarCamiao(camioes);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
-}
-        // UC 9.2 - Registar Camionista
-        else if(opcao == 2){
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            try{
-                service->registrarCamionista(nomeCamionista);
-                std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
-                menu.mostrarSucessoRegistarCamionista(camionistas);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
-        }
-        // UC 9.3 - Registar Carga
-        else if(opcao == 3){
-            float peso = menu.pedirPesoCarga();
-            std::vector<Localidade> localidades = service->getTodasLocalidades();
-            std::string nomeDestino = menu.pedirDestinoCarga(localidades);
-
-            try{
-                service->registarCarga(peso, nomeDestino);
-                std::vector<CargaDTO> cargas = service->getTodasCargas();
-                menu.mostrarSucessoRegistarCarga(cargas);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
-        }
-        // UC 9.4 - Atribuir Camionista a Camiao
-        else if(opcao == 4){
-            // 1. Pedir ao service os camionistas disponiveis (sem camiao)
-            std::vector<CamionistaDTO> camionistasDisp = service->getCamionistasDisponiveis();
-            
-            if(camionistasDisp.empty()){
-                menu.mostrarErro("Nao existem camionistas disponiveis.");
-                continue;
-            }
-            
-            menu.mostrarCamionistasDisponiveis(camionistasDisp);
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            
-            std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
-            
-            if(camioesDisp.empty()){
-                menu.mostrarErro("Nao existem camioes disponiveis.");
-                continue;
-            }
-            
-            menu.mostrarCamioesDisponiveis(camioesDisp);
-            std::string matricula;
-            while(true){
-                matricula = menu.pedirMatricula();
                 if(matricula == "v") break;
                 try{
-                    service->atribuirCamionistaACamiao(nomeCamionista, matricula);
-                    menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+                    Camiao::validarMatricula(matricula);
                     break;
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
-                    menu.mostrarCamioesDisponiveis(camioesDisp);
                 }
+            }
+            if(matricula == "v") continue;
+
+            float capacidadeMaxima;
+            bool voltar = false;
+            while(true){
+                capacidadeMaxima = menu.pedirCapacidadeMaxima();
+                if(capacidadeMaxima == -1){ voltar = true; break; }
+                try{
+                    service->registrarCamiao(matricula, capacidadeMaxima);
+                    std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
+                    menu.mostrarSucessoRegistarCamiao(camioes);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            if(voltar) continue;
+        }
+        // UC 9.2 - Registar Camionista
+        else if(opcao == 2){
+            std::string nomeCamionista;
+            while(true){
+                nomeCamionista = menu.pedirNomeCamionista();
+                if(nomeCamionista == "v") break;
+                try{
+                    service->registrarCamionista(nomeCamionista);
+                    std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
+                    menu.mostrarSucessoRegistarCamionista(camionistas);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            if(nomeCamionista == "v") continue;
+        }
+        // UC 9.3 - Registar Carga
+        else if(opcao == 3){
+            float peso;
+            while(true){
+                peso = menu.pedirPesoCarga();
+                if(peso == -1) break;
+                try{
+                    std::vector<Localidade> localidades = service->getTodasLocalidades();
+                    std::string nomeDestino = menu.pedirDestinoCarga(localidades);
+                    service->registarCarga(peso, nomeDestino);
+                    std::vector<CargaDTO> cargas = service->getTodasCargas();
+                    menu.mostrarSucessoRegistarCarga(cargas);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            if(peso == -1) continue;
+        }
+        // UC 9.4 - Atribuir Camionista a Camiao
+        else if(opcao == 4){
+            std::vector<CamionistaDTO> camionistasDisp = service->getCamionistasDisponiveis();
+
+            if(camionistasDisp.empty()){
+                menu.mostrarErro("Nao existem camionistas disponiveis.");
+                continue;
+            }
+
+            menu.mostrarCamionistasDisponiveis(camionistasDisp);
+            std::string nomeCamionista = menu.pedirNomeCamionista();
+
+            std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
+
+            if(camioesDisp.empty()){
+                menu.mostrarErro("Nao existem camioes disponiveis.");
+                continue;
+            }
+
+            menu.mostrarCamioesDisponiveis(camioesDisp);
+            std::string matricula = menu.pedirMatricula();
+
+            try{
+                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
+                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+            }
+            catch(std::invalid_argument &e){
+                menu.mostrarErro(e.what());
             }
         }
         // UC 9.5 - Remover Camiao
         else if(opcao == 5){
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::string matricula = menu.pedirSelecaoCamiao(camioes);
-            
+
             bool confirmacao = menu.pedirConfirmacao();
             if(confirmacao){
                 try{
@@ -144,6 +140,7 @@ void GestorController::mostrarMenu(){
         else if(opcao == 6){
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             std::string nomeCamionista = menu.pedirSelecaoCamionista(camionistas);
+
             bool confirmacao = menu.pedirConfirmacao();
             if(confirmacao){
                 try{
@@ -158,7 +155,8 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro("Acao cancelada.");
             }
         }
-        else if(opcao == 7){//eliminar carga
+        // UC 9.7 - Eliminar Carga
+        else if(opcao == 7){
             std::vector<CargaDTO> cargas = service->getTodasCargas();
             int indice = menu.pedirSelecaoCarga(cargas);
 
@@ -170,8 +168,6 @@ void GestorController::mostrarMenu(){
                 continue;
             }
 
-            //se chegou aqui, carga não está em transito
-            //pede confirmação
             bool confirmacao = menu.pedirConfirmacao();
 
             if(confirmacao){
@@ -187,7 +183,8 @@ void GestorController::mostrarMenu(){
                 menu.mostrarErro("Acao cancelada.");
             }
         }
-        else if(opcao == 8){//Visualizar Cadastros
+        // UC 9.8 - Visualizar Cadastros
+        else if(opcao == 8){
             std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
             std::vector<CargaDTO> cargas = service->getTodasCargas();
@@ -196,12 +193,12 @@ void GestorController::mostrarMenu(){
         // UC 9.9 - Visualizar Rotas Concluidas
         else if(opcao == 9){
             std::vector<RotaDTO> rotas = service->getTodasRotas();
-            
+
             if(rotas.empty()){
                 menu.mostrarErro("Nao existem rotas concluidas.");
                 continue;
             }
-            
+
             menu.mostrarRotasConcluidas(rotas);
         }
     }

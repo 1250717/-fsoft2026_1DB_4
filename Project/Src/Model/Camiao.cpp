@@ -1,15 +1,36 @@
 #include "..\..\Headers\Model\Camiao.h"
 #include "..\..\Headers\Model\Camionista.h"
 #include "..\..\Headers\Model\Carga.h"
+#include <stdexcept>
 
 
 Camiao::Camiao(std::string matricula, float capacidadeMaxima) {
+    validarMatricula(matricula);
+    validarCapacidade(capacidadeMaxima);
+
     this->matricula = matricula;
     this->capacidadeMaxima = capacidadeMaxima;
-    this->capacidadeDisponivel = capacidadeMaxima; // Inicialmente o peso disponível é o total
-    
-    this->estado = "Disponivel"; // Predefinido no relatório 
-    this->camionista = nullptr;  // Predefinido no relatório
+    this->capacidadeDisponivel = capacidadeMaxima;
+    this->estado = "Disponivel";
+    this->camionista = nullptr;
+}
+
+void Camiao::validarMatricula(std::string matricula){
+    if(matricula.size() != 8 || matricula[2] != '-' || matricula[5] != '-'){
+        throw std::invalid_argument("Formato da matricula invalido.");
+    }
+    if(matricula[0] < 'A' || matricula[0] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[1] < 'A' || matricula[1] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[3] < '0' || matricula[3] > '9') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[4] < '0' || matricula[4] > '9') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[6] < 'A' || matricula[6] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+    if(matricula[7] < 'A' || matricula[7] > 'Z') throw std::invalid_argument("Formato da matricula invalido.");
+}
+
+void Camiao::validarCapacidade(float capacidade){
+    if(capacidade <= 0 || capacidade > 10000){
+        throw std::invalid_argument("Capacidade tem de ser entre 0 e 10000 Kg.");
+    }
 }
 
 void Camiao::setCamionista(Camionista *camionista){
