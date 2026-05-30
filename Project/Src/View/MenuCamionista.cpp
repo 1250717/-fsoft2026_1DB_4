@@ -17,15 +17,16 @@ int MenuCamionista::mostrarOpcoes(){
     std::cout << "1. Visualizar estado do camiao\n";
     std::cout << "2. Adicionar Carga\n";
     std::cout << "3. Remover Carga\n";
+    std::cout << "4. Iniciar Entrega\n";
     std::cout << "0. Logout\n";
     std::cout << "Escolha uma opcao: ";
- 
+
     int opcao;
     std::cin >> opcao;
     if(std::cin.fail()){
-        std::cin.clear();                                              // limpa estado de erro
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // descarta buffer
-        return -1;  // opção inválida — o while ignora
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return -1;
     }
     return opcao;
 }

@@ -17,6 +17,8 @@ public:
     void setCamiao(Camiao* camiao);
     void setEstado(std::string estado);
 
+    static void validarNome(std::string matricula);
+
     Camiao* getCamiao();
     std::string getNome();
     std::string getEstado();

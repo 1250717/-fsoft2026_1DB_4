@@ -34,52 +34,59 @@ void GestorController::mostrarMenu(){
             if(matricula == "v") continue;
 
             float capacidadeMaxima;
+            bool voltar = false;
             while(true){
                 capacidadeMaxima = menu.pedirCapacidadeMaxima();
+                if(capacidadeMaxima == -1){ voltar = true; break; }
                 try{
-                    Camiao::validarCapacidade(capacidadeMaxima);
+                    service->registrarCamiao(matricula, capacidadeMaxima);
+                    std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
+                    menu.mostrarSucessoRegistarCamiao(camioes);
                     break;
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
                 }
             }
-
-            try{
-                service->registrarCamiao(matricula, capacidadeMaxima);
-                std::vector<CamiaoDTO> camioes = service->getTodosCamioes();
-                menu.mostrarSucessoRegistarCamiao(camioes);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
+            if(voltar) continue;
         }
         // UC 9.2 - Registar Camionista
         else if(opcao == 2){
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            try{
-                service->registrarCamionista(nomeCamionista);
-                std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
-                menu.mostrarSucessoRegistarCamionista(camionistas);
+            std::string nomeCamionista;
+            while(true){
+                nomeCamionista = menu.pedirNomeCamionista();
+                if(nomeCamionista == "v") break;
+                try{
+                    service->registrarCamionista(nomeCamionista);
+                    std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
+                    menu.mostrarSucessoRegistarCamionista(camionistas);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
             }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
+            if(nomeCamionista == "v") continue;
         }
         // UC 9.3 - Registar Carga
         else if(opcao == 3){
-            float peso = menu.pedirPesoCarga();
-            std::vector<Localidade> localidades = service->getTodasLocalidades();
-            std::string nomeDestino = menu.pedirDestinoCarga(localidades);
-
-            try{
-                service->registarCarga(peso, nomeDestino);
-                std::vector<CargaDTO> cargas = service->getTodasCargas();
-                menu.mostrarSucessoRegistarCarga(cargas);
+            float peso;
+            while(true){
+                peso = menu.pedirPesoCarga();
+                if(peso == -1) break;
+                try{
+                    std::vector<Localidade> localidades = service->getTodasLocalidades();
+                    std::string nomeDestino = menu.pedirDestinoCarga(localidades);
+                    service->registarCarga(peso, nomeDestino);
+                    std::vector<CargaDTO> cargas = service->getTodasCargas();
+                    menu.mostrarSucessoRegistarCarga(cargas);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
             }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-            }
+            if(peso == -1) continue;
         }
         // UC 9.4 - Atribuir Camionista a Camiao
         else if(opcao == 4){

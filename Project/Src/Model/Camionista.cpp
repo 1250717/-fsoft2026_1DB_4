@@ -1,9 +1,12 @@
 #include "..\..\Headers\Model\Camionista.h"
+#include <stdexcept>
+#include <cctype>
 
 Camionista::Camionista(std::string nome){
+    validarNome(nome);
     this->nome = nome;
-    this->estado = "Disponivel"; // Predefinido no relatório 
-    this->camiao = nullptr; // Predefinido no relatório 
+    this->estado = "Disponivel";
+    this->camiao = nullptr;
 }
 
 void Camionista::setCamiao(Camiao *camiao){
@@ -28,3 +31,13 @@ std::string Camionista::getEstado() {
     return this->estado;
 }
 
+void Camionista::validarNome(std::string nome){
+    if(nome.size() < 4 || nome.size() > 10){
+        throw std::invalid_argument("Nome tem de ter entre 4 e 10 caracteres.");
+    }
+    for(int i = 0; i < nome.size(); i++){
+        if(!isalpha(nome[i])){
+            throw std::invalid_argument("Nome so pode conter letras.");
+        }
+    }
+}

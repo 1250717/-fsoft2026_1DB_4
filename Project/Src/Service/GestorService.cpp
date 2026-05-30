@@ -41,9 +41,6 @@ void GestorService::registrarCamionista(std::string nomeCamionista){
 }
 
 void GestorService::registarCarga(float peso, std::string nomeDestino){
-    if(peso <= 0){
-        throw std::invalid_argument("O peso da carga deve ser maior que 0.");
-    }
     Localidade* destino = localidadeContainer->procurar(nomeDestino);
     if(destino == nullptr){
         throw std::invalid_argument("Localidade destino nao encontrada.");
