@@ -54,7 +54,7 @@ void GestorService::registrarCamionista(std::string nomeCamionista){
         throw std::invalid_argument("Nome nao pode estar vazio.");
     }
     if(camionistaContainer->validarNome(nomeCamionista) != nullptr){//ja existe
-        throw std::invalid_argument("Camionista já existente");
+        throw std::invalid_argument("Camionista ja existente");
     }
     Camionista camionista(nomeCamionista);
     camionistaContainer->guardar(camionista);
@@ -219,7 +219,7 @@ void GestorService::eliminarCarga(int indice){
     //apenas verifica se está em transito
     Carga* carga = cargaContainer->procurar(indice);
     if(carga == nullptr){
-        throw std::invalid_argument("Carga não encontrada.");
+        throw std::invalid_argument("Carga nao encontrada.");
     }
     if(carga->getEstado() == "Em Transito"){
         throw std::invalid_argument("Nao e possivel eliminar uma carga em transito.");
@@ -233,7 +233,7 @@ void GestorService::eliminarCarga(int indice, bool confirmar){
     //vai remover
     Carga* carga = cargaContainer->procurar(indice);
     if(carga == nullptr){
-        throw std::invalid_argument("Carga não encontrada.");
+        throw std::invalid_argument("Carga nao encontrada.");
     }
     //se a carga estava atribuida a um camião, liberta
     if(carga->getEstado() == "Atribuida"){

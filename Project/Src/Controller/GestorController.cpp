@@ -184,7 +184,7 @@ void GestorController::mostrarMenu(){
                     menu.mostrarErro(e.what());
                 }
             } else {
-                menu.mostrarErro("Ação cancelada.");
+                menu.mostrarErro("Acao cancelada.");
             }
         }
         else if(opcao == 8){//Visualizar Cadastros
