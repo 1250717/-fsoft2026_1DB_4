@@ -295,7 +295,22 @@ void MenuGestor::mostrarSucessoAtribuicao(std::string nomeCamionista, std::strin
     std::cout << "Camionista " << nomeCamionista << " esta agora atribuido ao camiao " << matricula << ".\n";
 }
 
-void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas){
-    listarCamionistas(camionistas);
-    listarCamioes(camioes);
+void MenuGestor::visualizarCadastros(std::vector<CamiaoDTO> camioes, std::vector<CamionistaDTO> camionistas, std::vector<CargaDTO> cargas){
+    if(camionistas.empty()){
+        std::cout << "\nNao existem camionistas registados.\n";
+    } else {
+        listarCamionistas(camionistas);
+    }
+
+    if(camioes.empty()){
+        std::cout << "\nNao existem camioes registados.\n";
+    } else {
+        listarCamioes(camioes);
+    }
+
+    if(cargas.empty()){
+        std::cout << "\nNao existem cargas registadas.\n";
+    } else {
+        listarCargas(cargas);
+    }
 }
