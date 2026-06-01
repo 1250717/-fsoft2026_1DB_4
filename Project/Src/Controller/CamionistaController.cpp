@@ -52,7 +52,21 @@ void CamionistaController::mostrarMenu(){
                         }
                         
                         menu.mostrarCargasDisponiveis(disponiveis);
-                        int indice = menu.pedirIndiceCarga();
+                        std::string input = menu.pedirIndiceCarga();
+                        
+                        // Opcao de voltar atras com "v"
+                        if(input == "v" || input == "V") break;
+                        
+                        // Converter o input para numero. Se nao for numero,
+                        // o stoi lanca excecao -> tratamos como indice invalido
+                        int indice;
+                        try{
+                            indice = std::stoi(input);
+                        }
+                        catch(...){
+                            menu.mostrarErro("Indice invalido.");
+                            continue;
+                        }
                         
                         // Validacao de input: o indice tem de corresponder a uma
                         // carga da lista mostrada, senao mostra "Indice invalido"
@@ -94,7 +108,21 @@ void CamionistaController::mostrarMenu(){
                         }
 
                         menu.mostrarCargasDoCamiao(cargasDoCamiao);
-                        int indice = menu.pedirIndiceCarga();
+                        std::string input = menu.pedirIndiceCarga();
+
+                        // Opcao de voltar atras com "v"
+                        if(input == "v" || input == "V") break;
+
+                        // Converter o input para numero. Se nao for numero,
+                        // o stoi lanca excecao -> tratamos como indice invalido
+                        int indice;
+                        try{
+                            indice = std::stoi(input);
+                        }
+                        catch(...){
+                            menu.mostrarErro("Indice invalido.");
+                            continue;
+                        }
 
                         // Validacao de input: o indice tem de corresponder a uma
                         // carga da lista. Se invalido, volta a lista SEM confirmacao

@@ -59,21 +59,12 @@ void MenuCamionista::mostrarCargasDisponiveis(std::vector<CargaDTO> cargas){
     std::cout << "----------------------------\n";
 }
  
-int MenuCamionista::pedirIndiceCarga(){
-    std::cout << "Introduza o indice da carga: ";
-    int indice;
-    std::cin >> indice;
-    
-    // Se o input nao for um numero (ex: uma letra), o cin entra em
-    // estado de erro. Limpamos o erro, descartamos o input invalido
-    // e devolvemos -1 (indice que nunca existe na lista)
-    if(std::cin.fail()){
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        return -1;
-    }
-    
-    return indice;
+std::string MenuCamionista::pedirIndiceCarga(){
+    std::cout << "Introduza o indice da carga ou 'v' para voltar: ";
+    std::string input;
+    std::cin >> input;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return input;
 }
  
 void MenuCamionista::mostrarSucessoAdicionarCarga(CamiaoDTO camiao){

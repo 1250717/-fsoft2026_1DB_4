@@ -13,7 +13,7 @@ public:
     void mostrarEstadoCamiao(CamiaoDTO camiao);
     
     void mostrarCargasDisponiveis(std::vector<CargaDTO> cargas);
-    int pedirIndiceCarga();
+    std::string pedirIndiceCarga();
     void mostrarSucessoAdicionarCarga(CamiaoDTO camiao);
     void mostrarErro(std::string mensagem);
 
