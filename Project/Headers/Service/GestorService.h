@@ -42,6 +42,7 @@ public:
     std::vector<CamiaoDTO> getCamioesDisponiveis();
     void atribuirCamionistaACamiao(std::string nomeCamionista, std::string matricula);
     bool existeCamiao(std::string matricula);
+    void verificarCamiao(std::string matricula);
 };
 
 #endif

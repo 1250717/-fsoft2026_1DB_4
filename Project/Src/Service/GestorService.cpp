@@ -246,3 +246,11 @@ void GestorService::verificarCamionista(std::string nomeCamionista){
     }
     camionista->verificarDisponivel(); // delega para a própria classe
 }
+
+void GestorService::verificarCamiao(std::string matricula){
+    if(!existeCamiao(matricula)){
+        throw std::invalid_argument("Camiao inexistente.");
+    }
+    Camiao* camiao = camiaoContainer->procurar(matricula);
+    camiao->verificarDisponivel();
+}
