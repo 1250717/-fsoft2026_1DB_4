@@ -185,7 +185,7 @@ void GestorController::mostrarMenu(){
                 } catch(std::invalid_argument &e){
                     menu.mostrarErro("Indice invalido.");
                 }
-            }
+                }
         }
 
         // UC 9.6 - Remover Camionista

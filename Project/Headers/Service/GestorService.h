@@ -32,6 +32,7 @@ public:
     void registarCarga(float peso, std::string nomeDestino);
     void eliminarCarga(int indice);
     void eliminarCarga(int indice, bool confrimar);
+    void verificarCamionista(std::string nomeCamionista);
     std::vector<CamiaoDTO> getTodosCamioes();
     std::vector<CamionistaDTO> getTodosCamionistas();
     std::vector<CargaDTO> getTodasCargas();
