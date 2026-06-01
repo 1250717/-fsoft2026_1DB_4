@@ -124,8 +124,21 @@ void GestorController::mostrarMenu(){
             }
 
             menu.mostrarCamionistasDisponiveis(camionistasDisp);
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            if(nomeCamionista == "v" || nomeCamionista == "V") continue;
+
+            std::string nomeCamionista;
+            bool voltar = false;
+            while(true){
+                nomeCamionista = menu.pedirNomeCamionista();
+                if(nomeCamionista == "v" || nomeCamionista == "V"){ voltar = true; break; }
+                try{
+                    service->verificarCamionista(nomeCamionista);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            if(voltar) continue;
             
             std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
 
