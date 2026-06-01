@@ -51,6 +51,24 @@ std::string MenuGestor::pedirMatricula(){
     return matricula;
 }
 
+float MenuGestor::pedirPesoCarga(){
+    while(true){
+        std::cout << "\nIntroduza o peso da carga (Kg) ou -1 para voltar: ";
+        float peso;
+        std::cin >> peso;
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Erro: introduza um numero.\n";
+            continue;
+        }
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return peso;
+    }
+}
+
 
 std::string MenuGestor::pedirSelecaoCamiao(std::vector<CamiaoDTO> camioes){
     listarCamioes(camioes);
