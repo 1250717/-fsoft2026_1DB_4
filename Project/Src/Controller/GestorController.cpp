@@ -216,27 +216,55 @@ void GestorController::mostrarMenu(){
         }
         // UC 9.7 - Eliminar Carga
         else if(opcao == 7){
-            std::vector<CargaDTO> cargas = service->getTodasCargas();
+            // Loop: indice invalido ou cancelamento volta a mostrar a lista
+            while(true){
+                std::vector<CargaDTO> cargas = service->getTodasCargas();
 
-            if(cargas.empty()){
-                menu.mostrarErro("Nao existem cargas registadas.");
-                continue;
-            }
+                if(cargas.empty()){
+                    menu.mostrarErro("Nao existem cargas registadas.");
+                    break;
+                }
 
-            int indice = menu.pedirSelecaoCarga(cargas);
-            if(indice == -1) continue;
+                std::string input = menu.pedirSelecaoCarga(cargas);
 
-            try{
-                service->eliminarCarga(indice);
-            }
-            catch(std::invalid_argument &e){
-                menu.mostrarErro(e.what());
-                continue;
-            }
+                // Opcao de voltar atras com "v"
+                if(input == "v" || input == "V") break;
 
-            bool confirmacao = menu.pedirConfirmacao();
+                // Converter o input para numero. Se nao for numero,
+                // o stoi lanca excecao -> indice invalido, volta a lista
+                int indice;
+                try{
+                    indice = std::stoi(input) - 1;
+                }
+                catch(...){
+                    menu.mostrarErro("Indice invalido.");
+                    continue;
+                }
 
-            if(confirmacao){
+                // Validar que o indice esta dentro do intervalo da lista
+                if(indice < 0 || indice >= (int)cargas.size()){
+                    menu.mostrarErro("Indice invalido.");
+                    continue;
+                }
+
+                // Verificar se a carga pode ser eliminada (ex: nao em transito)
+                try{
+                    service->eliminarCarga(indice);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                    continue;
+                }
+
+                // Indice valido - pedir confirmacao
+                bool confirmacao = menu.pedirConfirmacao();
+
+                // Se nao confirma, volta a mostrar a lista
+                if(!confirmacao){
+                    continue;
+                }
+
+                // Confirmou - eliminar a carga
                 try{
                     service->eliminarCarga(indice, true);
                     std::vector<CargaDTO> cargasAtualizadas = service->getTodasCargas();
@@ -245,8 +273,7 @@ void GestorController::mostrarMenu(){
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
                 }
-            } else {
-                menu.mostrarErro("Acao cancelada.");
+                break;
             }
         }
         // UC 9.8 - Visualizar Cadastros

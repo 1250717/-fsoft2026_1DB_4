@@ -51,7 +51,7 @@ public:
     void mostrarCamioesDisponiveis(std::vector<CamiaoDTO> camioes);
     void mostrarSucessoAtribuicao(std::string nomeCamionista, std::string matricula);
 
-    int pedirSelecaoCarga(std::vector<CargaDTO> cargas);
+    std::string pedirSelecaoCarga(std::vector<CargaDTO> cargas);
     void mostrarSucessoEliminarCarga(std::vector<CargaDTO> cargas);
 };
 

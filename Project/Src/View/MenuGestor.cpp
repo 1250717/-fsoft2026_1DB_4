@@ -202,12 +202,13 @@ std::string MenuGestor::pedirDestinoCarga(std::vector<Localidade> localidades){
     return nomeDestino;
 }
 
-int MenuGestor::pedirSelecaoCarga(std::vector<CargaDTO> cargas){
+std::string MenuGestor::pedirSelecaoCarga(std::vector<CargaDTO> cargas){
     listarCargas(cargas);
-    std::cout << "Introduz o indice da carga a eliminar: ";
-    int indice;
-    std::cin >> indice;
-    return indice-1;
+    std::cout << "Introduz o indice da carga a eliminar ou 'v' para voltar: ";
+    std::string input;
+    std::cin >> input;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return input;
 }
 
 void MenuGestor::mostrarSucessoRegistarCarga(std::vector<CargaDTO> cargas){
