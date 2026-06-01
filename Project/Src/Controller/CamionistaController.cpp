@@ -82,28 +82,49 @@ void CamionistaController::mostrarMenu(){
             }
             
             // Remover Carga
-            // Remover Carga
             else if(opcao == 3){
                 try{
-                    std::vector<CargaDTO> cargasDoCamiao = service->getCargasDoCamiao(nome);
+                    // Loop: indice invalido ou cancelamento volta a mostrar a lista
+                    while(true){
+                        std::vector<CargaDTO> cargasDoCamiao = service->getCargasDoCamiao(nome);
 
-                    if(cargasDoCamiao.empty()){
-                        menu.mostrarErro("O camiao nao tem cargas atribuidas.");
-                        continue;
+                        if(cargasDoCamiao.empty()){
+                            menu.mostrarErro("O camiao nao tem cargas atribuidas.");
+                            break;
+                        }
+
+                        menu.mostrarCargasDoCamiao(cargasDoCamiao);
+                        int indice = menu.pedirIndiceCarga();
+
+                        // Validacao de input: o indice tem de corresponder a uma
+                        // carga da lista. Se invalido, volta a lista SEM confirmacao
+                        bool indiceValido = false;
+                        for(int i = 0; i < cargasDoCamiao.size(); i++){
+                            if(cargasDoCamiao[i].indice == indice){
+                                indiceValido = true;
+                                break;
+                            }
+                        }
+
+                        if(!indiceValido){
+                            menu.mostrarErro("Indice invalido.");
+                            continue;
+                        }
+
+                        // Indice valido - pedir confirmacao
+                        bool confirmacao = menu.pedirConfirmacao();
+
+                        // Se nao confirma, volta a mostrar a lista
+                        if(!confirmacao){
+                            continue;
+                        }
+
+                        // Confirmou - remover a carga
+                        service->removerCarga(nome, indice);
+                        CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
+                        menu.mostrarSucessoRemoverCarga(camiao);
+                        break;
                     }
-
-                    menu.mostrarCargasDisponiveis(cargasDoCamiao);
-                    int indice = menu.pedirIndiceCarga();
-
-                    bool confirmacao = menu.pedirConfirmacao();
-                    if(!confirmacao){
-                        menu.mostrarErro("Operacao cancelada.");
-                        continue;
-                    }
-
-                    service->removerCarga(nome, indice);
-                    CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
-                    menu.mostrarSucessoRemoverCarga(camiao);
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());
