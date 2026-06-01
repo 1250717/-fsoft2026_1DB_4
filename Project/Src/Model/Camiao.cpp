@@ -28,8 +28,8 @@ void Camiao::validarMatricula(std::string matricula){
 }
 
 void Camiao::validarCapacidade(float capacidade){
-    if(capacidade <= 0 || capacidade > 10000){
-        throw std::invalid_argument("Capacidade tem de ser entre 0 e 10000 Kg.");
+    if(capacidade < 100 || capacidade > 10000){
+        throw std::invalid_argument("Capacidade tem de ser entre 100 e 10000 Kg.");
     }
 }
 
