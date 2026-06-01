@@ -29,7 +29,7 @@ CamiaoDTO CamionistaService::visualizarEstadoCamiao(std::string nomeCamionista){
     
     // Validacao: o camionista tem de ter um camiao atribuido
     if(camionista->getCamiao() == nullptr){
-        throw std::invalid_argument("Nao tem camiao atribuido. Contacte o gestor.");
+        throw std::invalid_argument("Nao tem camiao atribuido.");
     }
     
     Camiao* camiao = camionista->getCamiao();
@@ -49,7 +49,13 @@ CamiaoDTO CamionistaService::visualizarEstadoCamiao(std::string nomeCamionista){
 }
 
 // Devolve a lista de cargas que estao disponiveis no sistema
-std::vector<CargaDTO> CamionistaService::getCargasDisponiveis(){
+std::vector<CargaDTO> CamionistaService::getCargasDisponiveis(std::string nomeCamionista){
+    // Verificacao: o camionista tem de ter um camiao atribuido
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    if(camionista->getCamiao() == nullptr){
+        throw std::invalid_argument("Nao tem camiao atribuido.");
+    }
+
     std::vector<Carga>& todas = cargaContainer->getTodos();
     std::vector<CargaDTO> dtos;
     
@@ -74,7 +80,7 @@ void CamionistaService::adicionarCarga(std::string nomeCamionista, int indiceCar
     
     // Validacao: o camionista tem de ter um camiao atribuido
     if(camionista->getCamiao() == nullptr){
-        throw std::invalid_argument("Nao tem camiao atribuido. Contacte o gestor.");
+        throw std::invalid_argument("Nao tem camiao atribuido.");
     }
     
     Camiao* camiao = camionista->getCamiao();
@@ -107,7 +113,7 @@ std::vector<CargaDTO> CamionistaService::getCargasDoCamiao(std::string nomeCamio
     
     // Validacao: o camionista tem de ter um camiao atribuido
     if(camionista->getCamiao() == nullptr){
-        throw std::invalid_argument("Nao tem camiao atribuido. Contacte o gestor.");
+        throw std::invalid_argument("Nao tem camiao atribuido.");
     }
     
     Camiao* camiao = camionista->getCamiao();
@@ -175,7 +181,7 @@ RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
     
     // Validacao: o camionista tem de ter um camiao atribuido
     if(camionista->getCamiao() == nullptr){
-        throw std::invalid_argument("Nao tem camiao atribuido. Contacte o gestor.");
+        throw std::invalid_argument("Nao tem camiao atribuido.");
     }
     
     Camiao* camiao = camionista->getCamiao();
