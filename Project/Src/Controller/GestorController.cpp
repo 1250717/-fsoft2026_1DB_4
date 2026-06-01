@@ -89,17 +89,23 @@ void GestorController::mostrarMenu(){
                     menu.mostrarErro(e.what());
                     continue; // volta ao início do while para pedir o peso de novo
                 }
-                try{
-                    std::vector<Localidade> localidades = service->getTodasLocalidades();
-                    std::string nomeDestino = menu.pedirDestinoCarga(localidades);
-                    service->registarCarga(peso, nomeDestino);
-                    std::vector<CargaDTO> cargas = service->getTodasCargas();
-                    menu.mostrarSucessoRegistarCarga(cargas);
-                    break;
+                while(true){
+                    try{
+                        std::vector<Localidade> localidades = service->getTodasLocalidades();
+                        //retorna lista dtos
+                        std::string nomeDestino = menu.pedirDestinoCarga(localidades);
+                        //pede nome localidade
+                        service->registarCarga(peso, nomeDestino);
+                        //procura pelo nome dentro do container
+                        std::vector<CargaDTO> cargas = service->getTodasCargas();
+                        menu.mostrarSucessoRegistarCarga(cargas);
+                        break;
+                    }
+                    catch(std::invalid_argument &e){
+                        menu.mostrarErro(e.what());
+                    }
                 }
-                catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
-                }
+                break;
             }
             if(peso == -1) continue;
         }
