@@ -156,22 +156,35 @@ void GestorController::mostrarMenu(){
                 continue;
             }
 
-            std::string matricula = menu.pedirSelecaoCamiao(camioes);
-            if(matricula == "v") continue;
-            
+            while(true){
+                std::string input = menu.pedirSelecaoCamiao(camioes);
+                if(input == "v" || input == "V") break;
 
-            bool confirmacao = menu.pedirConfirmacao();
-            if(confirmacao){
                 try{
-                    service->removerCamiao(matricula);
-                    std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
-                    menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
+                    int indice = std::stoi(input);
+                    if(indice < 1 || indice > (int)camioes.size()){
+                        menu.mostrarErro("Indice invalido.");
+                        continue;
+                    }
+                    std::string matricula = camioes[indice-1].matricula;
+
+                    bool confirmacao = menu.pedirConfirmacao();
+                    if(confirmacao){
+                        try{
+                            service->removerCamiao(matricula);
+                            std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
+                            menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
+                        }
+                        catch(std::invalid_argument &e){
+                            menu.mostrarErro(e.what());
+                        }
+                    } else {
+                        menu.mostrarErro("Acao cancelada.");
+                    }
+                    break;
+                } catch(std::invalid_argument &e){
+                    menu.mostrarErro("Indice invalido.");
                 }
-                catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
-                }
-            } else {
-                menu.mostrarErro("Acao cancelada.");
             }
         }
 
