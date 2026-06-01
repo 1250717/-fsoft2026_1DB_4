@@ -83,6 +83,13 @@ void GestorController::mostrarMenu(){
                 peso = menu.pedirPesoCarga();
                 if(peso == -1) break;
                 try{
+                    Carga::verificarPeso(peso); // lança se inválido → vai para o catch abaixo
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                    continue; // volta ao início do while para pedir o peso de novo
+                }
+                try{
                     std::vector<Localidade> localidades = service->getTodasLocalidades();
                     std::string nomeDestino = menu.pedirDestinoCarga(localidades);
                     service->registarCarga(peso, nomeDestino);

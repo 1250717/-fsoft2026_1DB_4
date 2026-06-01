@@ -1,7 +1,10 @@
 #include "..\..\Headers\Model\Carga.h"
 
 Carga::Carga(float peso, Localidade *destino) {
-    verificarPeso(peso); // construtor valida — impossivel criar Carga com peso invalido
+    verificarPeso(peso); // garante que nao é criado em nenhum lado com condicoes erradas
+    // O controller já chama Carga::verificarPeso() antes de criar a Carga,
+// mas validar aqui também garante que nenhum outro código no futuro
+// consiga criar uma Carga com peso inválido — defesa em profundidade.
     this->peso = peso;
     this->estado = "Disponivel";
     this->destino = destino;
@@ -24,7 +27,7 @@ void Carga::setEstado(std::string estado) {
 }
 
 void Carga::verificarPeso(float peso){
-    if(peso <= 0){
-        throw std::invalid_argument("O peso da carga deve ser maior que 0.");
+    if(peso < 5 || peso > 200){
+        throw std::invalid_argument("O peso da carga deve ser estar entre 5kg a 200kg.");
     }
 }
