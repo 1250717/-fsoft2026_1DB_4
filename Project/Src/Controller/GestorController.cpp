@@ -147,17 +147,30 @@ void GestorController::mostrarMenu(){
                 continue;
             }
 
-            menu.mostrarCamioesDisponiveis(camioesDisp);
-            std::string matricula = menu.pedirMatricula();
-            if(matricula == "v" || matricula == "V") continue;
-            
+           menu.mostrarCamioesDisponiveis(camioesDisp);
+
+        std::string matricula;
+        bool voltarCamiao = false;
+        while(true){
+            matricula = menu.pedirMatricula();
+            if(matricula == "v" || matricula == "V"){ voltarCamiao = true; break; }
             try{
-                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
-                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+                service->verificarCamiao(matricula);
+                break;
             }
             catch(std::invalid_argument &e){
                 menu.mostrarErro(e.what());
             }
+        }
+        if(voltarCamiao) continue;
+
+        try{
+            service->atribuirCamionistaACamiao(nomeCamionista, matricula);
+            menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+        }
+        catch(std::invalid_argument &e){
+        menu.mostrarErro(e.what());
+        }
         }
 
         // UC 9.5 - Remover Camiao
