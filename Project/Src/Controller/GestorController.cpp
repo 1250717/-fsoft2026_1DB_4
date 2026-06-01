@@ -124,8 +124,21 @@ void GestorController::mostrarMenu(){
             }
 
             menu.mostrarCamionistasDisponiveis(camionistasDisp);
-            std::string nomeCamionista = menu.pedirNomeCamionista();
-            if(nomeCamionista == "v" || nomeCamionista == "V") continue;
+
+            std::string nomeCamionista;
+            bool voltar = false;
+            while(true){
+                nomeCamionista = menu.pedirNomeCamionista();
+                if(nomeCamionista == "v" || nomeCamionista == "V"){ voltar = true; break; }
+                try{
+                    service->verificarCamionista(nomeCamionista);
+                    break;
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+            }
+            if(voltar) continue;
             
             std::vector<CamiaoDTO> camioesDisp = service->getCamioesDisponiveis();
 
@@ -134,17 +147,30 @@ void GestorController::mostrarMenu(){
                 continue;
             }
 
-            menu.mostrarCamioesDisponiveis(camioesDisp);
-            std::string matricula = menu.pedirMatricula();
-            if(matricula == "v" || matricula == "V") continue;
-            
+           menu.mostrarCamioesDisponiveis(camioesDisp);
+
+        std::string matricula;
+        bool voltarCamiao = false;
+        while(true){
+            matricula = menu.pedirMatricula();
+            if(matricula == "v" || matricula == "V"){ voltarCamiao = true; break; }
             try{
-                service->atribuirCamionistaACamiao(nomeCamionista, matricula);
-                menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+                service->verificarCamiao(matricula);
+                break;
             }
             catch(std::invalid_argument &e){
                 menu.mostrarErro(e.what());
             }
+        }
+        if(voltarCamiao) continue;
+
+        try{
+            service->atribuirCamionistaACamiao(nomeCamionista, matricula);
+            menu.mostrarSucessoAtribuicao(nomeCamionista, matricula);
+        }
+        catch(std::invalid_argument &e){
+        menu.mostrarErro(e.what());
+        }
         }
 
         // UC 9.5 - Remover Camiao
@@ -185,7 +211,7 @@ void GestorController::mostrarMenu(){
                 } catch(std::invalid_argument &e){
                     menu.mostrarErro("Indice invalido.");
                 }
-            }
+                }
         }
 
         // UC 9.6 - Remover Camionista

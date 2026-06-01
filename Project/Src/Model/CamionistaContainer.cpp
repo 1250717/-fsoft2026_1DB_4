@@ -39,3 +39,4 @@ void CamionistaContainer::remover(std::string nome) {
         }
     }
 }
+

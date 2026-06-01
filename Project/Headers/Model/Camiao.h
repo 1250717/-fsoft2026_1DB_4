@@ -53,5 +53,7 @@ public:
 
     void removerCarga(Carga *carga);
 
+    void verificarDisponivel();
+
 };
 #endif

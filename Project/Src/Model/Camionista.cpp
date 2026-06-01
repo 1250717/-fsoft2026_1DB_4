@@ -41,3 +41,9 @@ void Camionista::validarNome(std::string nome){
         }
     }
 }
+
+void Camionista::verificarDisponivel(){
+    if(this->getCamiao() != nullptr){
+        throw std::invalid_argument("Camionista ja tem camiao atribuido.");
+    }
+}

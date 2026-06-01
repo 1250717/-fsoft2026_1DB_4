@@ -97,3 +97,9 @@ void Camiao::removerCarga(Carga *carga){
         }
     }
 }
+
+void Camiao::verificarDisponivel(){
+    if(this->getCamionista() != nullptr){
+        throw std::invalid_argument("Camiao ja tem camionista atribuido.");
+    }
+}

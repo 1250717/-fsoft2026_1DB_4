@@ -238,3 +238,19 @@ bool GestorService::existeCamiao(std::string matricula){
     }
     return false; // nao encontrou — nao existe
 }
+
+void GestorService::verificarCamionista(std::string nomeCamionista){
+    Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
+    if(camionista == nullptr){
+        throw std::invalid_argument("Camionista inexistente.");
+    }
+    camionista->verificarDisponivel(); // delega para a própria classe
+}
+
+void GestorService::verificarCamiao(std::string matricula){
+    if(!existeCamiao(matricula)){
+        throw std::invalid_argument("Camiao inexistente.");
+    }
+    Camiao* camiao = camiaoContainer->procurar(matricula);
+    camiao->verificarDisponivel();
+}
