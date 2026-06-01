@@ -42,19 +42,39 @@ void CamionistaController::mostrarMenu(){
             // Adicionar Carga
             else if(opcao == 2){
                 try{
-                    std::vector<CargaDTO> disponiveis = service->getCargasDisponiveis(nome);
-                    
-                    if(disponiveis.empty()){
-                        menu.mostrarErro("Nao existem cargas disponiveis.");
-                        continue;
+                    // Loop: se o indice for invalido, volta a mostrar a lista
+                    while(true){
+                        std::vector<CargaDTO> disponiveis = service->getCargasDisponiveis(nome);
+                        
+                        if(disponiveis.empty()){
+                            menu.mostrarErro("Nao existem cargas disponiveis.");
+                            break;
+                        }
+                        
+                        menu.mostrarCargasDisponiveis(disponiveis);
+                        int indice = menu.pedirIndiceCarga();
+                        
+                        // Validacao de input: o indice tem de corresponder a uma
+                        // carga da lista mostrada, senao mostra "Indice invalido"
+                        bool indiceValido = false;
+                        for(int i = 0; i < disponiveis.size(); i++){
+                            if(disponiveis[i].indice == indice){
+                                indiceValido = true;
+                                break;
+                            }
+                        }
+                        
+                        // Indice invalido: volta a mostrar a lista (continue do while)
+                        if(!indiceValido){
+                            menu.mostrarErro("Indice invalido.");
+                            continue;
+                        }
+                        
+                        service->adicionarCarga(nome, indice);
+                        CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
+                        menu.mostrarSucessoAdicionarCarga(camiao);
+                        break;
                     }
-                    
-                    menu.mostrarCargasDisponiveis(disponiveis);
-                    int indice = menu.pedirIndiceCarga();
-                    
-                    service->adicionarCarga(nome, indice);
-                    CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
-                    menu.mostrarSucessoAdicionarCarga(camiao);
                 }
                 catch(std::invalid_argument &e){
                     menu.mostrarErro(e.what());

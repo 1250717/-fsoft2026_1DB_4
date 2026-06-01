@@ -63,6 +63,16 @@ int MenuCamionista::pedirIndiceCarga(){
     std::cout << "Introduza o indice da carga: ";
     int indice;
     std::cin >> indice;
+    
+    // Se o input nao for um numero (ex: uma letra), o cin entra em
+    // estado de erro. Limpamos o erro, descartamos o input invalido
+    // e devolvemos -1 (indice que nunca existe na lista)
+    if(std::cin.fail()){
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return -1;
+    }
+    
     return indice;
 }
  
