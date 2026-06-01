@@ -23,7 +23,7 @@ public:
 
     bool verificarLogin(std::string nome);
     CamiaoDTO visualizarEstadoCamiao(std::string nomeCamionista);
-    std::vector<CargaDTO> getCargasDisponiveis();
+    std::vector<CargaDTO> getCargasDisponiveis(std::string nomeCamionista);
     void adicionarCarga(std::string nomeCamionista, int indiceCarga);
     std::vector<CargaDTO> getCargasDoCamiao(std::string nomeCamionista);
     void removerCarga(std::string nomeCamionista, int indiceCarga);

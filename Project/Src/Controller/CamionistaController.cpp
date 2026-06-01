@@ -42,7 +42,7 @@ void CamionistaController::mostrarMenu(){
             // Adicionar Carga
             else if(opcao == 2){
                 try{
-                    std::vector<CargaDTO> disponiveis = service->getCargasDisponiveis();
+                    std::vector<CargaDTO> disponiveis = service->getCargasDisponiveis(nome);
                     
                     if(disponiveis.empty()){
                         menu.mostrarErro("Nao existem cargas disponiveis.");
