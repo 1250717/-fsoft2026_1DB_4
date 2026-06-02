@@ -196,18 +196,17 @@ void GestorController::mostrarMenu(){
 
                     bool confirmacao = menu.pedirConfirmacao();
                     if(confirmacao){
-                        try{
-                            service->removerCamiao(matricula);
-                            std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
-                            menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
-                        }
-                        catch(std::invalid_argument &e){
-                            menu.mostrarErro(e.what());
-                        }
-                    } else {
-                        menu.mostrarErro("Acao cancelada.");
-                    }
-                    break;
+                try{
+                    service->removerCamiao(matricula);
+                    std::vector<CamiaoDTO> camoesAtualizados = service->getTodosCamioes();
+                    menu.mostrarSucessoRemoverCamiao(camoesAtualizados);
+                }
+                catch(std::invalid_argument &e){
+                    menu.mostrarErro(e.what());
+                }
+                break;
+            } 
+// se disser 'n' não faz break, volta ao topo do while e mostra a lista de novo
                 } catch(std::invalid_argument &e){
                     menu.mostrarErro("Indice invalido.");
                 }
