@@ -212,7 +212,6 @@ void GestorController::mostrarMenu(){
                 }
                 }
         }
-
         // UC 9.6 - Remover Camionista
         else if(opcao == 6){
             std::vector<CamionistaDTO> camionistas = service->getTodosCamionistas();
@@ -222,21 +221,23 @@ void GestorController::mostrarMenu(){
                 continue;
             }
 
-            std::string nomeCamionista = menu.pedirSelecaoCamionista(camionistas);
-            if(nomeCamionista == "v") continue;
+            while(true){
+                std::string nomeCamionista = menu.pedirSelecaoCamionista(camionistas);
+                if(nomeCamionista == "v") break;
 
-            bool confirmacao = menu.pedirConfirmacao();
-            if(confirmacao){
-                try{
-                    service->removerCamionista(nomeCamionista);
-                    std::vector<CamionistaDTO> camionistasAtualizados = service->getTodosCamionistas();
-                    menu.mostrarSucessoRemoverCamionista(camionistasAtualizados);
+                bool confirmacao = menu.pedirConfirmacao();
+                if(confirmacao){
+                    try{
+                        service->removerCamionista(nomeCamionista);
+                        std::vector<CamionistaDTO> camionistasAtualizados = service->getTodosCamionistas();
+                        menu.mostrarSucessoRemoverCamionista(camionistasAtualizados);
+                    }
+                    catch(std::invalid_argument &e){
+                        menu.mostrarErro(e.what());
+                    }
+                    break;
                 }
-                catch(std::invalid_argument &e){
-                    menu.mostrarErro(e.what());
-                }
-            } else {
-                menu.mostrarErro("Acao cancelada.");
+        // se disser 'n' volta ao topo do while e mostra a lista de novo
             }
         }
         // UC 9.7 - Eliminar Carga

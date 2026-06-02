@@ -1,3 +1,2 @@
 Joao,Disponivel,
-Pedro,Disponivel,
 Afonso,Disponivel,
