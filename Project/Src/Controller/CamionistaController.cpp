@@ -42,49 +42,52 @@ void CamionistaController::mostrarMenu(){
             // Adicionar Carga
             else if(opcao == 2){
                 try{
-                    // Loop: se o indice for invalido, volta a mostrar a lista
                     while(true){
                         std::vector<CargaDTO> disponiveis = service->getCargasDisponiveis(nome);
+                        //têm o indice real dentro do container
                         
                         if(disponiveis.empty()){
                             menu.mostrarErro("Nao existem cargas disponiveis.");
                             break;
                         }
                         
-                        menu.mostrarCargasDisponiveis(disponiveis);
+                        // Alteramos a lista temporariamente APENAS para exibição visual consecutiva (1, 2, 3...)
+                        std::vector<CargaDTO> listaVisual = disponiveis;
+                        for(int i = 0; i < listaVisual.size(); i++){
+                            listaVisual[i].indice = i + 1; // Força o índice visual a ser sempre 1, 2, 3...
+                        }
+                        
+                        menu.mostrarCargasDisponiveis(listaVisual);
                         std::string input = menu.pedirIndiceCarga();
                         
-                        // Opcao de voltar atras com "v"
                         if(input == "v" || input == "V") break;
                         
-                        // Converter o input para numero. Se nao for numero,
-                        // o stoi lanca excecao -> tratamos como indice invalido
-                        int indice;
+                        int escolhaUtilizador;
                         try{
-                            indice = std::stoi(input);
+                            escolhaUtilizador = std::stoi(input);
                         }
                         catch(...){
                             menu.mostrarErro("Indice invalido.");
                             continue;
                         }
                         
-                        // Validacao de input: o indice tem de corresponder a uma
-                        // carga da lista mostrada, senao mostra "Indice invalido"
+                        // MAPEAMENTO: Verifica se a escolha bate certo com a nossa sequência (1 até N)
                         bool indiceValido = false;
-                        for(int i = 0; i < disponiveis.size(); i++){
-                            if(disponiveis[i].indice == indice){
-                                indiceValido = true;
-                                break;
-                            }
+                        int indiceRealNoContainer = -1;
+                        
+                        if (escolhaUtilizador >= 1 && escolhaUtilizador <= (int)disponiveis.size()) {
+                            // Se o utilizador escolheu '2', ele quer o elemento no índice [2 - 1] = [1] da lista filtrada
+                            indiceRealNoContainer = disponiveis[escolhaUtilizador - 1].indice;
+                            indiceValido = true;
                         }
                         
-                        // Indice invalido: volta a mostrar a lista (continue do while)
                         if(!indiceValido){
                             menu.mostrarErro("Indice invalido.");
                             continue;
                         }
                         
-                        service->adicionarCarga(nome, indice);
+                        // Envia para o service o índice REAL que mapeámos
+                        service->adicionarCarga(nome, indiceRealNoContainer);
                         CamiaoDTO camiao = service->visualizarEstadoCamiao(nome);
                         menu.mostrarSucessoAdicionarCarga(camiao);
                         break;

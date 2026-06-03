@@ -63,7 +63,8 @@ std::vector<CargaDTO> CamionistaService::getCargasDisponiveis(std::string nomeCa
     for(int i = 0; i < todas.size(); i++){
         if(todas[i].getEstado() == "Disponivel"){
             CargaDTO dto;
-            dto.indice = i;
+            dto.indice = i; //guardamos o indice no container dentro dos dtos
+            //retornamos os dtos
             dto.peso = todas[i].getPeso();
             dto.nomeDestino = todas[i].getDestino()->getNome();
             dto.estado = todas[i].getEstado();
