@@ -1,1 +1,3 @@
 100,Disponivel,Viseu
+50,Disponivel,Lisboa
+15,Disponivel,Porto
