@@ -196,7 +196,7 @@ std::string MenuGestor::pedirDestinoCarga(std::vector<Localidade> localidades){
     for(int i = 0; i < localidades.size(); i++){
         std::cout << i+1 << ". " << localidades[i].getNome() << "\n";
     }
-    std::cout << "Introduza o nome do destino: ou v para voltar";
+    std::cout << "Introduza o nome do destino (ou 'v' para voltar): ";
     std::string nomeDestino;
     std::cin >> nomeDestino;
     return nomeDestino;

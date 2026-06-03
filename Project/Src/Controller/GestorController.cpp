@@ -97,7 +97,7 @@ void GestorController::mostrarMenu(){
                         std::vector<Localidade> localidades = service->getTodasLocalidades();
                         //retorna lista dtos
                         std::string nomeDestino = menu.pedirDestinoCarga(localidades);
-                        if(nomeDestino == "v" || nomeDestino == "V") continue;
+                        if(nomeDestino == "v" || nomeDestino == "V") break;
                         //pede nome localidade
                         service->registarCarga(peso, nomeDestino);
                         //procura pelo nome dentro do container
