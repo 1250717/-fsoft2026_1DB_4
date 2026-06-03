@@ -89,7 +89,7 @@ void MenuCamionista::mostrarCargasDoCamiao(std::vector<CargaDTO> cargas){
 }
  
 bool MenuCamionista::pedirConfirmacao(){
-    std::cout << "Confirma a remocao? (s/n): ";
+    std::cout << "Quer iniciar a entrega? (s/n): ";
     std::string resposta;
     std::cin >> resposta;
     return (resposta == "s" || resposta == "S");
