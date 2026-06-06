@@ -1,3 +1,3 @@
-100,Disponivel,Viseu
-50,Disponivel,Lisboa
-15,Disponivel,Porto
+100,Entregue,Viseu
+50,Entregue,Lisboa
+15,Entregue,Porto

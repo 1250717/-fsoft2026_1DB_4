@@ -23,6 +23,7 @@ void GeneralRepository::carregar() {
     carregarCargas();
     carregarCamioes();
     carregarCamionistas();
+    carregarRotas();
 }
 
 void GeneralRepository::guardar() {
@@ -229,8 +230,79 @@ void GeneralRepository::carregarLocalidades(){
     ficheiro.close();
 }
 
-void GeneralRepository::carregarRotas(){
+void GeneralRepository::guardarRotas() {
+    ofstream ficheiro("Dados/rotas.txt");
+    if (!ficheiro.is_open()) return;
+
+    vector<Rota>& lista = rotaContainer->getTodos();
+    for (int i = 0; i < lista.size(); i++) {
+        ficheiro << lista[i].getIdRota() << ","
+                 << lista[i].getNomeCamionista() << ","
+                 << lista[i].getMatriculaCamiao() << ","
+                 << lista[i].getDistanciaTotal();
+
+        vector<string>& destinos = lista[i].getDestinos();
+        for (int j = 0; j < destinos.size(); j++) {
+            ficheiro << "," << destinos[j];
+        }
+        ficheiro << "\n";
+    }
+    ficheiro.close();
 }
+
+void GeneralRepository::carregarRotas(){
+    ifstream ficheiro("Dados/rotas.txt");
+    if(!ficheiro.is_open()){
+        cout << "Erro ao abrir rotas.txt\n";
+        return;
+    }
+
+    string linha;
+    while(getline(ficheiro, linha)){
+        int campo = 0;
+        string idRotaStr = "";
+        string nomeCamionista = "";
+        string matriculaCamiao = "";
+        string distanciaTotalStr = "";
+        vector<string> destinos;
+        string destinoAtual = "";
+
+        for(int i = 0; i < linha.size(); i++){
+            if(linha[i] == ','){
+                if(campo >= 4 && !destinoAtual.empty()){
+                    // encontrou virgula e ja estamos nos destinos (campo 4+)
+                    // guarda o destino que estava a ser construido e limpa para o proximo
+                    destinos.push_back(destinoAtual);
+                    destinoAtual = "";
+                }
+                campo++;
+            } else if(campo == 0){
+                idRotaStr += linha[i];
+            } else if(campo == 1){
+                nomeCamionista += linha[i];
+            } else if(campo == 2){
+                matriculaCamiao += linha[i];
+            } else if(campo == 3){
+                distanciaTotalStr += linha[i];
+            } else if(campo >= 4){
+                destinoAtual += linha[i];
+            }
+        }
+
+        // o ultimo destino da linha nao tem virgula a seguir
+        // por isso nunca entrou no if acima — guardamos aqui manualmente
+        if(!destinoAtual.empty()){
+            destinos.push_back(destinoAtual);
+        }
+
+        int idRota = stoi(idRotaStr);
+        float distanciaTotal = stof(distanciaTotalStr);
+        Rota rota(idRota, nomeCamionista, matriculaCamiao, distanciaTotal, destinos);
+        rotaContainer->guardar(rota);
+    }
+    ficheiro.close();
+}
+
 
 void GeneralRepository::guardarLocalidades() {
     ofstream ficheiro("Dados/localidades.txt");
@@ -299,7 +371,4 @@ void GeneralRepository::guardarCamionistas() {
         ficheiro << "\n";
     }
     ficheiro.close();
-}
-
-void GeneralRepository::guardarRotas() {
 }

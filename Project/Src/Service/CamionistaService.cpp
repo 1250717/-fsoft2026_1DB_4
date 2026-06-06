@@ -219,54 +219,50 @@ RotaDTO CamionistaService::calcularRota(std::string nomeCamionista){
 // Executa a entrega e atualiza todos os estados
 void CamionistaService::iniciarEntrega(std::string nomeCamionista){
     Camionista* camionista = camionistaContainer->procurar(nomeCamionista);
-    
-    // Validacao: o camionista tem de ter um camiao atribuido
+
     if(camionista->getCamiao() == nullptr){
         throw std::invalid_argument("Nao tem camiao atribuido.");
     }
-    
+
     Camiao* camiao = camionista->getCamiao();
     std::vector<Carga*>& cargas = camiao->getCargas();
-    
+
     if(cargas.empty()){
         throw std::invalid_argument("O camiao nao tem cargas atribuidas.");
     }
-    
-    // 1. Calcular distancia total
+
+    // 1. Calcular distancia total e recolher destinos
     Localidade empresa("Empresa", 0.0f, 0.0f);
     float distanciaTotal = 0.0f;
     Localidade* anterior = &empresa;
+    std::vector<std::string> destinos;
+
     for(int i = 0; i < cargas.size(); i++){
         Localidade* destino = cargas[i]->getDestino();
         distanciaTotal += anterior->calcularDistancia(*destino);
+        destinos.push_back(destino->getNome()); // guarda so o nome
         anterior = destino;
     }
-    
-    // 2. Criar copia das cargas para a Rota
-    std::vector<Carga> cargasParaRota;
-    for(int i = 0; i < cargas.size(); i++){
-        cargasParaRota.push_back(*cargas[i]);
-    }
-    
-    // 3. Atualizar estado das cargas para "Entregue"
+
+    // 2. Atualizar estado das cargas para "Entregue"
     for(int i = 0; i < cargas.size(); i++){
         cargas[i]->setEstado("Entregue");
     }
-    
-    // 4. Criar e guardar a Rota
+
+    // 3. Criar e guardar a Rota com os destinos
     int idRota = rotaContainer->getTodos().size() + 1;
-    Rota rota(idRota, nomeCamionista, camiao->getMatricula(), distanciaTotal, cargasParaRota);
+    Rota rota(idRota, nomeCamionista, camiao->getMatricula(), distanciaTotal, destinos);
     rotaContainer->guardar(rota);
-    
-    // 5. Desvincular camionista do camiao
+
+    // 4. Desvincular camionista do camiao
     camionista->setCamiao(nullptr);
     camionista->setEstado("Disponivel");
-    
-    // 6. Camiao volta a "Disponivel"
+
+    // 5. Camiao volta a "Disponivel"
     camiao->setEstado("Disponivel");
     camiao->setCamionista(nullptr);
-    
-    // 7. Limpar cargas do camiao e devolver capacidade total
+
+    // 6. Limpar cargas do camiao e devolver capacidade total
     while(!camiao->getCargas().empty()){
         camiao->removerCarga(camiao->getCargas()[0]);
     }

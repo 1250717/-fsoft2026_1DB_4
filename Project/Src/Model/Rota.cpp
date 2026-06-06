@@ -1,11 +1,11 @@
 #include "..\..\Headers\Model\Rota.h"
 
-Rota::Rota(int id, std::string nomeCamionista, std::string matriculaCamiao, float distanciaTotal, std::vector<Carga> cargas) {
+Rota::Rota(int id, std::string nomeCamionista, std::string matriculaCamiao, float distanciaTotal, std::vector<std::string> destinos) {
     this->idRota = id;
     this->nomeCamionista = nomeCamionista;
     this->matriculaCamiao = matriculaCamiao;
     this->distanciaTotal = distanciaTotal;
-    this->cargas = cargas; // Como agora ambos são vectores, podes atribuir diretamente
+    this->destinos = destinos;
 }
 
 int Rota::getIdRota() {
@@ -24,6 +24,6 @@ float Rota::getDistanciaTotal() {
     return this->distanciaTotal;
 }
 
-std::vector<Carga>& Rota::getCargas() {
-    return this->cargas;
+std::vector<std::string>& Rota::getDestinos() {
+    return this->destinos;
 }

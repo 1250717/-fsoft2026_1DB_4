@@ -10,6 +10,7 @@ Se inicializassemos dentro do construtor:
 
 Empresa::Empresa(...){
     instance = nullptr; // resetava o instance cada vez que criassemos um objeto
+    //dava para criar multiplas nao queremos isso
 }*/
 
 Empresa::Empresa(std::string nif, std::string nome) {
@@ -22,13 +23,14 @@ Empresa::Empresa(std::string nif, std::string nome) {
 Empresa* Empresa::getInstance(std::string nif, std::string nome) {
     if(instance == nullptr){
         // primeira vez — cria a unica instancia
-        // nao podemos usar: Empresa e(nif, nome); instance = &e;
-        // porque e é criado na stack — quando getInstance() termina, e é destruido
+        // nao podemos usar: Empresa e(nif, nome);
+        // porque é criado na stack — quando getInstance() termina é destruido
         // o instance ficava a apontar para memoria invalida
         // quando o service tentasse usar, dava asneira
         // com new — o objeto é criado na heap e nao é destruido quando a funcao termina
         instance = new Empresa(nif, nome);
         //nunca mais volta aqui
+        //vai abaixo ao return instance
     }
     // ja existe — devolve a mesma, ignora os parametros
     return instance;

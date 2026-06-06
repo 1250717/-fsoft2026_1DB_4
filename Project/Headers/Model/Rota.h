@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include "Carga.h"
 
 class Rota {
 private:
@@ -11,15 +10,15 @@ private:
     float distanciaTotal;
     std::string nomeCamionista;
     std::string matriculaCamiao;
-    std::vector<Carga> cargas;
+    std::vector<std::string> destinos; // so nomes dos destinos — nao precisamos das Carga completas
 
 public:
-    Rota(int id, std::string nomeCamionista, std::string matriculaCamiao, float distanciaTotal, std::vector<Carga> cargas);
+    Rota(int id, std::string nomeCamionista, std::string matriculaCamiao, float distanciaTotal, std::vector<std::string> destinos);
     int getIdRota();
     std::string getNomeCamionista();
     std::string getMatriculaCamiao();
     float getDistanciaTotal();
-    std::vector<Carga>& getCargas();
+    std::vector<std::string>& getDestinos();
 };
 
 #endif

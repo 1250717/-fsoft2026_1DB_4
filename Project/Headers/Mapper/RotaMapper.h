@@ -12,12 +12,7 @@ public:
         dto.distanciaTotal = rota.getDistanciaTotal();
         dto.nomeCamionista = rota.getNomeCamionista();
         dto.matriculaCamiao = rota.getMatriculaCamiao();
-        
-        // preencher destinos a partir das cargas
-        std::vector<Carga>& cargas = rota.getCargas();
-        for(int i = 0; i < cargas.size(); i++){
-            dto.destinosOrdemFIFO.push_back(cargas[i].getDestino()->getNome());
-        }
+        dto.destinosOrdemFIFO = rota.getDestinos(); // copia direta — ambos sao vector<string>
         return dto;
     }
 };
