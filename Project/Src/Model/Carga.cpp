@@ -5,6 +5,11 @@ Carga::Carga(float peso, Localidade *destino) {
     // O controller já chama Carga::verificarPeso() antes de criar a Carga,
 // mas validar aqui também garante que nenhum outro código no futuro
 // consiga criar uma Carga com peso inválido — defesa em profundidade.
+
+    if(destino == nullptr){
+            throw std::invalid_argument("Destino da carga nao pode ser nulo.");
+        }
+        
     this->peso = peso;
     this->estado = "Disponivel";
     this->destino = destino;

@@ -16,12 +16,3 @@ Localidade* LocalidadeContainer::procurar(std::string nome) {
     }
     return nullptr;
 }
-
-void LocalidadeContainer::remover(std::string nome) {
-    for (int i = 0; i < localidades.size(); i++) {
-        if (localidades[i].getNome() == nome) {
-            localidades.erase(localidades.begin() + i);
-            return;
-        }
-    }
-}

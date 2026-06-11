@@ -39,4 +39,30 @@ void CamionistaContainer::remover(std::string nome) {
         }
     }
 }
+// -----------------------------------------------------------------------------
+// NOTAS SOBRE erase / begin / push_back
+//
+// push_back(valor):
+//   Recebe um VALOR, não uma posição. Já sabe onde vai pôr — sempre no fim, na
+//   posição 'size'. Não há ambiguidade, por isso não precisa de lhe dizer onde.
+//
+// begin():
+//   Não devolve um índice nem um valor. Devolve um ITERADOR, que para um vector
+//   é essencialmente um ponteiro (Camionista*) para o endereço do 1º elemento.
+//   É um cursor que diz "estou nesta posição da memória".
+//
+// begin() + i:
+//   Aritmética de ponteiros TIPADA. Como os elementos estão contíguos, e o
+//   compilador conhece sizeof(Camionista) em tempo de compilação, faz:
+//        endereço = base + i * sizeof(Camionista)
+//   O 'i' está em unidades de ELEMENTO; o compilador multiplica pelo tamanho do
+//   tipo sozinho. Por isso a cada i++ o endereço avança sizeof(Camionista) bytes
+//   (ex.: 40), e não 1 byte.
+//
+// erase(posição):
+//   Recebe a POSIÇÃO (iterador), não o valor nem o índice. Destrói o elemento
+//   nessa posição e desloca todos os seguintes uma casa para trás → O(n).
+//   Usa iterador (e não int) por consistência com toda a STL: list, set, map não
+//   têm índice numérico, mas todos têm iteradores.
+// -----------------------------------------------------------------------------
 

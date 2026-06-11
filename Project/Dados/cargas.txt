@@ -1,3 +1,6 @@
 100,Entregue,Viseu
 50,Entregue,Lisboa
 15,Entregue,Porto
+100,Entregue,Porto
+100,Entregue,Porto
+100,Disponivel,Guimaraes

@@ -1,2 +1,1 @@
-Joao,Disponivel,
-Afonso,Disponivel,
+Afonso,Atribuido,SS-22-PP
