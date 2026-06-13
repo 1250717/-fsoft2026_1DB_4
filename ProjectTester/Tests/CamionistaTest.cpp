@@ -15,6 +15,13 @@ TEST(CamionistaConstructorTest, ConstrutorValido) {
     EXPECT_TRUE(flag);
 }
 
+TEST(CamionistaConstructorTest, EstadoInicialDisponivel) {
+    //Arrange
+    Camionista camionista("Joao");
+    //Assert
+    EXPECT_EQ(camionista.getEstado(), "Disponivel");
+}
+
 TEST(CamionistaValidarNomeTest, NomeValido) {
     //Arrange
     bool flag = true;

@@ -96,3 +96,71 @@ TEST(CamiaoSettersTest, SetCapacidadeDisponivelAtualizado) {
     //Assert
     EXPECT_FLOAT_EQ(camiao.getCapacidadeDisponivel(), 300.0f);
 }
+
+TEST(CamiaoCapacidadeTest, GetCapacidadeMaximaCorreta) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    //Assert
+    EXPECT_FLOAT_EQ(camiao.getCapacidadeMaxima(), 500.0f);
+}
+
+TEST(CamiaoSetCamionistaTest, SetCamionistaAtualizado) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    Camionista camionista("Joao");
+    //Act
+    camiao.setCamionista(&camionista);
+    //Assert
+    EXPECT_EQ(camiao.getCamionista(), &camionista);
+}
+
+TEST(CamiaoTemCargasTest, RetornaVerdadeiroComCargas) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    Localidade loc("Porto", 20.0f, 15.0f);
+    Carga carga(50.0f, &loc);
+    camiao.adicionarCarga(&carga);
+    //Assert
+    EXPECT_TRUE(camiao.temCargas());
+}
+
+TEST(CamiaoTemCargasPorEstadoTest, RetornaVerdadeiroComEstadoCorreto) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    Localidade loc("Porto", 20.0f, 15.0f);
+    Carga carga(50.0f, &loc);
+    carga.setEstado("Entregue");
+    camiao.adicionarCarga(&carga);
+    //Assert
+    EXPECT_TRUE(camiao.temCargasPorEstado("Entregue"));
+}
+
+TEST(CamiaoVerificarDisponivel, SemCamionistaNaoLancaExcecao) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    bool flag = true;
+    //Act
+    try {
+        camiao.verificarDisponivel();
+    } catch (std::invalid_argument& e) {
+        flag = false;
+    }
+    //Assert
+    EXPECT_TRUE(flag);
+}
+
+TEST(CamiaoVerificarDisponivel, ComCamionistaLancaExcecao) {
+    //Arrange
+    Camiao camiao("AB-12-CD", 500.0f);
+    Camionista camionista("Joao");
+    camiao.setCamionista(&camionista);
+    bool flag = false;
+    //Act
+    try {
+        camiao.verificarDisponivel();
+    } catch (std::invalid_argument& e) {
+        flag = true;
+    }
+    //Assert
+    EXPECT_TRUE(flag);
+}
