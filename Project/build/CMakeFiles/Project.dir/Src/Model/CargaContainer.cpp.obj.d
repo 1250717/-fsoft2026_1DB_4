@@ -1,6 +1,6 @@
 CMakeFiles/Project.dir/Src/Model/CargaContainer.cpp.obj: \
- C:\Users\Utilizador\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Model\CargaContainer.cpp \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CargaContainer.h \
+ C:\Users\afons\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Model\CargaContainer.cpp \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CargaContainer.h \
  C:/msys64/ucrt64/include/c++/15.2.0/string \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -16,8 +16,11 @@ CMakeFiles/Project.dir/Src/Model/CargaContainer.cpp.obj: \
  C:/msys64/ucrt64/include/_mingw.h C:/msys64/ucrt64/include/_mingw_mac.h \
  C:/msys64/ucrt64/include/_mingw_secapi.h \
  C:/msys64/ucrt64/include/vadefs.h \
- C:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
  C:/msys64/ucrt64/include/corecrt_stdio_config.h \
+ C:/msys64/ucrt64/include/corecrt_wconio.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
+ C:/msys64/ucrt64/include/stddef.h C:/msys64/ucrt64/include/crtdefs.h \
+ C:/msys64/ucrt64/include/sec_api/wconio_s.h \
  C:/msys64/ucrt64/include/corecrt_wstdlib.h \
  C:/msys64/ucrt64/include/corecrt_wctype.h \
  C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -48,8 +51,7 @@ CMakeFiles/Project.dir/Src/Model/CargaContainer.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/localefwd.h \
  C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
  C:/msys64/ucrt64/include/c++/15.2.0/clocale \
- C:/msys64/ucrt64/include/locale.h C:/msys64/ucrt64/include/crtdefs.h \
- C:/msys64/ucrt64/include/stdio.h \
+ C:/msys64/ucrt64/include/locale.h C:/msys64/ucrt64/include/stdio.h \
  C:/msys64/ucrt64/include/sec_api/stdio_s.h \
  C:/msys64/ucrt64/include/c++/15.2.0/iosfwd \
  C:/msys64/ucrt64/include/c++/15.2.0/cctype \
@@ -99,8 +101,6 @@ CMakeFiles/Project.dir/Src/Model/CargaContainer.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.tcc \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/memory_resource.h \
  C:/msys64/ucrt64/include/c++/15.2.0/cstddef \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
- C:/msys64/ucrt64/include/stddef.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator_args.h \
  C:/msys64/ucrt64/include/c++/15.2.0/tuple \
@@ -110,8 +110,8 @@ CMakeFiles/Project.dir/Src/Model/CargaContainer.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/stl_vector.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/vector.tcc \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Carga.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Carga.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h \
  C:/msys64/ucrt64/include/c++/15.2.0/stdexcept \
  C:/msys64/ucrt64/include/c++/15.2.0/exception \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/exception_ptr.h \

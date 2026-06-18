@@ -1,6 +1,6 @@
 CMakeFiles/Project.dir/Src/Model/LocalidadeContainer.cpp.obj: \
- C:\Users\Utilizador\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Model\LocalidadeContainer.cpp \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/LocalidadeContainer.h \
+ C:\Users\afons\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Model\LocalidadeContainer.cpp \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/LocalidadeContainer.h \
  C:/msys64/ucrt64/include/c++/15.2.0/vector \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -63,7 +63,6 @@ CMakeFiles/Project.dir/Src/Model/LocalidadeContainer.cpp.obj: \
  C:/msys64/ucrt64/include/_mingw_mac.h \
  C:/msys64/ucrt64/include/_mingw_secapi.h \
  C:/msys64/ucrt64/include/vadefs.h \
- C:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator_args.h \
  C:/msys64/ucrt64/include/c++/15.2.0/tuple \
@@ -75,6 +74,8 @@ CMakeFiles/Project.dir/Src/Model/LocalidadeContainer.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/cwchar \
  C:/msys64/ucrt64/include/wchar.h \
  C:/msys64/ucrt64/include/corecrt_stdio_config.h \
+ C:/msys64/ucrt64/include/corecrt_wconio.h \
+ C:/msys64/ucrt64/include/sec_api/wconio_s.h \
  C:/msys64/ucrt64/include/corecrt_wstdlib.h \
  C:/msys64/ucrt64/include/corecrt_wctype.h \
  C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -110,4 +111,4 @@ CMakeFiles/Project.dir/Src/Model/LocalidadeContainer.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/cerrno \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.tcc \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h

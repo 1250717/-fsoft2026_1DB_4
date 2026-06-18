@@ -1,7 +1,7 @@
 CMakeFiles/Project.dir/Src/Controller/CamionistaController.cpp.obj: \
- C:\Users\Utilizador\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Controller\CamionistaController.cpp \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Controller/CamionistaController.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Service/CamionistaService.h \
+ C:\Users\afons\Documents\GitHub\-fsoft2026_1DB_4\Project\Src\Controller\CamionistaController.cpp \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Controller/CamionistaController.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Service/CamionistaService.h \
  C:/msys64/ucrt64/include/c++/15.2.0/vector \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -64,7 +64,6 @@ CMakeFiles/Project.dir/Src/Controller/CamionistaController.cpp.obj: \
  C:/msys64/ucrt64/include/_mingw_mac.h \
  C:/msys64/ucrt64/include/_mingw_secapi.h \
  C:/msys64/ucrt64/include/vadefs.h \
- C:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator_args.h \
  C:/msys64/ucrt64/include/c++/15.2.0/tuple \
@@ -76,6 +75,8 @@ CMakeFiles/Project.dir/Src/Controller/CamionistaController.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/cwchar \
  C:/msys64/ucrt64/include/wchar.h \
  C:/msys64/ucrt64/include/corecrt_stdio_config.h \
+ C:/msys64/ucrt64/include/corecrt_wconio.h \
+ C:/msys64/ucrt64/include/sec_api/wconio_s.h \
  C:/msys64/ucrt64/include/corecrt_wstdlib.h \
  C:/msys64/ucrt64/include/corecrt_wctype.h \
  C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -111,33 +112,33 @@ CMakeFiles/Project.dir/Src/Controller/CamionistaController.cpp.obj: \
  C:/msys64/ucrt64/include/c++/15.2.0/cerrno \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.tcc \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CamionistaContainer.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camionista.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camionista.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camiao.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Carga.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CamionistaContainer.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camionista.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camionista.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Camiao.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Carga.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Localidade.h \
  C:/msys64/ucrt64/include/c++/15.2.0/stdexcept \
  C:/msys64/ucrt64/include/c++/15.2.0/exception \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/exception_ptr.h \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/cxxabi_init_exception.h \
  C:/msys64/ucrt64/include/c++/15.2.0/typeinfo \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/nested_exception.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CargaContainer.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/RotaContainer.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Rota.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/View/MenuCamionista.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
- C:/Users/Utilizador/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/View/MenuCamionista.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/CargaContainer.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/RotaContainer.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Model/Rota.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/View/MenuCamionista.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CamiaoDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/CargaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/Dtos/RotaDTO.h \
+ C:/Users/afons/Documents/GitHub/-fsoft2026_1DB_4/Project/Headers/View/MenuCamionista.h \
  C:/msys64/ucrt64/include/c++/15.2.0/iostream \
  C:/msys64/ucrt64/include/c++/15.2.0/ostream \
  C:/msys64/ucrt64/include/c++/15.2.0/bits/ostream.h \

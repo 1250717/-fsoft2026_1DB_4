@@ -2,4 +2,4 @@ RD-64-TF,Disponivel,175,175,
 AF-88-ST,Disponivel,100,100,
 AT-66-LK,Disponivel,3000,3000,
 FF-54-TT,Disponivel,245,245,
-SS-22-PP,Atribuido,1000,1000,Afonso
+SS-22-PP,Atribuido,1000,1000,
