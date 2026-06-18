@@ -35,12 +35,6 @@ void GeneralRepository::guardar() {
 
 void GeneralRepository::carregarCamioes(){
     ifstream ficheiro("Dados/camioes.txt");
-    //Uma stream é um fluxo de dados — uma sequência de bytes que flui de um lado para o outro.
-    //disco → [buffer em RAM] → programa    (leitura — ifstream)
-    //  programa → [buffer em RAM] → disco    (escrita — ofstream)
-    //ifstream classe que representa um ficheira aberto
-    //programa pede ao SO para abrir o ficheiro
-    // o SO devolve um file descriptor relativo a esse ficheiro
     if(!ficheiro.is_open()){
         cout << "Erro ao abrir camioes.txt\n";
         return;
@@ -143,7 +137,6 @@ void GeneralRepository::carregarCamionistas(){
             Camiao* camiao = camiaoContainer->procurar(matriculaCamiao);
             if(camiao != nullptr){
                 camionista.setCamiao(camiao);
-                camiao->setCamionista(&camionista);
             }
         }
 
@@ -342,28 +335,21 @@ void GeneralRepository::guardarCamioes() {
     if (!ficheiro.is_open()) return;
 
     vector<Camiao>& listaCamioes = camiaoContainer->getTodos();
-    vector<Carga>& todasCargas = cargaContainer->getTodos();
-
     for (int i = 0; i < listaCamioes.size(); i++) {
         ficheiro << listaCamioes[i].getMatricula() << ","
                  << listaCamioes[i].getEstado() << ","
                  << listaCamioes[i].getCapacidadeMaxima() << ","
                  << listaCamioes[i].getCapacidadeDisponivel() << ",";
-
+        
         if (listaCamioes[i].getCamionista() != nullptr) {
             ficheiro << listaCamioes[i].getCamionista()->getNome();
         }
-
-        // guarda so o indice de cada carga no cargaContainer
+        
         vector<Carga*>& listaCargas = listaCamioes[i].getCargas();
         for (int j = 0; j < listaCargas.size(); j++) {
-            // encontra o indice desta carga no container global
-            for(int k = 0; k < todasCargas.size(); k++){
-                if(&todasCargas[k] == listaCargas[j]){
-                    ficheiro << "," << k;
-                    break;
-                }
-            }
+            ficheiro << "," << listaCargas[j]->getPeso()
+                     << "," << listaCargas[j]->getEstado()
+                     << "," << listaCargas[j]->getDestino()->getNome();
         }
         ficheiro << "\n";
     }

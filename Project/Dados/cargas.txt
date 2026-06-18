@@ -3,8 +3,4 @@
 15,Entregue,Porto
 100,Entregue,Porto
 100,Entregue,Porto
-100,Atribuida,Guimaraes
-100,Entregue,Porto
-100,Entregue,Porto
-100,Atribuida,Porto
-69,Atribuida,Setubal
+100,Disponivel,Guimaraes
