@@ -1,6 +1,5 @@
-100,Entregue,Viseu
-50,Entregue,Lisboa
-15,Entregue,Porto
-100,Entregue,Porto
-100,Entregue,Porto
-100,Disponivel,Guimaraes
+50,Disponivel,Setubal
+200,Disponivel,Viseu
+50,Disponivel,Lisboa
+50,Disponivel,Evora
+50,Disponivel,Porto

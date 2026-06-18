@@ -1,1 +1,5 @@
-Afonso,Atribuido,SS-22-PP
+Afonso,Disponivel,
+Bruno,Disponivel,
+Marco,Disponivel,
+Vilas,Disponivel,
+Pedro,Disponivel,
