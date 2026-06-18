@@ -1,1 +1,5 @@
-Afonso,Atribuido,SS-22-PP
+Afonso,Atribuido,RD-64-TF
+Joao,Disponivel,
+Pedro,Disponivel,
+Bruno,Atribuido,RD-64-TF
+Joana,Disponivel,

@@ -6,6 +6,7 @@
 
 class CamiaoMapper {
 public:
+//nao é preciso criar um camiao Mapper para poder usa lo
     static CamiaoDTO toDTO(Camiao &camiao) {
         CamiaoDTO dto;
         dto.matricula = camiao.getMatricula();

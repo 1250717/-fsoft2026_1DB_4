@@ -1,3 +1,4 @@
 1,Afonso,RD-64-TF,102.204,Viseu,Lisboa,Porto
 2,Afonso,RD-64-TF,25,Porto
 3,Afonso,AF-88-ST,25,Porto
+4,Afonso,SS-22-PP,25,Porto,Porto
