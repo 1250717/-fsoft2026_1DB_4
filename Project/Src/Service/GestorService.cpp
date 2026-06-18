@@ -219,6 +219,9 @@ void GestorService::eliminarCarga(int indice, bool confirmar){
             std::vector<Carga*>& cargasDoCamiao = camioes[i].getCargas();
             for(int j = 0; j < (int)cargasDoCamiao.size(); j++){
                 if(cargasDoCamiao[j] == carga){
+                    //carge é o ponteiro obtido do cargacontainer
+                    //cargasDoCamiao[j] é um ponteiro guardado no vetor interno do camião atual.
+                    //mas sim se ambos os ponteiros apontam exatamente para a mesma posição de memória do objeto.
                     // encontrou o camiao que tem esta carga - liberta a capacidade
                     float novaCapacidade = camioes[i].getCapacidadeDisponivel() + carga->getPeso();
                     camioes[i].setCapacidadeDisponivel(novaCapacidade);
